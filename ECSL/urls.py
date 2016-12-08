@@ -19,7 +19,6 @@ from system.views import *
 
 extra_patterns = [
 
-    url(r'^admin/', admin.site.urls),
     url('^', include('django.contrib.auth.urls')),
 
     ]
