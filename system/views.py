@@ -10,8 +10,7 @@ def index(request):
 
 
 def login(request):
-    template_response = views.login(request, authentication_form=Login_Form,
-                                    template_name='users/identificarse.html')
+    template_response = views.login(request, authentication_form=Login_Form, template_name='usuarios/identificarse.html')
     return template_response
 
 
@@ -19,3 +18,5 @@ def login(request):
 def logout(request):
     template_response = views.logout(request, next_page='Index')
     return template_response
+
+

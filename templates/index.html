@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+{% load static %}
+{% block Head %}
+
 <head>
+
     <meta charset="UTF-8">
     <title>ECSL</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.dataTables.css' %}">
+
+     <script src="{% static 'js/jquery.min.js' %}"></script>
+   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'js/DjangoAjax.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
 </head>
+{% endblock %}
 <body>
 <a href="{% url 'Login' %}">Login</a>
+
 </body>
 </html>

@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'paypal',
     'bootstrapform',
     'registration',
+    'django_ajax',
+    'ckeditor',
+    'bootstrap3',
+    'simple_email_confirmation',
 
 
 ]
@@ -89,6 +93,9 @@ DATABASES = {
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
     }
 }
 
@@ -115,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 

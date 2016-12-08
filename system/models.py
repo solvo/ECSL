@@ -64,7 +64,7 @@ class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
 
 
-class Speech (Model):
+class Speech(Model):
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
     topic = ForeignKey(Topic, verbose_name=_('Topic'))
     user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
@@ -74,3 +74,37 @@ class Speech (Model):
     skill_level = PositiveIntegerField(verbose_name=_('Skill Level'))
     speaker_information = TextField(verbose_name=_('Speaker Information'))
     title = TextField(verbose_name=_('Title'))
+
+
+class Hotel(Model):
+    contact_email = EmailField(verbose_name=_('E-Mail'))
+    description = TextField(verbose_name=_('Description'))
+    name = CharField(verbose_name=_('Name'), max_length=200)
+    url = URLField(verbose_name=_('URL'))
+
+
+class Room(Model):
+    hotel = ForeignKey(Hotel, on_delete=CASCADE, verbose_name=_('Hotel'))
+    available_beds = SmallIntegerField(verbose_name=_('Available Beds'))
+    coin = CharField(max_length=100, verbose_name=_('Coin'))
+    floor = SmallIntegerField(verbose_name=_('Floor'))
+    matrimonial = BooleanField(verbose_name=_('Matrimonial'))
+    number = CharField(max_length=50, verbose_name=_('Number'))
+    price_per_bed = DecimalField(verbose_name=_('Bed`s Prices'), max_digits=6, decimal_places=2) # Arreglar Verbose
+    total_beds = SmallIntegerField(verbose_name=_('Total Beds'))
+
+
+class QuestionCategory(Model):
+    emoji_alt = CharField(verbose_name=_('Emoji'), max_length=50)
+    name = CharField(max_length=100, verbose_name=_('Category'))
+
+
+class Question(Model):
+    category = ForeignKey(QuestionCategory, on_delete=CASCADE)
+    answer = TextField(verbose_name=_('Answer'))
+    created = DateField(verbose_name=_('Date Created'))
+    published = BooleanField(verbose_name=_('Published'))
+    question = TextField(verbose_name=_('Question'))
+
+
+

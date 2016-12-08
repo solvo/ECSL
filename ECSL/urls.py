@@ -19,14 +19,15 @@ from system.views import *
 
 extra_patterns = [
 
+    url(r'^admin/', admin.site.urls),
     url('^', include('django.contrib.auth.urls')),
 
     ]
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^', index, name='Index'),
+
+urlpatterns = extra_patterns + [
+
+    url(r'^$', index, name='Index'),
     url(r'^accounts/login/$', login, name='Login'),
     url(r'^accounts/logout/$', logout, name='Logout'),
-
 
 ]
