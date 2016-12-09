@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models import *
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from datetime import datetime
 
 
 @python_2_unicode_compatible
@@ -21,6 +22,13 @@ class Profile(Model):
     institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'))
+
+    def save(self, *args, **kwargs):
+        periodo = get_active_period()
+        if periodo != 0:
+            self.enrolled = True
+            super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
+        super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
 
     def __str__(self):
         return self.identification
@@ -157,3 +165,12 @@ class DateState(Model):
 
     def __str__(self):
         return self.start_date
+
+
+#Function
+
+def get_active_period():
+    period = DateState.objects.filter(start_date__lte=datetime.now(), finish_date__gte=datetime.now())
+    if period.exists():
+        return period.last()
+    return 0
