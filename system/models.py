@@ -6,6 +6,15 @@ from django.utils.translation import ugettext_lazy as _
 
 # Faltan Question y Question Category
 
+from datetime import datetime
+
+
+def get_active_period():
+    period = DateState.objects.filter(start_date__lte=datetime.now(),
+                                   finish_date__gte=datetime.now())
+    if period.exists():
+        return period.last()
+    return 0
 
 class Profile(Model):
     gender_choice = (
@@ -21,6 +30,14 @@ class Profile(Model):
     institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'))
+    enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
+
+    def save(self, *args, **kwargs):
+        periodo = get_active_period()
+        if periodo != 0:
+            self.enrolled = True
+            super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
+        super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
 
 
 class Inscription(Model):
@@ -64,7 +81,7 @@ class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
 
 
-class Speech (Model):
+class Speech(Model):
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
     topic = ForeignKey(Topic, verbose_name=_('Topic'))
     user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
@@ -76,8 +93,6 @@ class Speech (Model):
     title = TextField(verbose_name=_('Title'))
 
 
-
-
-
-
-
+class DateState(Model):
+    start_date = models.DateField(verbose_name=_("Period start date"))
+    finish_date = models.DateField(verbose_name=_("Period finish date"))

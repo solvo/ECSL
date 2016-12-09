@@ -7,4 +7,4 @@ admin.site.register(Profile)
 admin.site.register(Inscription)
 admin.site.register(SpeechType)
 admin.site.register(Topic)
-
+admin.site.register(DateState)

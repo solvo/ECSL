@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block Content %}
+    <h1>Añadir perfiles</h1>
+<form method="post" action="{% url 'Profile' %}">
+
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+        <button type="submit" class="btn btn-primary {% block button_class %}{% endblock %}">
+            {% block button_text %} Login {% endblock %}
+        </button>
+    {% endbuttons %}
+    <p><a href="{% url 'password_reset' %}">¿Perdió su contraseña?</a></p>
+    <input type="hidden" name="next" value="{{ next }}"/>
+</form>
+
+{% endblock %}
+
+</body>
+</html>

@@ -1,3 +1,2 @@
-from django.shortcuts import render
-
-# Create your views here.
+from system.models import DateState
+from datetime import datetime

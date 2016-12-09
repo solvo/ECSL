@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'paypal',
     'bootstrapform',
     'registration',
+    'django_ajax',
+    'ckeditor',
+    'bootstrap3',
+    'simple_email_confirmation',
 
 
 ]
