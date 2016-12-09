@@ -16,6 +16,7 @@ def get_active_period():
         return period.last()
     return 0
 
+
 class Profile(Model):
     gender_choice = (
         ('M', 'Masculino'),
