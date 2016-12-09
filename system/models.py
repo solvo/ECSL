@@ -3,9 +3,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import *
 from django.utils.translation import ugettext_lazy as _
-
-# Faltan Question y Question Category
-
 from datetime import datetime
 
 
@@ -31,6 +28,7 @@ class Profile(Model):
     institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'))
+
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
 
     def save(self, *args, **kwargs):
@@ -39,6 +37,10 @@ class Profile(Model):
             self.enrolled = True
             super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
         super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
+
+    def __str__(self):
+        return self.identification
+
 
 
 class Inscription(Model):
@@ -50,6 +52,9 @@ class Inscription(Model):
     registered = BooleanField(verbose_name=_('Registered'))
     subvention_description = TextField(verbose_name=_('Subvention Description'))  # Preguntar para que es
     subvention_request = BooleanField(verbose_name=_('Subvention Request'))
+
+    def __str__(self):
+        return self. registered
 
 
 class TshirtStyle(Model):
@@ -65,6 +70,9 @@ class TshirtStyle(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
 
+    def __str__(self):
+        return self.gender_choice
+
 
 class Tshirt(Model):
     style = ForeignKey(TshirtStyle, on_delete=CASCADE, verbose_name=_('Style'))
@@ -77,9 +85,15 @@ class Tshirt(Model):
 class SpeechType(Model):
     name = CharField(max_length=45,verbose_name=_('Name'))
 
+    def __str__(self):
+        return self.name
+
 
 class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
+
+    def __str__(self):
+        return self.identification
 
 
 class Speech(Model):
@@ -94,6 +108,54 @@ class Speech(Model):
     title = TextField(verbose_name=_('Title'))
 
 
+class Hotel(Model):
+    contact_email = EmailField(verbose_name=_('E-Mail'))
+    description = TextField(verbose_name=_('Description'))
+    name = CharField(verbose_name=_('Name'), max_length=200)
+    url = URLField(verbose_name=_('URL'))
+
+    def __str__(self):
+        return self.contact_email
+
+
+class Room(Model):
+    hotel = ForeignKey(Hotel, on_delete=CASCADE, verbose_name=_('Hotel'))
+    available_beds = SmallIntegerField(verbose_name=_('Available Beds'))
+    coin = CharField(max_length=100, verbose_name=_('Coin'))
+    floor = SmallIntegerField(verbose_name=_('Floor'))
+    matrimonial = BooleanField(verbose_name=_('Matrimonial'))
+    number = CharField(max_length=50, verbose_name=_('Number'))
+    price_per_bed = DecimalField(verbose_name=_('Bed`s Prices'), max_digits=6, decimal_places=2) # Arreglar Verbose
+    total_beds = SmallIntegerField(verbose_name=_('Total Beds'))
+
+    def __str__(self):
+        return self.hotel
+
+
+class QuestionCategory(Model):
+    emoji_alt = CharField(verbose_name=_('Emoji'), max_length=50)
+    name = CharField(max_length=100, verbose_name=_('Category'))
+
+    def __str__(self):
+        return self.name
+
+
+class Question(Model):
+    category = ForeignKey(QuestionCategory, on_delete=CASCADE)
+    answer = TextField(verbose_name=_('Answer'))
+    created = DateField(verbose_name=_('Date Created'))
+    published = BooleanField(verbose_name=_('Published'))
+    question = TextField(verbose_name=_('Question'))
+
+    def __str__(self):
+        return self.question
+
+
 class DateState(Model):
     start_date = models.DateField(verbose_name=_("Period start date"))
     finish_date = models.DateField(verbose_name=_("Period finish date"))
+
+    def __str__(self):
+        return self.start_date
+
+

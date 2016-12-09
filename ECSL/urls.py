@@ -21,15 +21,12 @@ from system.vistas.User import *
 
 extra_patterns = [
 
-    url('^', include('django.contrib.auth.urls')),
-
+    url(r'^accounts/', include('registration.backends.hmac.urls')),
     ]
-urlpatterns = extra_patterns +[
+urlpatterns = extra_patterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='Index'),
     url(r'^accounts/login/$', login, name='Login'),
-    url(r'^accounts/register/$', register.as_view(), name='Register'),
-    url(r'^accounts/logout/$', logout, name='Logout'),
     url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
 
 

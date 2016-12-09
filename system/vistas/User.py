@@ -13,26 +13,6 @@ def login(request):
     return template_response
 
 
-@login_required()
-def logout(request):
-    template_response = views.logout(request, next_page='Index')
-    return template_response
-
-
-class pre_register(CreateView):
-    template_name = 'usuarios/register.html'
-    model = User
-    success_url = '/'
-    fields = ['username', 'first_name', 'last_name', 'email']
-
-
-class register(CreateView):
-    template_name = 'usuarios/register.html'
-    model = User
-    success_url = '/accounts/profile'
-    fields = ['username', 'first_name', 'last_name', 'email']
-
-
 @method_decorator(login_required, name='dispatch')
 class profile(CreateView):
     template_name = 'usuarios/profile.html'
