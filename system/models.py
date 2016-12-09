@@ -3,10 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import *
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
-# Faltan Question y Question Category
 
-
+@python_2_unicode_compatible
 class Profile(Model):
     gender_choice = (
         ('M', 'Masculino'),
@@ -22,7 +22,11 @@ class Profile(Model):
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'))
 
+    def __str__(self):
+        return self.identification
 
+
+@python_2_unicode_compatible
 class Inscription(Model):
     user = OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
     mozilla_subvention = BooleanField(verbose_name=_('Mozilla Subvention?'))
@@ -33,7 +37,11 @@ class Inscription(Model):
     subvention_description = TextField(verbose_name=_('Subvention Description'))  # Preguntar para que es
     subvention_request = BooleanField(verbose_name=_('Subvention Request'))
 
+    def __str__(self):
+        return self. registered
 
+
+@python_2_unicode_compatible
 class TshirtStyle(Model):
     gender_choice = (
         ('M', 'Masculino'),
@@ -47,7 +55,11 @@ class TshirtStyle(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
 
+    def __str__(self):
+        return self.gender_choice
 
+
+@python_2_unicode_compatible
 class Tshirt(Model):
     style = ForeignKey(TshirtStyle, on_delete=CASCADE, verbose_name=_('Style'))
     user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
@@ -55,15 +67,27 @@ class Tshirt(Model):
     last_update = DateField(verbose_name=_('Last Update'))
     size = CharField(max_length=15, verbose_name=_('Size'))
 
+    def __str__(self):
+        return self.style
 
+
+@python_2_unicode_compatible
 class SpeechType(Model):
     name = CharField(max_length=45,verbose_name=_('Name'))
 
+    def __str__(self):
+        return self.name
 
+
+@python_2_unicode_compatible
 class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
 
+    def __str__(self):
+        return self.identification
 
+
+@python_2_unicode_compatible
 class Speech(Model):
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
     topic = ForeignKey(Topic, verbose_name=_('Topic'))
@@ -75,14 +99,22 @@ class Speech(Model):
     speaker_information = TextField(verbose_name=_('Speaker Information'))
     title = TextField(verbose_name=_('Title'))
 
+    def __str__(self):
+        return self.speech_type
 
+
+@python_2_unicode_compatible
 class Hotel(Model):
     contact_email = EmailField(verbose_name=_('E-Mail'))
     description = TextField(verbose_name=_('Description'))
     name = CharField(verbose_name=_('Name'), max_length=200)
     url = URLField(verbose_name=_('URL'))
 
+    def __str__(self):
+        return self.contact_email
 
+
+@python_2_unicode_compatible
 class Room(Model):
     hotel = ForeignKey(Hotel, on_delete=CASCADE, verbose_name=_('Hotel'))
     available_beds = SmallIntegerField(verbose_name=_('Available Beds'))
@@ -93,12 +125,20 @@ class Room(Model):
     price_per_bed = DecimalField(verbose_name=_('Bed`s Prices'), max_digits=6, decimal_places=2) # Arreglar Verbose
     total_beds = SmallIntegerField(verbose_name=_('Total Beds'))
 
+    def __str__(self):
+        return self.hotel
 
+
+@python_2_unicode_compatible
 class QuestionCategory(Model):
     emoji_alt = CharField(verbose_name=_('Emoji'), max_length=50)
     name = CharField(max_length=100, verbose_name=_('Category'))
 
+    def __str__(self):
+        return self.name
 
+
+@python_2_unicode_compatible
 class Question(Model):
     category = ForeignKey(QuestionCategory, on_delete=CASCADE)
     answer = TextField(verbose_name=_('Answer'))
@@ -106,5 +146,14 @@ class Question(Model):
     published = BooleanField(verbose_name=_('Published'))
     question = TextField(verbose_name=_('Question'))
 
+    def __str__(self):
+        return self.question
 
 
+@python_2_unicode_compatible
+class DateState(Model):
+    start_date = models.DateField(verbose_name=_("Period start date"))
+    finish_date = models.DateField(verbose_name=_("Period finish date"))
+
+    def __str__(self):
+        return self.start_date
