@@ -28,7 +28,6 @@ class Profile(Model):
     institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'))
-
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
 
     def save(self, *args, **kwargs):
@@ -156,5 +155,14 @@ class DateState(Model):
 
     def __str__(self):
         return 'Periodo'
+
+
+class MigratoryControl(Model):
+    user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
+    entry_country = IntegerField(verbose_name=_('Entry in country'))
+    exit_country = IntegerField(verbose_name=_('Exit from country'))
+    date_in = DateField(verbose_name=_('Date of in'))
+    date_out = DateField(verbose_name=_('Date of out'))
+
 
 

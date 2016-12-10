@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+
+
+
 {% block content %}
     <h1>Añadir perfiles</h1>
 <form method="post" action="{% url 'Profile' %}">
@@ -15,6 +18,11 @@
     <input type="hidden" name="next" value="{{ next }}"/>
 </form>
 
+{% if user.username == 'Admin' %}
+    <h1>El usuario</h1>
+    {% else %}
+    <h1>Nooooo</h1>
+    {% endif %}
 {% endblock %}
 
 </body>

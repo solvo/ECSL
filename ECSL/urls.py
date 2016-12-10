@@ -27,7 +27,7 @@ extra_patterns = [
 urlpatterns = extra_patterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='Index'),
-
+    url(r'^testint$', testing, name='Testing'),
     url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
 
 
