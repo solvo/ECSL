@@ -39,8 +39,7 @@ class Profile(Model):
         super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
 
     def __str__(self):
-        return self.identification
-
+        return self.user.username
 
 
 class Inscription(Model):
@@ -54,7 +53,7 @@ class Inscription(Model):
     subvention_request = BooleanField(verbose_name=_('Subvention Request'))
 
     def __str__(self):
-        return self. registered
+        return self.registered
 
 
 class TshirtStyle(Model):
@@ -64,9 +63,9 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    img1 = ImageField(verbose_name=_('Image 1'))
-    img2 = ImageField(verbose_name=_('Image 2'))
-    img3 = ImageField(verbose_name=_('Image 3'))
+    # img1 = ImageField(verbose_name=_('Image 1'))
+    # img2 = ImageField(verbose_name=_('Image 2'))
+    # img3 = ImageField(verbose_name=_('Image 3'))
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
 
@@ -156,6 +155,6 @@ class DateState(Model):
     finish_date = models.DateField(verbose_name=_("Period finish date"))
 
     def __str__(self):
-        return self.start_date
+        return 'Periodo'
 
 

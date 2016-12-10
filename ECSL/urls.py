@@ -22,11 +22,12 @@ from system.vistas.User import *
 extra_patterns = [
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+
     ]
 urlpatterns = extra_patterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='Index'),
-    url(r'^accounts/login/$', login, name='Login'),
+
     url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
 
 

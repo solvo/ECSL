@@ -7,12 +7,6 @@ from system.models import *
 from django.utils.decorators import method_decorator
 
 
-def login(request):
-    template_response = views.login(request, authentication_form=Login_Form,
-                                    template_name='usuarios/identificarse.html')
-    return template_response
-
-
 @method_decorator(login_required, name='dispatch')
 class profile(CreateView):
     template_name = 'usuarios/profile.html'

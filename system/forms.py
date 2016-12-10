@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm, SetPasswordForm, UserCreationForm
 
 
-class Login_Form(AuthenticationForm, SetPasswordForm):
+class Login_Form(AuthenticationForm):
     pass
 
 

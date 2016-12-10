@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'djreservation',
     'paypal',
     'bootstrapform',
-    'registration',
+
     'django_ajax',
     'ckeditor',
     'bootstrap3',
@@ -91,8 +91,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ECSL',
         'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
 
         'OPTIONS': {
@@ -136,11 +136,13 @@ USE_L10N = True
 USE_TZ = True
 
 ACCOUNT_ACTIVATION_DAYS = 10
+LOGIN_REDIRECT_URL = '/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-
+# Run the email's server in windows's MS-DOS
+# python -m smtpd -c DebuggingServer -n
 STATIC_URL = '/static/'
 
 EMAIL_HOST = "localhost"
-EMAIL_PORT = "1025"
+EMAIL_PORT = "8025"
