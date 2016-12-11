@@ -10,7 +10,8 @@
     {% endif %}
     <a href="{% url 'Edit_Profile' profile_pk %}">Edit Profile</a>
     <a href="{% url 'View_Profile' profile_pk %}">Profile</a>
-    <a href="{% url 'Edit_Account' profile_pk %}">Edit User Account</a>
+    <a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a>
+    <a href="{% url 'auth_password_change' %}">Chance the user's password</a>
 {#{{ status }}#}
 {% endblock %}
 

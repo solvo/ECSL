@@ -53,6 +53,14 @@ class view_profile(UpdateView, SingleObjectMixin):
               'entry_country_date', 'out_country_date', 'letter']
 
 
+class edit_account(UpdateView, SingleObjectMixin):
+    template_name = 'usuarios/edit_account.html'
+    model = User
+
+    fields = ['username','first_name', 'last_name', 'email']
+
+
+
 @login_required()
 def testing(request):
 

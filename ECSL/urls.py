@@ -30,5 +30,5 @@ urlpatterns = extra_patterns + [
     url(r'^accounts/create_profile/$', profile.as_view(), name='Profile'),
     url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
-
+    url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
 ]
