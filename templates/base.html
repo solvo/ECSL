@@ -19,7 +19,7 @@
 {% block Head %}
 {% endblock %}
 
-{% block NavBar1 %}
+{% block NavBar %}
 
       <ul>
 {% for foo in menu %}
@@ -29,13 +29,6 @@
       </ul>
 {% endblock %}
 
-
-{% block NavBar2 %}
-{% for foo in menu_user %}
-       <li {% if foo.active %} class="active" {% endif %}><a href="{{ foo.url }}">{{ foo.name }} </a></li>
- {% endfor %}
-
-{% endblock %}
 
 
 <body>

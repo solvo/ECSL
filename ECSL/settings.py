@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,12 +42,9 @@ INSTALLED_APPS = [
     'djreservation',
     'paypal',
     'bootstrapform',
-
     'django_ajax',
     'ckeditor',
     'bootstrap3',
-    'simple_email_confirmation',
-
 
 ]
 
@@ -75,7 +73,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'system.contex_processor.menu',
-                'system.contex_processor.menu_user',
+
             ],
         },
     },
@@ -138,7 +136,7 @@ USE_L10N = True
 USE_TZ = True
 
 ACCOUNT_ACTIVATION_DAYS = 10
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/profile/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

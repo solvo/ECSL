@@ -30,6 +30,14 @@ class Profile(Model):
     snore = BooleanField(verbose_name=_('Snore?'))
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
 
+    entry_country = IntegerField(verbose_name=_('Entry and out from country'))
+    out_country = IntegerField(verbose_name=_('Entry and otu from country'))
+    entry_port = CharField(max_length=100, verbose_name=_('Entry port'))
+    out_port = CharField(max_length=100, verbose_name=_('Out port'))
+    entry_country_date = DateTimeField(verbose_name=_('Entry country Date'))
+    out_country_date = DateTimeField(verbose_name=_('Out country Date'))
+    letter = TextField(verbose_name=_('Migratory letter'))
+
     def save(self, *args, **kwargs):
         periodo = get_active_period()
         if periodo != 0:
@@ -157,12 +165,6 @@ class DateState(Model):
         return 'Periodo'
 
 
-class MigratoryControl(Model):
-    user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
-    entry_country = IntegerField(verbose_name=_('Entry in country'))
-    exit_country = IntegerField(verbose_name=_('Exit from country'))
-    date_in = DateField(verbose_name=_('Date of in'))
-    date_out = DateField(verbose_name=_('Date of out'))
 
 
 

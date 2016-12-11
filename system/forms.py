@@ -1,16 +1,5 @@
 # -*- coding: utf-8 -*-
-from django import forms
-from django.contrib.auth.forms import PasswordChangeForm, AuthenticationForm, SetPasswordForm, UserCreationForm
+from django.forms import ModelForm
+from system.models import Profile
 
 
-class Login_Form(AuthenticationForm):
-    pass
-
-
-class ChancePassword(PasswordChangeForm):
-    old_password = forms.CharField(label='Contraseña actual:', max_length=150,
-                                   widget=forms.PasswordInput())
-    new_password1 = forms.CharField(label='Nueva Contraseña:', max_length=150,
-                                    widget=forms.PasswordInput())
-    new_password2 = forms.CharField(label='Repetir Contraseña:', max_length=150,
-                                    widget=forms.PasswordInput())
