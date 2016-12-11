@@ -4,9 +4,9 @@
 @font-face {
   font-family: 'Lato';
   src: url("lato/lato-regular.eot");
-  src: local("☺"), url("lato/lato-regular.woff") format("woff");
-  src: local("☺"), url("lato/lato-regular.ttf") format("truetype");
-  src: local("☺"), url("lato/lato-regular.svg") format("svg");
+  src: local("☺"), url("lato/lato-regular.woff") format("woff"),
+  url("lato/lato-regular.ttf") format("truetype"),
+  url("lato/lato-regular.svg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
