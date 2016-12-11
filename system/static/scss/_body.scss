@@ -1,21 +1,16 @@
 .login-page {
   margin-top: 12rem;
-  padding: 1rem 15rem;
   .login-content {
-    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.13),0 1px 5px 0 rgba(0,0,0,0.08);
-    padding: 1rem;
     .login-title {
       text-align: center;
     }
     .login-form, .login-extras {
-      padding: 0 15rem;
       button {
         width: 100%;
       }
     }
     .login-extras {
-      display: flex;
-      justify-content: space-around;
+
     }
   }
 }

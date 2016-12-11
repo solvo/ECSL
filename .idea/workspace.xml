@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecf08b56-d8e2-4123-ace6-30a5625cddaf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/others/.sass-cache/dd853175ec4dff961b649fba2bdec4e2197b8ca7/style.scssc" afterPath="$PROJECT_DIR$/system/static/others/.sass-cache/dd853175ec4dff961b649fba2bdec4e2197b8ca7/style.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/others/.sass-cache/dd853175ec4dff961b649fba2bdec4e2197b8ca7/_body.scssc" afterPath="$PROJECT_DIR$/system/static/others/.sass-cache/dd853175ec4dff961b649fba2bdec4e2197b8ca7/_body.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/css/style.css" afterPath="$PROJECT_DIR$/system/static/css/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/css/style.css.map" afterPath="$PROJECT_DIR$/system/static/css/style.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/fonts/_fonts.scss" afterPath="$PROJECT_DIR$/system/static/fonts/_fonts.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/scss/_body.scss" afterPath="$PROJECT_DIR$/system/static/scss/_body.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/system/static/scss/style.scss" afterPath="$PROJECT_DIR$/system/static/scss/style.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/registration/login.html" afterPath="$PROJECT_DIR$/templates/registration/login.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/registration/registration_form.html" afterPath="$PROJECT_DIR$/templates/registration/registration_form.html" />
@@ -37,8 +36,8 @@
       <file leaf-file-name="registration_form.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/registration/registration_form.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+            <state relative-caret-position="85">
+              <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -54,11 +53,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_body.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="_body.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/system/static/scss/_body.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+            <state relative-caret-position="204">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -78,17 +77,17 @@
         <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
-              <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+              <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
+            <state relative-caret-position="239">
+              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -98,7 +97,7 @@
         <entry file="file://$PROJECT_DIR$/system/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="827" selection-start-line="0" selection-start-column="827" selection-end-line="0" selection-end-column="827" />
+              <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -136,12 +135,12 @@
         <option value="$PROJECT_DIR$/system/static/scss/_variables.scss" />
         <option value="$PROJECT_DIR$/system/static/scss/_overrides.scss" />
         <option value="$PROJECT_DIR$/system/static/scss/_header.scss" />
-        <option value="$PROJECT_DIR$/templates/registration/registration_form.html" />
-        <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/system/static/scss/style.scss" />
         <option value="$PROJECT_DIR$/system/static/fonts/_fonts.scss" />
-        <option value="$PROJECT_DIR$/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/system/static/scss/_body.scss" />
+        <option value="$PROJECT_DIR$/templates/registration/login.html" />
+        <option value="$PROJECT_DIR$/templates/registration/registration_form.html" />
+        <option value="$PROJECT_DIR$/templates/base.html" />
       </list>
     </option>
   </component>
@@ -915,34 +914,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/registration_form.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="22" column="19" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/system/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="827" selection-start-line="0" selection-start-column="827" selection-end-line="0" selection-end-column="827" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="34" selection-start-line="5" selection-start-column="34" selection-end-line="5" selection-end-column="34" />
+          <caret line="0" column="37" selection-start-line="0" selection-start-column="37" selection-end-line="0" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -965,8 +940,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/system/static/scss/_body.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="11" selection-start-line="0" selection-start-column="11" selection-end-line="0" selection-end-column="11" />
+        <state relative-caret-position="204">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/registration/registration_form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/registration/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="20" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
           <folding />
         </state>
       </provider>
