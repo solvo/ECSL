@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load i18n %}
+{% block head %}
+<nav class="navbar navbar-default nav-main navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Brand</a>
+    </div>
 
-        <a href="{% url 'registration_register' %}">Register</a>
-        <a href="{% url 'Login' %}">Login</a>
-{#{{ status }}#}
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          <li><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
+          <li><a href="{% url 'Login' %}">{% trans "Login" %}</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 {% endblock %}
 
+{% block content %}
 
-</body>
-</html>
+
+{% endblock %}

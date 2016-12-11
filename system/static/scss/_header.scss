@@ -1,0 +1,23 @@
+.nav-main {
+  background-color: #fff;
+  .navbar-header {
+    padding: 1rem;
+  }
+  .navbar-nav {
+    li {
+      padding: 1rem;
+      &.active {
+        a {
+          color: $brand_purple !important;
+        }
+      }
+      a {
+        transition: 0.25s ease-in;
+        color: $brand_blue !important;
+      }
+      a:hover {
+        color: $brand_purple !important;
+      }
+    }
+  }
+}
