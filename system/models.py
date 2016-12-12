@@ -89,7 +89,12 @@ class Tshirt(Model):
 
 
 class SpeechType(Model):
-    name = CharField(max_length=45,verbose_name=_('Name'))
+    speech_choice = (
+        ('T', 'Talleres'),
+        ('Ch', 'Charlas'),
+        ('Md', 'Mesas de dialogos')
+    )
+    name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
 
     def __str__(self):
         return self.name

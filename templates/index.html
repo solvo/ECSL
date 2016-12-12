@@ -32,6 +32,8 @@
 
     {% endif %}
 
+
+
       </ul>
     </div>
   </div>
@@ -43,6 +45,13 @@
 {% endblock %}
 
 {% block content %}
+    <br><br><br><br><br>
+    {% for foo in total_speech %}
+        {{ foo.topic }}
+        {{ foo.user.username }}
+        {% empty %}
+        <h1>No hay</h1>
+    {% endfor %}
 
 
 {% endblock %}
