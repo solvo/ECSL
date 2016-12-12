@@ -1,5 +1,5 @@
 .login-page {
-  margin-top: 12rem;
+  margin-top: 10rem;
   .login-content {
     .login-title {
       text-align: center;
@@ -11,6 +11,18 @@
     }
     .login-extras {
 
+    }
+  }
+}
+
+.registrer-page {
+  margin-top: 10rem;
+  .register-title {
+    text-align: center;
+  }
+  .register-form {
+    button {
+      width: 100%;
     }
   }
 }

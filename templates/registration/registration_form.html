@@ -2,14 +2,14 @@
 {% load i18n %}
 {% load bootstrap3 %}
 {% block content %}
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="container registrer-page">
         <div class="registrer">
             <h1 class="register-title">{% trans "Register" %}</h1>
             <form class="register-form" method="post" action=".">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                <input class="btn btn-primary" type="submit" value="{% trans 'Submit' %}" />
+                <button class="btn btn-primary" type="submit" >{% trans 'Submit' %}</button>
             </form>
         </div>
     </div>
