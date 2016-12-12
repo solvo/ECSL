@@ -6,6 +6,7 @@ def menu(request):
     menu = {'menu': [
                      {'name': 'Site', 'url': reverse('Index')},
                      {'name': 'Testing', 'url':reverse('Testing')},
+                     {'name': 'Register', 'url':reverse('registration_register')},
                      {'name': 'Logout', 'url':reverse('auth_logout')},
                      {'name': 'Login', 'url':reverse('auth_login')},
                      ]}
