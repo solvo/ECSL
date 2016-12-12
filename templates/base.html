@@ -17,12 +17,16 @@
     <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
 <body>
-{% block head %}
-{% endblock %}
-<div class="col-sm-12">
-{% block content %}
-{% endblock %}
-</div>
+    <header>
+        {% block head %}
+        {% endblock %}
+    </header>
+    <div class="col-sm-12">
+        {% block content %}
+        {% endblock %}
 
+        {% block footer %}
+        {% endblock %}
+    </div>
 </body>
 </html>
