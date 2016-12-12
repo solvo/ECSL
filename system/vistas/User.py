@@ -43,7 +43,7 @@ class edit_profile(UpdateView, SingleObjectMixin):
               'entry_country_date', 'out_country_date', 'letter']
 
 
-class view_profile(UpdateView, SingleObjectMixin):
+class view_profile(DetailView):
     template_name = 'usuarios/view_profile.html'
     model = Profile
 
