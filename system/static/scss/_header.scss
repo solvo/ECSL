@@ -1,17 +1,14 @@
 .nav-main {
   background-color: #fff;
-  .navbar-header {
-    padding: 1rem;
-  }
   .navbar-nav {
     li {
-      padding: 1rem;
       &.active {
         a {
           color: $brand_purple !important;
         }
       }
       a {
+        padding: 2rem;
         transition: 0.25s ease-in;
         color: $brand_blue !important;
       }
