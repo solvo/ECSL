@@ -19,7 +19,7 @@
       <ul class="nav navbar-nav">
           <li class="active"><a href="#">{% trans "Home" %}</a></li>
           <li><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
-          <li><a href="{% url 'Login' %}">{% trans "Login" %}</a></li>
+          <li><a href="{% url 'auth_login' %}">{% trans "Login" %}</a></li>
       </ul>
     </div>
   </div>
@@ -30,7 +30,7 @@
     <a href="{% url 'View_Profile' profile_pk %}">Profile</a>
     <a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a>
 
-        <h1>{{ user.username }}</h1>
+
 
     {% else %}
 

@@ -8,7 +8,7 @@
         <div class="login-page">
             <div class="login-content">
                 <h1 class="login-title">{% trans "Login" %}</h1>
-                <form class="login-form" method="post" action="{% url 'Login' %}">
+                <form class="login-form" method="post" action="{% url 'auth_login' %}">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     {% buttons %}
@@ -27,18 +27,6 @@
     </div>
 </div>
 
-<form method="post" action="{% url 'auth_login' %}">
-
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary {% block button_class %}{% endblock %}">
-            {% block button_text %} Login {% endblock %}
-        </button>
-    {% endbuttons %}
-
-    <input type="hidden" name="next" value="{{ next }}"/>
-</form>
 
 
 

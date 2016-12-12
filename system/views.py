@@ -15,5 +15,5 @@ def index(request):
 
     if periodo == 0:
         pre_matricula = True
-        return render(request, 'index.html', {'status': pre_matricula, 'profile_pk': profile_pk, 'user_pk':request.user.pk})
+        return render(request, 'index.html', {'status': pre_matricula, 'profile_pk': profile_pk, 'user_pk': request.user.pk})
     return render(request, 'index.html', {'status': pre_matricula})
