@@ -18,17 +18,26 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
           <li class="active"><a href="#">{% trans "Home" %}</a></li>
-          <li><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
-          <li><a href="{% url 'auth_login' %}">{% trans "Login" %}</a></li>
           {% if user.is_authenticated %}
-
+                {% if profile_pk %}
               <li> <a href="{% url 'Edit_Profile' profile_pk %}">Edit Profile</a> </li>
               <li><a href="{% url 'View_Profile' profile_pk %}">Profile</a></li>
               <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
               <li><a href="{% url 'auth_password_change'%}">Edit User PAssword</a></li>
+              <li><a href="{% url 'auth_logout'%}">Exit User</a></li>
+                    {% else %}
 
+                    <li><a href="{% url 'Profile'%}">Crear Profile</a></li>
+                    <li><a href="{% url 'auth_logout'%}">Exit User</a></li>
+                    <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
+                    <li><a href="{% url 'auth_password_change'%}">Edit User PAssword</a></li>
+
+                {% endif %}
 
     {% else %}
+
+        <li><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
+        <li><a href="{% url 'auth_login' %}">{% trans "Login" %}</a></li>
 
     {% endif %}
 
