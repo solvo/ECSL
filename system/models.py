@@ -70,9 +70,9 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    img1 = ImageField(verbose_name=_('Image 1'))
-    img2 = ImageField(verbose_name=_('Image 2'))
-    img3 = ImageField(verbose_name=_('Image 3'))
+    # img1 = ImageField(verbose_name=_('Image 1'))
+    # img2 = ImageField(verbose_name=_('Image 2'))
+    # img3 = ImageField(verbose_name=_('Image 3'))
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
 

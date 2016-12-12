@@ -20,21 +20,22 @@
           <li class="active"><a href="#">{% trans "Home" %}</a></li>
           <li><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
           <li><a href="{% url 'auth_login' %}">{% trans "Login" %}</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+          {% if user.is_authenticated %}
 
-    {% if user.is_authenticated %}
-    <a href="{% url 'Edit_Profile' profile_pk %}">Edit Profile</a>
-    <a href="{% url 'View_Profile' profile_pk %}">Profile</a>
-    <a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a>
-
+              <li> <a href="{% url 'Edit_Profile' profile_pk %}">Edit Profile</a> </li>
+              <li><a href="{% url 'View_Profile' profile_pk %}">Profile</a></li>
+              <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
+              <li><a href="{% url 'auth_password_change'%}">Edit User PAssword</a></li>
 
 
     {% else %}
 
     {% endif %}
+
+      </ul>
+    </div>
+  </div>
+</nav>
 
 
 {#{{ status }}#}
