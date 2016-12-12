@@ -15,19 +15,20 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from system.views import *
-from system.vistas import *
+from system.views import index
 from system.vistas.User import *
 
 extra_patterns = [
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+
     ]
 urlpatterns = extra_patterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='Index'),
-    url(r'^accounts/login/$', login, name='Login'),
+    url(r'^testing$', testing, name='Testing'),
     url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
-
-
+    url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
+    url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
+    url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
 ]

@@ -16,6 +16,7 @@
     <script src="{% static 'js/script.js' %}"></script>
     <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
+
 <body>
     <header>
         {% block head %}
@@ -24,6 +25,29 @@
     <div class="col-sm-12">
         {% block content %}
         {% endblock %}
+
+
+{% block Head %}
+{% endblock %}
+
+{% block NavBar %}
+
+      <ul>
+{% for foo in menu %}
+       <li {% if foo.active %} class="active" {% endif %}><a href="{{ foo.url }}">{{ foo.name }} </a></li>
+ {% endfor %}
+
+      </ul>
+{% endblock %}
+
+
+
+<body>
+
+{% block content %}
+
+{% endblock %}
+
 
         {% block footer %}
         {% endblock %}

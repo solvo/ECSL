@@ -1,27 +1,67 @@
-from django.shortcuts import render
-from django.contrib.auth import views
+from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
-from system.forms import *
 from django.views.generic import *
 from system.models import *
 from django.utils.decorators import method_decorator
-
-
-def login(request):
-    template_response = views.login(request, authentication_form=Login_Form,
-                                    template_name='usuarios/identificarse.html')
-    return template_response
+from django.views.generic.detail import SingleObjectMixin
 
 
 @method_decorator(login_required, name='dispatch')
-class profile(CreateView):
-    template_name = 'usuarios/profile.html'
+class profile(CreateView, SingleObjectMixin):
+    template_name = 'usuarios/create_profile.html'
     model = Profile
     success_url = '/'
     fields = ['alimentary_restriction', 'born_date', 'gender', 'health_consideration',
-              'identification', 'institution', 'nationality', 'snore']
+              'identification', 'institution', 'nationality', 'snore',
+              'entry_country', 'out_country', 'entry_port', 'out_port',
+              'entry_country_date', 'out_country_date', 'letter']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         form.save()
         return super(profile, self).form_valid(form)
+
+    def dispatch(self, request, *args, **kwargs):
+
+        try:
+            Profile.objects.get(user=request.user)
+        except ObjectDoesNotExist:
+            return super(profile, self).dispatch(request, *args, **kwargs)
+
+        else:
+            return redirect('Index')
+
+
+@method_decorator(login_required, name='dispatch')
+class edit_profile(UpdateView, SingleObjectMixin):
+    template_name = 'usuarios/edit_profile.html'
+    model = Profile
+
+    fields = ['alimentary_restriction', 'born_date', 'gender', 'health_consideration',
+              'identification', 'institution', 'nationality', 'snore',
+              'entry_country', 'out_country', 'entry_port', 'out_port',
+              'entry_country_date', 'out_country_date', 'letter']
+
+
+class view_profile(DetailView):
+    template_name = 'usuarios/view_profile.html'
+    model = Profile
+
+    fields = ['alimentary_restriction', 'born_date', 'gender', 'health_consideration',
+              'identification', 'institution', 'nationality', 'snore',
+              'entry_country', 'out_country', 'entry_port', 'out_port',
+              'entry_country_date', 'out_country_date', 'letter']
+
+
+class edit_account(UpdateView, SingleObjectMixin):
+    template_name = 'usuarios/edit_account.html'
+    model = User
+
+    fields = ['username','first_name', 'last_name', 'email']
+
+
+
+@login_required()
+def testing(request):
+
+    return render(request, 'testing.html')

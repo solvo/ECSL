@@ -28,8 +28,15 @@ class Profile(Model):
     institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'))
-
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
+
+    entry_country = IntegerField(verbose_name=_('Entry and out from country'))
+    out_country = IntegerField(verbose_name=_('Entry and otu from country'))
+    entry_port = CharField(max_length=100, verbose_name=_('Entry port'))
+    out_port = CharField(max_length=100, verbose_name=_('Out port'))
+    entry_country_date = DateTimeField(verbose_name=_('Entry country Date'))
+    out_country_date = DateTimeField(verbose_name=_('Out country Date'))
+    letter = TextField(verbose_name=_('Migratory letter'))
 
     def save(self, *args, **kwargs):
         periodo = get_active_period()
@@ -39,8 +46,7 @@ class Profile(Model):
         super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
 
     def __str__(self):
-        return self.identification
-
+        return self.user.username
 
 
 class Inscription(Model):
@@ -54,7 +60,7 @@ class Inscription(Model):
     subvention_request = BooleanField(verbose_name=_('Subvention Request'))
 
     def __str__(self):
-        return self. registered
+        return self.registered
 
 
 class TshirtStyle(Model):
@@ -156,6 +162,9 @@ class DateState(Model):
     finish_date = models.DateField(verbose_name=_("Period finish date"))
 
     def __str__(self):
-        return self.start_date
+        return 'Periodo'
+
+
+
 
 
