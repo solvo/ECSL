@@ -47,11 +47,6 @@ class view_profile(DetailView):
     template_name = 'usuarios/view_profile.html'
     model = Profile
 
-    fields = ['alimentary_restriction', 'born_date', 'gender', 'health_consideration',
-              'identification', 'institution', 'nationality', 'snore',
-              'entry_country', 'out_country', 'entry_port', 'out_port',
-              'entry_country_date', 'out_country_date', 'letter']
-
 
 @method_decorator(login_required, name='dispatch')
 class edit_account(UpdateView, SingleObjectMixin):

@@ -34,6 +34,9 @@ urlpatterns = extra_patterns + [
 
     # url(r'^actividades/charlas/$', charlas.as_view(), name='Charlas'),
     # url(r'^actividades/dialogos/$', dialogos.as_view(), name='Dialogos'),
-    url(r'^actividades/mesas/$', mesas.as_view(), name='Mesas'),
+    url(r'^accounts/view_tables/(?P<pk>[\w-]+)/$', view_table.as_view(), name='View_Table'),
+    url(r'^actividades/tables/$', mesas.as_view(), name='Mesas'),
+    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', mesas.as_view(), name='Mesas'),
+
 ]
 

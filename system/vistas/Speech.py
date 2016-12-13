@@ -9,3 +9,8 @@ from django.views.generic.detail import SingleObjectMixin
 class mesas(ListView):
     template_name = 'actividades/mesas/list_mesas.html'
     queryset = Speech.objects.filter(speech_type=1)
+
+
+class view_table(DetailView):
+    template_name = 'actividades/mesas/view_table.html'
+    model = Speech
