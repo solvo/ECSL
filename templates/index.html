@@ -41,8 +41,6 @@
 
     {% endif %}
 
-
-
       </ul>
     </div>
   </div>
@@ -61,6 +59,12 @@
         {% empty %}
         <h1>No hay</h1>
     {% endfor %}
+
+    <h1>Actividades</h1>
+{#    <a href="{% url 'Charlas' %}"><h2>Charlas</h2></a>#}
+    <a href="{% url 'Mesas' %}"><h2>Mesas</h2></a>
+{#    <a href="{% url 'Dialogos' %}"><h2>Dialogos</h2></a>#}
+
 
 
 {% endblock %}

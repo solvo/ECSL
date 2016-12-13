@@ -70,9 +70,9 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    # img1 = ImageField(verbose_name=_('Image 1'))
-    # img2 = ImageField(verbose_name=_('Image 2'))
-    # img3 = ImageField(verbose_name=_('Image 3'))
+    img1 = ImageField(verbose_name=_('Image 1'))
+    img2 = ImageField(verbose_name=_('Image 2'))
+    img3 = ImageField(verbose_name=_('Image 3'))
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
 
@@ -104,14 +104,23 @@ class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
 
     def __str__(self):
-        return self.identification
+        return self.name
 
 
 class Speech(Model):
+    speech_audience = (
+        ('PG', 'Publico General'),
+        ('NB', 'Nivel Basico'),
+        ('NI', 'Nivel Intermedio'),
+        ('NA', 'Nivel Avanzado'),
+        ('PRO', 'Profesional'),
+
+    )
+
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
     topic = ForeignKey(Topic, verbose_name=_('Topic'))
     user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
-    audience = TextField(verbose_name=_('Audience')) # Aclarar para que se usa este campo
+    audience = CharField(verbose_name=_('Audience'), choices=speech_audience, max_length=45)
     description = TextField(verbose_name=_('Description'))
     notes = TextField(verbose_name=_('Notes'))
     skill_level = PositiveIntegerField(verbose_name=_('Skill Level'))

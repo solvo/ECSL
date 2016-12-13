@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+
+
+{% block content %}
+    <h1>Listados de mesas creadas</h1>
+<ul>
+{% for article in object_list %}
+    <li>{{ article.topic.name}}</li>
+    <li>{{ article.user.username}}</li>
+    <li>{{ article.audience}}</li>
+
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}
+</body>
+</html>

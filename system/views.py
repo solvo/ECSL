@@ -2,7 +2,6 @@ from django.shortcuts import render
 from system.models import *
 
 
-
 def index(request):
     pre_matricula = False
     total_speech = Speech.objects.all()

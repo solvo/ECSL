@@ -18,7 +18,6 @@ class profile(CreateView, SingleObjectMixin):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.save()
         return super(profile, self).form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
@@ -42,6 +41,7 @@ class edit_profile(UpdateView, SingleObjectMixin):
               'entry_country', 'out_country', 'entry_port', 'out_port',
               'entry_country_date', 'out_country_date', 'letter']
 
+
 @method_decorator(login_required, name='dispatch')
 class view_profile(DetailView):
     template_name = 'usuarios/view_profile.html'
@@ -58,8 +58,7 @@ class edit_account(UpdateView, SingleObjectMixin):
     template_name = 'usuarios/edit_account.html'
     model = User
 
-    fields = ['username','first_name', 'last_name', 'email']
-
+    fields = ['first_name', 'last_name', 'email']
 
 
 @login_required()
