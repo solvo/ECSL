@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'system',
-    'djreservation',
+
     'paypal',
 
     'django_ajax',
     'ckeditor',
     'bootstrap3',
-
+    'djreservation',
 
 ]
 

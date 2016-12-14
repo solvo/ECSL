@@ -18,7 +18,6 @@ from django.contrib import admin
 from system.views import *
 from system.vistas.User import *
 from system.vistas.Speech import *
-
 extra_patterns = [
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
@@ -32,25 +31,14 @@ urlpatterns = extra_patterns + [
     url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
     url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
-
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
 
-
+    # url(r'^actividades/charlas/$', charlas.as_view(), name='Charlas'),
+    # url(r'^actividades/dialogos/$', dialogos.as_view(), name='Dialogos'),
+    url(r'^accounts/view_tables/(?P<pk>[\w-]+)/$', view_table.as_view(), name='View_Table'),
+    url(r'^actividades/tables/$', mesas.as_view(), name='Mesas'),
+    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', mesas.as_view(), name='Mesas'),
 
     url(r'^forum/$', forum, name='Forum'),
-    url(r'^forum/tables/$', tables.as_view(), name='Tables'),
-    url(r'^forum/tables/view_tables/(?P<pk>[\w-]+)/$', view_table.as_view(), name='View_Table'),
-
-    url(r'^forum/dialog/$', dialog.as_view(), name='Dialog'),
-    url(r'^forum/dialog/view_dialog/(?P<pk>[\w-]+)/$', view_dialog.as_view(), name='View_Dialog'),
-
-    url(r'^forum/talleres/$', talleres.as_view(), name='Talleres'),
-    url(r'^forum/talleres/view_talleres/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
-
-    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', tables.as_view(), name='Mesas'),
-
-
-
-
 ]
 

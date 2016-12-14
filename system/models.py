@@ -95,9 +95,9 @@ class Tshirt(Model):
 
 class SpeechType(Model):
     speech_choice = (
-        ('T', 'Talleres'),
-        ('Ch', 'Charlas'),
-        ('Md', 'Mesas de dialogos')
+        ('Talleres', 'T'),
+        ('Charlas', 'CH'),
+        ('Dialogos', 'D')
     )
     name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
 
