@@ -1,17 +1,16 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 
-
-
 {% block content %}
     <h1>Añadir perfiles</h1>
 <form method="post" action="{% url 'Profile' %}">
 
     {% csrf_token %}
+    {{ form.media }}
     {% bootstrap_form form %}
     {% buttons %}
         <button type="submit" class="btn btn-primary {% block button_class %}{% endblock %}">
-            {% block button_text %} Login {% endblock %}
+            {% block button_text %} Edit {% endblock %}
         </button>
     {% endbuttons %}
 

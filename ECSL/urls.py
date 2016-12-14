@@ -25,6 +25,7 @@ extra_patterns = [
 
     ]
 urlpatterns = extra_patterns + [
+
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
@@ -34,8 +35,6 @@ urlpatterns = extra_patterns + [
     url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
 
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
-
-
 
     url(r'^forum/$', forum, name='Forum'),
     url(r'^forum/tables/$', tables.as_view(), name='Tables'),

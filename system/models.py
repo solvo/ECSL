@@ -132,6 +132,9 @@ class Speech(Model):
     speaker_information = TextField(verbose_name=_('Speaker Information'))
     title = TextField(verbose_name=_('Title'))
 
+    def __str__(self):
+        return self.speech_type.name + ' de ' + self.topic.name
+
 
 class Hotel(Model):
     contact_email = EmailField(verbose_name=_('E-Mail'))
