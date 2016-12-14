@@ -13,7 +13,7 @@
 <ul>
 {% for talleres in object_list %}
     <p>Titulo:</p>
-    <li><a href="{% url 'View_Table' talleres.pk %}">{{ talleres.topic.name}}</a></li>
+    <li><a href="{% url 'View_Talleres' talleres.pk %}">{{ talleres.topic.name}}</a></li>
     <p>Description:</p>
     {{ talleres.description }}
     <p>Por el usuario:</p>

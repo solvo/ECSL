@@ -18,6 +18,7 @@ from django.contrib import admin
 from system.views import *
 from system.vistas.User import *
 from system.vistas.Speech import *
+from system.ajax import *
 
 extra_patterns = [
 
@@ -25,7 +26,6 @@ extra_patterns = [
 
     ]
 urlpatterns = extra_patterns + [
-
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
@@ -35,6 +35,8 @@ urlpatterns = extra_patterns + [
     url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
 
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
+
+
 
     url(r'^forum/$', forum, name='Forum'),
     url(r'^forum/tables/$', tables.as_view(), name='Tables'),
@@ -46,7 +48,8 @@ urlpatterns = extra_patterns + [
     url(r'^forum/talleres/$', talleres.as_view(), name='Talleres'),
     url(r'^forum/talleres/view_talleres/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
 
-    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', tables.as_view(), name='Mesas'),
+    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', matricularse, name='Ajax_Talleres'),
+    url(r'^notificaciones/$', notificaciones, name='notificaciones'),
 
 
 

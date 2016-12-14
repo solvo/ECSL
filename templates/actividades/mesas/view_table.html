@@ -10,5 +10,5 @@
 
     {{ object.user.username }}
 
-<a href="">matricularse</a>
+<a href="{% url 'Talleres' object.pk %}" data-ajax="true">matricularse</a>
 {% endblock %}
