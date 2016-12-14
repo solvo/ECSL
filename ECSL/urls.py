@@ -18,6 +18,7 @@ from django.contrib import admin
 from system.views import *
 from system.vistas.User import *
 from system.vistas.Speech import *
+
 extra_patterns = [
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
@@ -32,7 +33,7 @@ urlpatterns = extra_patterns + [
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
     url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
 
-    url(r'^accounts/new_profile/$', create_profile, name='New_Profile'),
+    url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
 
 
 

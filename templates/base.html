@@ -39,7 +39,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-          <li class="active"><a href="#">{% trans "Home" %}</a></li>
+          <li class="active"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
           {% if user.is_authenticated %}
                 {% if profile_pk %}
               <li> <a href="{% url 'Edit_Profile' profile_pk %}">Edit Profile</a> </li>
@@ -61,7 +61,7 @@
 
     {% else %}
 
-        <li><a href="{% url 'registration_register' %}">{% trans "Register" %}</a></li>
+        <li><a href="{% url 'New_Profile' %}">{% trans "Register" %}</a></li>
         <li><a href="{% url 'auth_login' %}">{% trans "Login" %}</a></li>
         <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
 

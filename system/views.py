@@ -4,7 +4,8 @@ from system.models import *
 from system.forms import *
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from registration.views import RegistrationView
+from registration.backends.hmac.views import RegistrationView
+from registration import signals
 
 
 def index(request):
@@ -16,10 +17,7 @@ def index(request):
 
     except ObjectDoesNotExist:
         user_without_profile={'status': pre_matricula, 'total_speech': total_speech, 'user_pk': request.user.pk}
-
         return render(request, 'index.html', user_without_profile)
-
-
 
     periodo = get_active_period()
 
@@ -31,22 +29,21 @@ def index(request):
     return render(request, 'index.html', without_user)
 
 
-def create_profile(request):
-    form = ProfileForm()
-    if request.method == 'POST':
-        form = ProfileForm(request.POST)
-        if form.is_valid():
-            formuser = RegistrationForm(data={'username': form.cleaned_data["username"], 'email': form.cleaned_data["email"], 'password1': form.cleaned_data["password1"],
-                                              'password2': form.cleaned_data["password2"]})
-            if formuser.is_valid():
-                user = formuser.save()
-                profile = Profile(name=form.cleaned_data["name"], last_name=form.cleaned_data["last_name"],
-                                  gender=form.cleaned_data["gender"], user=user,
+class createProfile(RegistrationView):
+    form_class = ProfileForm
+    template_name = 'usuarios/create_profile.html'
+
+    def register(self, form):
+        formuser = RegistrationForm(data={'username': form.cleaned_data["username"], 'email': form.cleaned_data["email"], 'password1': form.cleaned_data["password1"],
+                                          'password2': form.cleaned_data["password2"]})
+        new_user = self.create_inactive_user(formuser)
+        signals.user_registered.send(sender=self.__class__,
+                                     user=new_user,
+                                     request=self.request)
+        profile = Profile(name=form.cleaned_data["name"], last_name=form.cleaned_data["last_name"],
+                                  gender=form.cleaned_data["gender"], user=new_user,
                                   born_date=form.cleaned_data["born_date"],
                                   nationality=form.cleaned_data["nationality"],
                                   institution=form.cleaned_data["institution"],)
-                profile.save()
-                messages.add_message(request, messages.SUCCESS, 'The user '+ profile.user.username +'was created susesfully ')
-                return redirect('index')
-    return render(request, 'usuarios/create_profile.html', {'form': form})
-
+        profile.save()
+        return new_user
