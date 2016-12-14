@@ -1,0 +1,44 @@
+.login-page {
+  margin-top: 20%;
+  .login-content {
+    .login-title {
+      text-align: center;
+    }
+    .login-form, .login-extras {
+      .form-group {
+        .input-group-addon {
+          i {
+            width: 10px;
+          }
+        }
+      }
+      button {
+        width: 100%;
+      }
+    }
+    .login-extras {
+
+    }
+  }
+}
+
+.registrer-page {
+  margin-top: 20%;
+  .register-title {
+    text-align: center;
+  }
+  .register-form {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.row-image{
+     background: url('../img/row.png') repeat-x top center;
+    height: 160px;
+    padding: 0;
+    margin-top: -85px;
+    position: relative;
+    z-index: 5;
+}

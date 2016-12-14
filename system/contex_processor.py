@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 
 def menu(request):
     menu = {'menu': [
-                     {'name': 'Site', 'url': reverse('Index')},
+                     {'name': 'Site', 'url': reverse('index')},
                      {'name': 'Testing', 'url':reverse('Testing')},
                      {'name': 'Register', 'url':reverse('registration_register')},
                      {'name': 'Logout', 'url':reverse('auth_logout')},

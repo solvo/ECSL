@@ -1,15 +1,2 @@
-#Descripcion{
-    font-size:14px;
-    font-style:italic;
-}
-h1{
-    color:white;
-    text-shadow:0px 4px 8px rgb(0, 92, 230);
-}
-
- .contienearticulo{
-    padding:10px;
-    height:55px;
-
-}
-
+﻿@font-face{font-family:'Lato';src:url("lato/lato-regular.eot");src:local("Ôÿ║"),url("lato/lato-regular.woff") format("woff"),url("lato/lato-regular.ttf") format("truetype"),url("lato/lato-regular.svg") format("svg");font-weight:normal;font-style:normal}.btn-primary{background-color:#24ABE3}.nav-main{background-color:#fff}.nav-main .navbar-nav li.active a{color:#E92177 !important}.nav-main .navbar-nav li a{padding:2rem;transition:0.25s ease-in;color:#24ABE3 !important}.nav-main .navbar-nav li a:hover{color:#E92177 !important}.login-page{margin-top:15%}.login-page .login-content .login-title{text-align:center}.login-page .login-content .login-form button,.login-page .login-content .login-extras button{width:100%}.registrer-page{margin-top:15%}.registrer-page .register-title{text-align:center}.registrer-page .register-form button{width:100%}
+/*# sourceMappingURL=style.css.map */

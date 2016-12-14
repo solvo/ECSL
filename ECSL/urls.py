@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from system.views import index
+from system.views import *
 from system.vistas.User import *
-
+from system.vistas.Speech import *
 extra_patterns = [
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
@@ -25,10 +25,20 @@ extra_patterns = [
     ]
 urlpatterns = extra_patterns + [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', index, name='Index'),
-    url(r'^testing$', testing, name='Testing'),
+    url(r'^$', index, name='index'),
+    url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
     url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
     url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
     url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
+    url(r'^accounts/new_profile/$', create_profile, name='New_Profile'),
+
+    # url(r'^actividades/charlas/$', charlas.as_view(), name='Charlas'),
+    # url(r'^actividades/dialogos/$', dialogos.as_view(), name='Dialogos'),
+    url(r'^accounts/view_tables/(?P<pk>[\w-]+)/$', view_table.as_view(), name='View_Table'),
+    url(r'^actividades/tables/$', mesas.as_view(), name='Mesas'),
+    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', mesas.as_view(), name='Mesas'),
+
+    url(r'^forum/$', forum, name='Forum'),
 ]
+

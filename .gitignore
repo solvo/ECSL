@@ -87,3 +87,11 @@ ENV/
 
 # Rope project settings
 .ropeproject
+#IDEA
+.idea/
+.idea/*
+
+#style
+system/static/css/style.css
+system/static/css/style.css.map
+system/static/others/.sass-cache

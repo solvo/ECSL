@@ -5,10 +5,8 @@
 
 {% block content %}
     <h1>Ver perfiles</h1>
-<form method="post" action="{% url 'Profile' %}">
+
     {{ object.letter }}
 
-    <input type="hidden" name="next" value="{{ next }}"/>
-</form>
 
 {% endblock %}

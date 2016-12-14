@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'system',
     'djreservation',
     'paypal',
-    'bootstrapform',
+
     'django_ajax',
     'ckeditor',
     'bootstrap3',
+
 
 ]
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
@@ -20,23 +21,26 @@ class Profile(Model):
         ('F', 'Femenino')
     )
     user = OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
-    alimentary_restriction = TextField(verbose_name=_('Food Restriction'))
+    name = CharField(max_length=255, verbose_name=_('Name'))
+    last_name = CharField(max_length=255, verbose_name=_('Last name'))
+    institution = CharField(max_length=12, verbose_name=_('Institution'))
+    alimentary_restriction = TextField(verbose_name=_('Food Restriction'), null=True)
     born_date = DateField(verbose_name=_('Born Date'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    health_consideration = TextField(verbose_name=_('Health Considerations'))
-    identification = CharField(max_length=12, verbose_name=_('Identification'))
+    health_consideration = TextField(verbose_name=_('Health Considerations'), null=True)
+    identification = CharField(max_length=12, verbose_name=_('Identification'), null=True)
     institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
-    snore = BooleanField(verbose_name=_('Snore?'))
+    snore = BooleanField(verbose_name=_('Snore?'), default=False)
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
 
-    entry_country = IntegerField(verbose_name=_('Entry and out from country'))
-    out_country = IntegerField(verbose_name=_('Entry and otu from country'))
-    entry_port = CharField(max_length=100, verbose_name=_('Entry port'))
-    out_port = CharField(max_length=100, verbose_name=_('Out port'))
-    entry_country_date = DateTimeField(verbose_name=_('Entry country Date'))
-    out_country_date = DateTimeField(verbose_name=_('Out country Date'))
-    letter = TextField(verbose_name=_('Migratory letter'))
+    entry_country = IntegerField(verbose_name=_('Entry and out from country'), null=True)
+    out_country = IntegerField(verbose_name=_('Entry and otu from country'), null=True)
+    entry_port = CharField(max_length=100, verbose_name=_('Entry port'), null=True)
+    out_port = CharField(max_length=100, verbose_name=_('Out port'), null=True)
+    entry_country_date = DateTimeField(verbose_name=_('Entry country Date'), null=True)
+    out_country_date = DateTimeField(verbose_name=_('Out country Date'), null=True)
+    letter = TextField(verbose_name=_('Migratory letter'), null=True)
 
     def save(self, *args, **kwargs):
         periodo = get_active_period()
@@ -70,9 +74,10 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    img1 = ImageField(verbose_name=_('Image 1'))
-    img2 = ImageField(verbose_name=_('Image 2'))
-    img3 = ImageField(verbose_name=_('Image 3'))
+    # img1 = ImageField(verbose_name=_('Image 1'))
+    # img2 = ImageField(verbose_name=_('Image 2'))
+    # img3 = ImageField(verbose_name=_('Image 3'))
+
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
 
@@ -89,7 +94,12 @@ class Tshirt(Model):
 
 
 class SpeechType(Model):
-    name = CharField(max_length=45,verbose_name=_('Name'))
+    speech_choice = (
+        ('T', 'Talleres'),
+        ('Ch', 'Charlas'),
+        ('Md', 'Mesas de dialogos')
+    )
+    name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
 
     def __str__(self):
         return self.name
@@ -99,14 +109,23 @@ class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'))
 
     def __str__(self):
-        return self.identification
+        return self.name
 
 
 class Speech(Model):
+    speech_audience = (
+        ('PG', 'Publico General'),
+        ('NB', 'Nivel Basico'),
+        ('NI', 'Nivel Intermedio'),
+        ('NA', 'Nivel Avanzado'),
+        ('PRO', 'Profesional'),
+
+    )
+
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
     topic = ForeignKey(Topic, verbose_name=_('Topic'))
     user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
-    audience = TextField(verbose_name=_('Audience')) # Aclarar para que se usa este campo
+    audience = CharField(verbose_name=_('Audience'), choices=speech_audience, max_length=45)
     description = TextField(verbose_name=_('Description'))
     notes = TextField(verbose_name=_('Notes'))
     skill_level = PositiveIntegerField(verbose_name=_('Skill Level'))
