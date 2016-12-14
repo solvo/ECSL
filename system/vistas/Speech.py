@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic.detail import SingleObjectMixin
 
 
+
 def forum(request):
     return render(request, 'foro/foro.html')
 

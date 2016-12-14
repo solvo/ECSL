@@ -16,7 +16,10 @@ def index(request):
 
     except ObjectDoesNotExist:
         user_without_profile={'status': pre_matricula, 'total_speech': total_speech, 'user_pk': request.user.pk}
+
         return render(request, 'index.html', user_without_profile)
+
+
 
     periodo = get_active_period()
 
@@ -46,3 +49,4 @@ def create_profile(request):
                 messages.add_message(request, messages.SUCCESS, 'The user '+ profile.user.username +'was created susesfully ')
                 return redirect('index')
     return render(request, 'usuarios/create_profile.html', {'form': form})
+
