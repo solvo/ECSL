@@ -18,6 +18,7 @@ from django.contrib import admin
 from system.views import *
 from system.vistas.User import *
 from system.vistas.Speech import *
+from system.ajax import *
 
 extra_patterns = [
 
@@ -47,7 +48,7 @@ urlpatterns = extra_patterns + [
     url(r'^forum/talleres/$', talleres.as_view(), name='Talleres'),
     url(r'^forum/talleres/view_talleres/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
 
-    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', tables.as_view(), name='Mesas'),
+    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', matricularse, name='Talleres_Matricula'),
 
 
 
