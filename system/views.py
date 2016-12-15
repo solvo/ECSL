@@ -10,7 +10,7 @@ from registration import signals
 
 def index(request):
 
-    return render(request, 'index.html', {'user_pk': request.user.pk})
+    return render(request, 'index.html')
 
 
 class createProfile(RegistrationView):

@@ -1,17 +1,19 @@
 # -*- coding: UTF-8 -*-
-from django.core.urlresolvers import reverse
+
+from system.models import Profile, User
+from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def menu(request):
-    menu = {'menu': [
-                     {'name': 'Site', 'url': reverse('index')},
-                     {'name': 'Testing', 'url':reverse('Testing')},
-                     {'name': 'Register', 'url':reverse('New_Profile')},
-                     {'name': 'Logout', 'url':reverse('auth_logout')},
-                     {'name': 'Login', 'url':reverse('auth_login')},
-                     ]}
+    profile_pk = []
+    try:
+        pp = User.objects.get(pk=request.user.pk)
+        profile_pk = pp.profile.pk
 
-    for item in menu['menu']:
-        if request.path == item['url']:
-            item['active'] = True
-    return menu
+    except ObjectDoesNotExist:
+
+        redirect('index')
+    print (profile_pk)
+    value = {'profile_pk': profile_pk}
+    return value
