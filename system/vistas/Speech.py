@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import *
+from django.views.generic.detail import SingleObjectMixin
 from system.models import *
 from django.utils.decorators import method_decorator
 
@@ -42,10 +43,26 @@ class talleres(ListView):
 
 
 @method_decorator(login_required, name='dispatch')
+class topic_talleres(SingleObjectMixin, ListView):
+    template_name = 'actividades/talleres/list_talleres.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super(topic_talleres, self).get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super(topic_talleres, self).get_context_data(**kwargs)
+        context['topic'] = self.object
+        return context
+
+    def get_queryset(self):
+        return Speech.objects.filter(speech_type=2)
+
+
+@method_decorator(login_required, name='dispatch')
 class view_talleres(DetailView):
     template_name = 'actividades/talleres/view_talleres.html'
     model = Speech
-
 
 
 class add_talleres(CreateView):

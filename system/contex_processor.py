@@ -10,10 +10,7 @@ def menu(request):
     try:
         pp = User.objects.get(pk=request.user.pk)
         profile_pk = pp.profile.pk
-
     except ObjectDoesNotExist:
-
         redirect('index')
-    print (profile_pk)
     value = {'profile_pk': profile_pk}
     return value

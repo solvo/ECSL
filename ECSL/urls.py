@@ -29,7 +29,7 @@ urlpatterns = extra_patterns + [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
-    url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
+
     url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
 
@@ -45,7 +45,8 @@ urlpatterns = extra_patterns + [
     url(r'^forum/dialog/view_dialog/(?P<pk>[\w-]+)/$', view_dialog.as_view(), name='View_Dialog'),
 
     url(r'^forum/talleres/$', talleres.as_view(), name='Talleres'),
-    url(r'^forum/talleres/view_talleres/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
+    url(r'^forum/talleres/view_talleres/topic/(?P<slug>[\w-]+)/$', topic_talleres.as_view(), name='Topic_Talleres'),
+    url(r'^forum/talleres/view_talleres/topic/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
     url(r'^forum/talleres/add_talleres/$', add_talleres.as_view(), name='Add_Talleres'),
 
     url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', matricularse, name='Talleres_Matricula'),
