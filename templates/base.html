@@ -52,9 +52,7 @@
 
                             {% else %}
 
-                                <li><a href="{% url 'Profile' %}">Crear Profile</a></li>
                                 <li><a href="{% url 'auth_logout' %}">Exit User</a></li>
-                                <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
                                 <li><a href="{% url 'auth_password_change' %}">Edit User PAssword</a></li>
                                 <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
 

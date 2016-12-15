@@ -1,0 +1,22 @@
+{% if messages %}
+             {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                         <div class="alert alert-success text-center notificaciones" >
+                            {{ message }}
+                         </div>
+                    {% else %}
+
+                        {%if message.tags == 'info' %}
+                            <div class="alert alert-info text-center notificaciones" >
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            {%if message.tags == 'error' %}
+                                <div class="alert alert-danger text-center notificaciones" >
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+            {% endfor %}
+{% endif %}

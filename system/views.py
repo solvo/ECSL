@@ -9,24 +9,8 @@ from registration import signals
 
 
 def index(request):
-    pre_matricula = False
 
-    try:
-        pp = User.objects.get(pk=request.user.pk)
-        profile_pk = pp.profile.pk
-
-    except ObjectDoesNotExist:
-        user_without_profile={'status': pre_matricula, 'user_pk': request.user.pk}
-        return render(request, 'index.html', user_without_profile)
-
-    periodo = get_active_period()
-
-    if periodo == 0:
-        pre_matricula = True
-        user_with_profile = {'status': pre_matricula, 'profile_pk': profile_pk, 'user_pk': request.user.pk}
-        return render(request, 'index.html', user_with_profile)
-    without_user = {'status': pre_matricula}
-    return render(request, 'index.html', without_user)
+    return render(request, 'index.html', {'user_pk': request.user.pk})
 
 
 class createProfile(RegistrationView):

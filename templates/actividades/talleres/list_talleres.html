@@ -4,13 +4,20 @@
 
 
 {% block content %}
-    <h1>Listados de mesas creadas</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Listados de talleres creadas</h1>
 <ul>
-{% for article in object_list %}
+{% for talleres in object_list %}
     <p>Titulo:</p>
-    <li><a href="{% url 'View_Table' article.pk %}">{{ article.topic.name}}</a></li>
+    <li><a href="{% url 'View_Talleres' talleres.pk %}">{{ talleres.topic.name}}</a></li>
+    <p>Description:</p>
+    {{ talleres.description }}
     <p>Por el usuario:</p>
-    <li>{{ article.user.username}}</li>
+    <li>{{ talleres.user.username}}</li>
 
 {% empty %}
     <li>No articles yet.</li>

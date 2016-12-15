@@ -28,7 +28,7 @@ class profile(CreateView, SingleObjectMixin):
             return super(profile, self).dispatch(request, *args, **kwargs)
 
         else:
-            return redirect('Index')
+            return redirect('index')
 
 
 @method_decorator(login_required, name='dispatch')
