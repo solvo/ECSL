@@ -16,25 +16,11 @@ class tables(ListView):
     template_name = 'actividades/mesas/list_table.html'
     queryset = Speech.objects.filter(speech_type=1)
 
-    def get_context_data(self, **kwargs):
-    # Call the base implementation first to get a context
-        context = super(tables, self).get_context_data(**kwargs)
-    # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
-
 
 @method_decorator(login_required, name='dispatch')
 class view_table(DetailView):
     template_name = 'actividades/mesas/view_table.html'
     model = Speech
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(view_table, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -42,25 +28,11 @@ class dialog(ListView):
     template_name = 'actividades/dialogos/list_dialog.html'
     queryset = Speech.objects.filter(speech_type=3)
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(dialog, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
-
 
 @method_decorator(login_required, name='dispatch')
 class view_dialog(DetailView):
     template_name = 'actividades/dialogos/view_dialog.html'
     model = Speech
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(view_dialog, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -68,22 +40,21 @@ class talleres(ListView):
     template_name = 'actividades/talleres/list_talleres.html'
     queryset = Speech.objects.filter(speech_type=2)
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(talleres, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
-
 
 @method_decorator(login_required, name='dispatch')
 class view_talleres(DetailView):
     template_name = 'actividades/talleres/view_talleres.html'
     model = Speech
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(view_talleres, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
+
+
+class add_talleres(CreateView):
+    template_name = 'usuarios/create_profile.html'
+    model = Speech
+    success_url = '/forum/talleres/'
+    fields = ['speech_type','topic', 'audience', 'description', 'notes', 'skill_level', 'speaker_information', 'title']
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.speech_type = 2
+        return super(add_talleres, self).form_valid(form)

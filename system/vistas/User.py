@@ -48,13 +48,6 @@ class view_profile(DetailView):
     model = Profile
 
 
-@method_decorator(login_required, name='dispatch')
-class edit_account(UpdateView, SingleObjectMixin):
-    template_name = 'usuarios/edit_account.html'
-    model = User
-
-    fields = ['first_name', 'last_name', 'email']
-
 
 @login_required()
 def testing(request):

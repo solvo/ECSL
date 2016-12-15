@@ -27,9 +27,8 @@ def matricularse(request, pk):
 
 @ajax
 def matricularse_tables(request, pk):
-    if request.method == 'POST':
-        print(pk)
-        messages.add_message(request, messages.SUCCESS,'Click in enoroll')
-        return {
+
+    messages.add_message(request, messages.SUCCESS,'Click in enoroll')
+    return {
             'inner-fragments': {
-                '.notificaciones': '<script>recargarMensajes();</script>'}, }
+                '.notificaciones': '<script> recargarMensajes();</script>'}, }

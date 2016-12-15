@@ -32,7 +32,6 @@ urlpatterns = extra_patterns + [
     url(r'^accounts/profile/$', profile.as_view(), name='Profile'),
     url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
-    url(r'^accounts/edit_account/(?P<pk>[\w-]+)/$', edit_account.as_view(), name='Edit_Account'),
 
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
 
@@ -47,6 +46,7 @@ urlpatterns = extra_patterns + [
 
     url(r'^forum/talleres/$', talleres.as_view(), name='Talleres'),
     url(r'^forum/talleres/view_talleres/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
+    url(r'^forum/talleres/add_talleres/$', add_talleres.as_view(), name='Add_Talleres'),
 
     url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', matricularse, name='Talleres_Matricula'),
 
