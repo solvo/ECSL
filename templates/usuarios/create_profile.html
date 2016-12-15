@@ -10,8 +10,7 @@
     <form method="post">
     {% csrf_token %}
     <div class="container" style="max-width: 600px;">
-        {{ form.media }}
-        {% bootstrap_form form %}
+            {% bootstrap_form form %}
         <button type="submit" class="btn btn-lg btn-success center-block">Save</button>
     </div>
     </form>

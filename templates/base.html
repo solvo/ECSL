@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 {% load i18n %}
 <html lang="en">
 <head>
@@ -24,49 +24,55 @@
     {% block head %}
 
 
-<nav class="navbar navbar-default nav-main navbar-fixed-top" role="navigation">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
+        <nav class="navbar navbar-default nav-main navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-          <li class="active"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
-          {% if user.is_authenticated %}
-              {% if user_pk %}
-                <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
-                <li><a href="{% url 'auth_password_change'%}">Edit User PAssword</a></li>
-                <li><a href="{% url 'auth_logout'%}">Exit User</a></li>
-                <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
+                        {% if user.is_authenticated %}
+                            {% if profile_pk %}
+                                <li><a href="{% url 'Edit_Profile' profile_pk %}">Edit Profile</a></li>
+                                <li><a href="{% url 'View_Profile' profile_pk %}">Profile</a></li>
+                                <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
+                                <li><a href="{% url 'auth_password_change' %}">Edit User PAssword</a></li>
+                                <li><a href="{% url 'auth_logout' %}">Exit User</a></li>
+                                <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
 
-              {% else %}
+                            {% else %}
 
-               <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
-               <li><a href="{% url 'auth_logout'%}">Exit User</a></li>
-               {% endif %}
+                                <li><a href="{% url 'Profile' %}">Crear Profile</a></li>
+                                <li><a href="{% url 'auth_logout' %}">Exit User</a></li>
+                                <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
+                                <li><a href="{% url 'auth_password_change' %}">Edit User PAssword</a></li>
+                                <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
 
-          {% else %}
+                            {% endif %}
 
-                <li><a href="{% url 'Profile'%}">Crear Profile</a></li>
-                <li><a href="{% url 'auth_logout'%}">Exit User</a></li>
-                <li><a href="{% url 'Edit_Account' user_pk %}">Edit User Account</a></li>
-                <li><a href="{% url 'auth_password_change'%}">Edit User PAssword</a></li>
-                <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
+                        {% else %}
 
-          {% endif %}
+                            <li><a href="{% url 'auth_login' %}">{% trans "Login" %}</a></li>
+                            <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
 
-      </ul>
-    </div>
-  </div>
-</nav>
+
+
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
 
     {% endblock %}
@@ -76,20 +82,34 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="notificaciones">
-            {% include 'notificaciones.html' %}
-            </div>
             {% block content %}
             {% endblock %}
-            {% block footer %}
-            {% endblock %}
-
         </div>
     </div>
 </div>
+{% block footer %}
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <h2>{% trans 'Stay Connected' %}</h2>
+                        <ul>
+                            <li>
+                                <a><span class="fa fa-2x fa-facebook-square"></span></a>
+                            </li>
+                             <li>
+                                <a><span class="fa fa-2x fa-twitter-square"></span></a>
+                            </li>
+                             <li>
+                                <a><span class="fa fa-2x fa-linkedin-square"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
 </body>
 </html>

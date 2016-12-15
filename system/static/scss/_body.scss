@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "ECSL";
+  src: url("../fonts/ecsl.woff") format("woff");
+}
+
 .login-page {
   margin-top: 20%;
   .login-content {
@@ -34,11 +39,58 @@
   }
 }
 
-.row-image{
-     background: url('../img/row.png') repeat-x top center;
-    height: 160px;
-    padding: 0;
-    margin-top: -85px;
-    position: relative;
-    z-index: 5;
+.row-image {
+  background: url('../img/row.png') repeat-x top center;
+  height: 160px;
+  padding: 0;
+  margin-top: -85px;
+  position: relative;
+  z-index: 5;
+}
+
+.block-encuentro {
+  text-transform: uppercase;
+  .title {
+    font-weight: bold !important;
+    margin-bottom: 0 !important;
+    font-size: 80px;
+    font-family: monospace;
+    line-height: 65px;
+  }
+  .title-2 {
+    font-weight: bold !important;
+    margin: 0 !important;
+    font-size: 40px;
+    &.letter-spacing-3 {
+      letter-spacing: 3px;
+    }
+    &.letter-spacing-2 {
+      letter-spacing: 2px;
+    }
+  }
+  .title-anho {
+    font-size: 50px;
+    font-weight: bold !important;
+    margin: 0 !important;
+    span {
+      position: relative;
+      display: inline-block;
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 120px;
+        height: 2px;
+        background: #000;
+      }
+      &:before {
+        right: 100%;
+        margin-right: 18px;
+      }
+      &:after {
+        left: 100%;
+        margin-left: 18px;
+      }
+    }
+  }
 }

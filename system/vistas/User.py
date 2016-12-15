@@ -28,7 +28,7 @@ class profile(CreateView, SingleObjectMixin):
             return super(profile, self).dispatch(request, *args, **kwargs)
 
         else:
-            return redirect('index')
+            return redirect('Index')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -49,19 +49,11 @@ class view_profile(DetailView):
 
 
 @method_decorator(login_required, name='dispatch')
-class edit_account(UpdateView):
+class edit_account(UpdateView, SingleObjectMixin):
     template_name = 'usuarios/edit_account.html'
     model = User
 
     fields = ['first_name', 'last_name', 'email']
-
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(edit_account, self).get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
-        context['user_pk'] = self.request.user.pk
-        return context
-
 
 
 @login_required()
