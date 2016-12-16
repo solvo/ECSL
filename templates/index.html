@@ -26,3 +26,89 @@
         <h2 class="title-2">Alajuela, Costa Rica</h2>
     </div>
 {% endblock %}
+
+{% block fluid %}
+    <div class="block-actividades">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">Propuestas de Actividades</h1>
+                    <div class="col-sm-4">
+                        <img src="{% static 'img/charlas.png' %}" class="img-responsive pull-left">
+                        <h2>Charlas</h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="{% static 'img/talleres.png' %}" class="img-responsive pull-left">
+                        <h2>Talleres</h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="{% static 'img/dialogos.png' %}" class="img-responsive pull-left">
+                        <h2>Mesas de diálogo</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="block-paises">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">Países participantes</h1>
+                    <div class="view-paises">
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/bandera-de-costa-rica.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">Costa Rica</div>
+                            </div>
+                        </div>
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/Flag_of_Belize.svg.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">Belize</div>
+                            </div>
+                        </div>
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/200px-Flag_of_Honduras.svg.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">Honduras</div>
+                            </div>
+                        </div>
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/Flag_of_Guatemala.svg.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">Guatemala</div>
+                            </div>
+                        </div>
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/Flag_of_Nicaragua.svg.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">Nicaragua</div>
+                            </div>
+                        </div>
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/Flag_of_Panama.svg.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">Panamá</div>
+                            </div>
+                        </div>
+                        <div class="views-row">
+                            <div class="views-field-field-imagen">
+                                <img src="{% static 'img/flag/200px-Flag_of_El_Salvador.svg.png' %}"
+                                     class="img-responsive pull-left field-content">
+                                <div class="circle-item-text">El Salvador</div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{% static 'img/logoecsl.png' %}" class="links-center-icon">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
