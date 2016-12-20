@@ -5,8 +5,10 @@ from system.forms import *
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from registration.backends.hmac.views import RegistrationView
+from django.contrib.auth.decorators import login_required
 from registration import signals
-
+from django.views.generic import *
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def index(request):
 
@@ -31,3 +33,14 @@ class createProfile(RegistrationView):
                                   institution=form.cleaned_data["institution"],)
         profile.save()
         return new_user
+
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+
+    fields = ['name', 'last_name', 'gender', 'born_date', 'nationality', 'institution', 'identification',
+              'alimentary_restriction', 'health_consideration', 'snore', 'letter', 'entry_country', 'out_country',
+              'entry_port', 'out_port', 'entry_country_date', 'out_country_date', ]
+    template_name = 'usuarios/my_edit_profile.html'
+    success_url = "/"
+    model = Profile
+

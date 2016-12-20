@@ -30,9 +30,11 @@ urlpatterns = extra_patterns + [
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
 
-    url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
+
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
+
+    url(r'^accounts/edit_profile/(?P<pk>[0-9]+)$', ProfileUpdateView.as_view(), name='edit_profile'),
 
 
 
@@ -46,7 +48,7 @@ urlpatterns = extra_patterns + [
     url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
     url(r'^forum/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
 
-    url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', matricularse, name='Talleres_Matricula'),
+    url(r'^ajax/matricularse/(?P<slug_speech>[\w-]+)/(?P<slug_topic>[\w-]+)/$', matricularse, name='Ajax_Matricula'),
 
 
 

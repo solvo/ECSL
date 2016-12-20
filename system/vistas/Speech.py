@@ -22,9 +22,7 @@ class foro_topic(ListView):
     context_object_name = 'pedro'
 
     def get_queryset(self, *args, **kwargs):
-
         self.editor = self.kwargs['slug']
-
         return Speech.objects.filter(topic__slug = self.editor)
 
     def get_context_data(self, **kwargs):
@@ -77,5 +75,5 @@ class insert_speech(CreateView):
         form.instance.user = self.request.user
         self.topic_slug = get_object_or_404(Topic, slug= self.kwargs['slug'])
         form.instance.topic = self.topic_slug
-        form.instance.slug = slugify(form.instance.title)
+        form.instance.slug = slugify(form.instance.user.username + ' ' + form.instance.title)
         return super(insert_speech, self).form_valid(form)

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block content %}
+    <div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <h1 class="text-center">Profile</h1>
+    </div>
+    </div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="container" style="max-width: 600px;">
+            {% bootstrap_form form %}
+
+        <button type="submit" class="btn btn-lg btn-success center-block">Save</button>
+    </div>
+    </form>
+{% endblock %}

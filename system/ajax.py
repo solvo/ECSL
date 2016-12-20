@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import *
 from system.models import *
@@ -13,22 +13,15 @@ def notificaciones(request):
 
 
 @ajax
-def matricularse(request, pk):
-    print(pk)
+def matricularse(request, slug_speech, slug_topic):
+    tema = get_object_or_404(Topic, slug=slug_topic)
+    activity = get_object_or_404(Speech, slug=slug_speech, topic__slug=slug_topic)
+
     messages.add_message(request, messages.SUCCESS,
                          'Click in enoroll')
     return {
         'inner-fragments': {
-            '.notificaciones': '<script>recargarMensajes();</script>'
+            '.notificaciones': '<script> alert("df"); </script>'
 
         },
-    }
-
-
-@ajax
-def matricularse_tables(request, pk):
-
-    messages.add_message(request, messages.SUCCESS,'Click in enoroll')
-    return {
-            'inner-fragments': {
-                '.notificaciones': '<script> recargarMensajes();</script>'}, }
+   }
