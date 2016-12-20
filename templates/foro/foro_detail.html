@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+            <br>
+            <br>
+            <br>
+            <br>
+    <h1>Actividades</h1>
+
+    Titulo del Curso:
+    {{ pedro.title }}
+    <br>
+    Usuario:
+    {{ pedro.user.username }}
+    <br>
+    Detalles:
+    {{ pedro.description }}
+    <br>
+    Tipo de Actividad:
+    {{ pedro.speech_type.name }}
+    <br>
+    Acerca del autor:
+    {{ pedro.speaker_information }}
+    <br>
+    Para:
+    {{ pedro.audience }}
+    <br>
+    Nivel del Autor:
+    {{ foo.skill_level }}
+
+
+
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+{% endblock %}

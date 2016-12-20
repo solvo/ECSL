@@ -107,12 +107,12 @@ class SpeechType(Model):
 
 class Topic(Model):
 
-    name = CharField(max_length=45, verbose_name=_('Name'))
+    name = CharField(max_length=45, verbose_name=_('Name'),unique=True)
     description = TextField(verbose_name=_('Description'))
-
+    slug = SlugField(unique=True)
 
     def __str__(self):
-        return self.name
+        return self.slug
 
 
 class Speech(Model):
@@ -134,6 +134,7 @@ class Speech(Model):
     skill_level = PositiveIntegerField(verbose_name=_('Skill Level'))
     speaker_information = TextField(verbose_name=_('Speaker Information'))
     title = TextField(verbose_name=_('Title'))
+    slug = SlugField(unique=True)
 
     def __str__(self):
         return self.speech_type.name + ' de ' + self.topic.name

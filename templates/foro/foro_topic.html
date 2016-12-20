@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+            <br>
+            <br>
+            <br>
+            <br>
+    En el NavBar crear uuna lista despegable con acceso a los distintos
+    tipos de actividades
+    <h1>Actividades</h1>
+
+
+{% for foo in pedro %}
+
+    Titulo del Curso:
+
+        <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">{{ foo.title }}</a>
+        <a href="{% url 'Insert_Speech' foo.topic.slug %}">Insert Speech</a>
+    Usuario:
+
+    <p>{{ foo.user.username }}</p>
+
+
+
+{% empty %}
+
+    <h1>No hay actividades</h1>
+    <a href="{% url 'Insert_Speech' topic.slug %}">Insert Speech</a>
+
+{% endfor %}
+
+<BR>
+<BR>
+<BR>
+<BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+<BR><BR>
+{% endblock %}

@@ -9,12 +9,29 @@
             <br>
             <br>
             <br>
-    En el NavBar crear uuna lista despegable con acceso a los distintos
-    tipos de actividades
     <h1>Actividades</h1>
 
-       <a href="{% url 'Tables' %}">Tables</a>
-       <a href="{% url 'Dialog' %}">Dialog</a>
-       <a href="{% url 'Talleres' %}">Talleres</a>
+    {% for foo in object_list %}
+        <a href="{% url 'Forum_Topic' foo.slug %}">{{ foo.name }}</a>
+        {{ foo.description }}
+        {% empty %}
+        <h1>No existen aun temas que mostrar</h1>
+        <br>
+    {% endfor %}
+
+    <a href="{% url 'Insert_Topic' %}"> Insertar </a>
+        <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
 
 {% endblock %}

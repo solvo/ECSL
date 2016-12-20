@@ -32,22 +32,19 @@ urlpatterns = extra_patterns + [
 
     url(r'^accounts/edit_profile/(?P<pk>[\w-]+)/$', edit_profile.as_view(), name='Edit_Profile'),
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
-
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
 
 
 
-    url(r'^forum/$', forum, name='Forum'),
-    url(r'^forum/tables/$', tables.as_view(), name='Tables'),
-    url(r'^forum/tables/view_tables/(?P<pk>[\w-]+)/$', view_table.as_view(), name='View_Table'),
+    url(r'^forum/$', foro.as_view(), name='Forum'),
+    url(r'^forum/insert_topic/$', insert_topic.as_view(), name='Insert_Topic'),
+    url(r'^forum/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
 
-    url(r'^forum/dialog/$', dialog.as_view(), name='Dialog'),
-    url(r'^forum/dialog/view_dialog/(?P<pk>[\w-]+)/$', view_dialog.as_view(), name='View_Dialog'),
+    # url(r'^forum/insert_speech/$', insert_speech.as_view(), name='Insert_Speech_None'),
 
-    url(r'^forum/talleres/$', talleres.as_view(), name='Talleres'),
-    url(r'^forum/talleres/view_talleres/topic/(?P<slug>[\w-]+)/$', topic_talleres.as_view(), name='Topic_Talleres'),
-    url(r'^forum/talleres/view_talleres/topic/(?P<pk>[\w-]+)/$', view_talleres.as_view(), name='View_Talleres'),
-    url(r'^forum/talleres/add_talleres/$', add_talleres.as_view(), name='Add_Talleres'),
+
+    url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
+    url(r'^forum/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
 
     url(r'^ajax/matricularse/(?P<pk>[\w-]+)/$', matricularse, name='Talleres_Matricula'),
 
