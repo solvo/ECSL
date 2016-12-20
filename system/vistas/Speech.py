@@ -51,6 +51,11 @@ class insert_topic(CreateView):
     form_class = InsertTopic
     success_url = '/forum/'
 
+    def form_valid(self, form):
+
+        form.instance.slug = slugify(form.instance.name)
+        return super(insert_topic, self).form_valid(form)
+
 
 class insert_speech(CreateView):
     template_name = 'foro/insert_speech.html'
