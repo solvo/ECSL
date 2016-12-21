@@ -81,7 +81,7 @@
 </header>
 {% block banner %}
 {% endblock %}
-<div class="container {% ifequal url "/" %}main-container{% endifequal %}">
+<div class="container {% ifnotequal url "/" %}main-container{% endifnotequal %}">
     <div class="row">
         <div class="col-sm-12">
             {% block messages %}
