@@ -4,7 +4,7 @@
 }
 
 .login-page {
-  margin-top: 20%;
+  margin-top: 25%;
   .login-content {
     .login-title {
       text-align: center;
@@ -27,15 +27,28 @@
   }
 }
 
-.registrer-page {
-  margin-top: 20%;
+.registry-page {
+  margin-top: 25%;
   .register-title {
     text-align: center;
   }
-  .register-form {
+  .form-group {
+    .input-group-addon {
+      i {
+        width: 10px;
+      }
+    }
+  }
+  .registry-form {
     button {
       width: 100%;
     }
+  }
+}
+
+.pass-change-form {
+  button {
+    width: 100%;
   }
 }
 
@@ -56,11 +69,23 @@
     font-size: 80px;
     font-family: monospace;
     line-height: 65px;
+    @media screen and (max-width: 480px) {
+      font-size: 65px;
+    }
+    @media screen and (max-width: 320px) {
+      font-size: 55px;
+    }
   }
   .title-2 {
     font-weight: bold !important;
     margin: 0 !important;
     font-size: 40px;
+    @media screen and (max-width: 480px) {
+      font-size: 31px;
+    }
+    @media screen and (max-width: 320px) {
+      font-size: 25px;
+    }
     &.letter-spacing-3 {
       letter-spacing: 3px;
     }
@@ -72,6 +97,9 @@
     font-size: 50px;
     font-weight: bold !important;
     margin: 0 !important;
+    @media screen and (max-width: 320px) {
+      font-size: 35px;
+    }
     span {
       position: relative;
       display: inline-block;
@@ -82,6 +110,12 @@
         width: 120px;
         height: 2px;
         background: #000;
+        @media screen and (max-width: 480px) {
+          width: 85px;
+        }
+        @media screen and (max-width: 320px) {
+          width: 70px;
+        }
       }
       &:before {
         right: 100%;
@@ -99,6 +133,8 @@
   padding-bottom: 7.5rem;
   padding-top: 4.5rem;
   background: -webkit-radial-gradient(68% 128%, 203% 245%, rgba(233, 33, 119, 0.31) 0, rgba(158, 31, 100, 0.55) 44%, rgba(243, 62, 51, 0.75) 65%, rgba(243, 62, 51, 0.79) 67%, rgba(243, 62, 51, 0.8) 100%);
+  background: -moz-radial-gradient(68% 128%, 203% 245%, rgba(233, 33, 119, 0.31) 0, rgba(158, 31, 100, 0.55) 44%, rgba(243, 62, 51, 0.75) 65%, rgba(243, 62, 51, 0.79) 67%, rgba(243, 62, 51, 0.8) 100%);
+  background: radial-gradient(68% 128%, 203% 245%, rgba(233, 33, 119, 0.31) 0, rgba(158, 31, 100, 0.55) 44%, rgba(243, 62, 51, 0.75) 65%, rgba(243, 62, 51, 0.79) 67%, rgba(243, 62, 51, 0.8) 100%);
   color: #fff;
   margin-top: 70px;
   .title {
@@ -111,12 +147,17 @@
     max-width: 60px;
     margin-right: 15px;
   }
+  .actividad-item {
+    height: 55px;
+  }
 }
 
 .block-paises {
   background: -webkit-linear-gradient(#f4fafb 0, #eff2f9 48%, #e2e6f5 100%);
+  background: -moz-linear-gradient(#f4fafb 0, #eff2f9 48%, #e2e6f5 100%);
   background: linear-gradient(#f4fafb 0, #eff2f9 48%, #e2e6f5 100%);
   background: -webkit-linear-gradient(105deg, #e2e6f4 20%, #eff2f9 40%, #fcfdff 60%, #f4fafb 80%);
+  background: -moz-linear-gradient(105deg, #e2e6f4 20%, #eff2f9 40%, #fcfdff 60%, #f4fafb 80%);
   background: linear-gradient(-15deg, #e2e6f4 20%, #eff2f9 40%, #fcfdff 60%, #f4fafb 80%);
   padding: 30px 30px 120px 30px;
   .title {
@@ -132,5 +173,24 @@
     bottom: 0;
     margin: auto;
     height: 100px;
+    @media screen and (max-width: 480px) {
+      height: 80px;
+    }
+    @media screen and (max-width: 320px) {
+      height: 65px;
+      top: 90px;
+    }
+  }
+}
+
+.pass-reset-page {
+  margin-top: 25%;
+  .pass-reset-title {
+    text-align: center;
+  }
+  .pass-reset-form {
+    button {
+      width: 100%;
+    }
   }
 }
