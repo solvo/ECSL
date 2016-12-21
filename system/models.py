@@ -4,12 +4,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import *
 from django.utils.translation import ugettext_lazy as _
-from datetime import datetime
+from django.utils.timezone import now
 
 
 def get_active_period():
-    period = DateState.objects.filter(start_date__lte=datetime.now(),
-                                   finish_date__gte=datetime.now())
+    period = DateState.objects.filter(start_date__lte=now(),
+                                   finish_date__gte=now())
     if period.exists():
         return period.last()
     return 0
@@ -29,7 +29,6 @@ class Profile(Model):
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
     health_consideration = TextField(verbose_name=_('Health Considerations'), null=True)
     identification = CharField(max_length=12, verbose_name=_('Identification'), null=True)
-    institution = CharField(max_length=12, verbose_name=_('Institution'))
     nationality = CharField(max_length=12, verbose_name=_('Nationality'))
     snore = BooleanField(verbose_name=_('Snore?'), default=False)
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
@@ -110,19 +109,26 @@ class Topic(Model):
     name = CharField(max_length=45, verbose_name=_('Name'),unique=True)
     description = TextField(verbose_name=_('Description'))
     slug = SlugField(unique=True)
+    date_created = DateTimeField(verbose_name=_('Created Date'), auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date_created"]
 
     def __str__(self):
         return self.slug
 
 
 class Speech(Model):
+
+    class Meta:
+        ordering = ["date_created"]
+
     speech_audience = (
         ('PG', 'Publico General'),
         ('NB', 'Nivel Basico'),
         ('NI', 'Nivel Intermedio'),
         ('NA', 'Nivel Avanzado'),
         ('PRO', 'Profesional'),
-
     )
 
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
@@ -133,8 +139,13 @@ class Speech(Model):
     notes = TextField(verbose_name=_('Notes'))
     skill_level = PositiveIntegerField(verbose_name=_('Skill Level'))
     speaker_information = TextField(verbose_name=_('Speaker Information'))
-    title = TextField(verbose_name=_('Title'))
+    title = CharField(max_length=250, verbose_name=_('Title'))
+    places = CharField(max_length=250, verbose_name=_('Places'))
+    days = CharField(max_length=250, verbose_name=_('Days'))
     slug = SlugField(unique=True)
+    date_start = DateField(verbose_name=_('Start Date'), default='2016-01-01')
+    date_created = DateTimeField(verbose_name=_('Created Date'), auto_now_add=True)
+    published = BooleanField(verbose_name=_('Published'), default=False)
 
     def __str__(self):
         return self.speech_type.name + ' de ' + self.topic.name

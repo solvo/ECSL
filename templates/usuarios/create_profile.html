@@ -1,79 +1,17 @@
 {% extends 'base.html' %}
-{% load i18n %}
 {% load bootstrap3 %}
 
 {% block content %}
      <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
-            <div class="registry-page">
-                <div class="registry-content">
-                    <h1 class="text-center">{% trans "New Registry" %}</h1>
-                    <form class="registry-form" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                             {% bootstrap_field form.username show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                             {% bootstrap_field form.email show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                             {% bootstrap_field form.password1 show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                             {% bootstrap_field form.password2 show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                             {% bootstrap_field form.name show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                             {% bootstrap_field form.last_name show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                             {% bootstrap_field form.gender show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                             {% bootstrap_field form.born_date show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                             {% bootstrap_field form.nationality show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                             {% bootstrap_field form.institution show_label=False block_help=False %}
-                           </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-     </div>
+    <div class="col-lg-4 col-lg-offset-4">
+        <h1 class="text-center">New Profile</h1>
+    </div>
+    </div>
+    <form method="post">
+    {% csrf_token %}
+    <div class="container" style="max-width: 600px;">
+            {% bootstrap_form form %}
+        <button type="submit" class="btn btn-lg btn-success center-block">Save</button>
+    </div>
+    </form>
 {% endblock %}
