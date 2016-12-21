@@ -4,7 +4,7 @@
 }
 
 .login-page {
-  margin-top: 20%;
+  margin-top: 25%;
   .login-content {
     .login-title {
       text-align: center;
@@ -27,12 +27,19 @@
   }
 }
 
-.registrer-page {
-  margin-top: 20%;
+.registry-page {
+  margin-top: 25%;
   .register-title {
     text-align: center;
   }
-  .register-form {
+  .form-group {
+    .input-group-addon {
+      i {
+        width: 10px;
+      }
+    }
+  }
+  .registry-form {
     button {
       width: 100%;
     }
@@ -166,6 +173,18 @@
     @media screen and (max-width: 320px) {
       height: 65px;
       top: 90px;
+    }
+  }
+}
+
+.pass-reset-page {
+  margin-top: 25%;
+  .pass-reset-title {
+    text-align: center;
+  }
+  .pass-reset-form {
+    button {
+      width: 100%;
     }
   }
 }
