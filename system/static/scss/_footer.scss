@@ -1,0 +1,22 @@
+.footer{
+  background: url('../img/footer.png') repeat-x;
+  padding-top: 7em;
+  margin-top: -75px;
+  .footer-container{
+    background: rgb(253,103,79);
+    color: #fff;
+    padding: 40px 0;
+    ul{
+      padding: 0;
+      li{
+        list-style: none;
+        display: inline;
+        margin-right: 5px;
+        a{
+          cursor: pointer;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

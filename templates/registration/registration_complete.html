@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>{% trans "You are now registered. Activation email sent." %}</p>
+    <p>{% trans "Now you will be reedirct to the index's page" %}</p>
+    <p>{% trans "Now you have 10 days to activate the account" %}</p>
+# Front: Aquí va por JS una opción que pasado 5-10 segundo mas o menos
+    redireccionen a la página de inicio
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+            <br>
+            <br>
+            <br>
+            <br>
+    <h1>Actividades</h1>
+
+    {% for foo in object_list %}
+        <a href="{% url 'Forum_Topic' foo.slug %}">{{ foo.name }}</a>
+        {{ foo.description }}
+        {% empty %}
+        <h1>No existen aun temas que mostrar</h1>
+        <br>
+    {% endfor %}
+
+    <a href="{% url 'Insert_Topic' %}"> Insertar </a>
+        <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+
+
+{% endblock %}
