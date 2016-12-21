@@ -14,7 +14,7 @@ admin.site.register(DateState)
 
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'user', 'audience', 'published')
-    #list_display_links = ('published',)
-    list_editable = ('published',)
+    list_display = ('topic', 'user', 'published', 'days', 'places')
+
+    list_editable = ('published','days', 'places')
 

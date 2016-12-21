@@ -12,6 +12,14 @@
 <br>
 <br>
 <br>
+
+    {% for foo in object_list %}
+        {{ foo.title }}
+        {% empty %}
+        <h1>No hay actividades</h1>
+    {% endfor %}
+
+
 <br>
 <br>
 <br>

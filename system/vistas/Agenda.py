@@ -9,5 +9,6 @@ from system.forms import *
 from django.http import Http404
 
 
-def agenda(request):
-    return render(request, 'agenda/agenda.html')
+class agenda(ListView):
+    template_name = 'agenda/agenda.html'
+    queryset = Speech.objects.filter(published=True).order_by('-date_start')
