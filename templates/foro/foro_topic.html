@@ -19,7 +19,7 @@
     Titulo del Curso:
 
         <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">{{ foo.title }}</a>
-        <a href="{% url 'Insert_Speech' foo.topic.slug %}">Insert Speech</a>
+
     Usuario:
 
     <p>{{ foo.user.username }}</p>
@@ -27,13 +27,19 @@
     {% elif foo in user.profile.likes.all %}
         <p>Me encanta cuando te gusta</p>
     {% else %}
-        <a href="#" id="{{foo.pk}}" class="link-like">like</a>
+        <a href="#" onclick="like({{ foo.pk }})">like</a>
+    {% endif %}
+
+    {% if foo.user == user %}
+   {% elif foo in user.profile.matriculatedspeechs.all %}
+   <a href="#" onclick="desmatricular({{ foo.pk }})">Desmatricularme</a>
+    {% else %}
+     <a href="#" onclick="matricular({{ foo.pk }})" >Matricularme</a>
     {% endif %}
     <br>
-
     Created:
+    {{ foo.date_created }}
 
-    <p>{{ foo.date_created }}</p>
 
 
 {% empty %}
@@ -60,22 +66,39 @@
 
 {% block script %}
 <script type="text/javascript" >
-$(document).ready(function() {
-    $('.link-like').click(function (event) {
-        event.preventDefault();
-        var id_speech = $(this).attr('id');
-        $.ajax({
-            url: '/ajax/add_like/',
-            type: "POST",
-            data: {'id_speech': id_speech},
-            success: function (response) {
-                //Esto les toca a los frontend ver que van a hacer cuando de like
 
-            }
-        });
-
+function like (id_speech){
+    $.ajax({
+             url: '/ajax/add_like/',
+             type: "POST",
+             data: {'id_speech': id_speech},
+             success: function (response) {
+                 //Esto les toca a los frontend ver que van a hacer cuando de like
+             }
     });
-});
+}
+
+function matricular(id_speech){
+        $.ajax({
+             url: '/ajax/matricularse/',
+             type: "POST",
+             data: {'id_speech': id_speech},
+             success: function (response) {
+                 //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
+             }
+        });
+    }
+    function desmatricular(id_speech){
+        $.ajax({
+             url: '/ajax/delete_matricula/',
+             type: "POST",
+             data: {'id_speech': id_speech},
+             success: function (response) {
+                 //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
+             }
+    });
+    }
+
 
 </script>
 {% endblock %}

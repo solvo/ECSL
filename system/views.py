@@ -49,6 +49,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
 
 # esto es lo de dar like
+@login_required()
 def profileAddLike(request):
     profile = request.user.profile
     idSpeech = request.POST['id_speech']
@@ -56,6 +57,23 @@ def profileAddLike(request):
     profile.likes.add(speech)
     return JsonResponse({'mensaje': "Me gusta confirmado"})
 
+
+@login_required()
+def matricularse(request):
+    profile = request.user.profile
+    idSpeech = request.POST['id_speech']
+    speech = get_object_or_404(Speech, pk=idSpeech)
+    profile.matriculatedspeechs.add(speech)
+    return JsonResponse({'mensaje': "Matricula confirmada"})
+
+
+@login_required()
+def deleteMatricularse(request):
+    profile = request.user.profile
+    idSpeech = request.POST['id_speech']
+    speech = get_object_or_404(Speech, pk=idSpeech)
+    profile.matriculatedspeechs.remove(speech)
+    return JsonResponse({'mensaje': "Matricula eliminada"})
 
 
 

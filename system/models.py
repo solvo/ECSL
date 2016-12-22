@@ -38,7 +38,7 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    # img1 = ImageField(verbose_name=_('Image 1'))
+    img1 = ImageField(verbose_name=_('Image 1'))
     # img2 = ImageField(verbose_name=_('Image 2'))
     # img3 = ImageField(verbose_name=_('Image 3'))
 
@@ -165,9 +165,6 @@ class DateState(Model):
 
     def __str__(self):
         return 'Periodo'
-
-
-
 
 
 class Profile(Model):

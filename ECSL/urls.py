@@ -51,7 +51,11 @@ urlpatterns = extra_patterns + [
     url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
     url(r'^forum/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
 
-    url(r'^ajax/matricularse/(?P<slug_speech>[\w-]+)/(?P<slug_topic>[\w-]+)/$', matricularse, name='Ajax_Matricula'),
+    # Esto es lo de matricularse ------------
+    url(r'^ajax/matricularse/', matricularse, name='ajax_matricula'),
+    url(r'^ajax/delete_matricula/', deleteMatricularse, name='ajax_delete_matricula'),
+
+
     # Esto es lo de dar like -------------------------
     url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
 
