@@ -13,3 +13,42 @@
 body{
   font: normal normal normal 18px/1.4em ECSL,sans-serif;
 }
+
+.dropdown {
+  &.open {
+    .dropdown-menu {
+      background-color: rgba(253,103,79,0.82);
+      border-color: transparent !important;
+    }
+  }
+}
+
+.nav {
+  .open {
+    a {
+      &.dropdown-toggle {
+         background-color: $brand_purple;
+      }
+    }
+    >a:visited {
+      &.dropdown-toggle {
+         background-color: $brand_purple;
+      }
+    }
+    >a:active {
+      &.dropdown-toggle {
+         background-color: $brand_purple;
+      }
+    }
+    >a:focus {
+      &.dropdown-toggle {
+         background-color: $brand_purple;
+      }
+    }
+    >a:active {
+      &.dropdown-toggle {
+         background-color: $brand_purple;
+      }
+    }
+  }
+}
