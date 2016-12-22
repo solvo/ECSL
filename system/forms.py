@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from registration.forms import *
+from django.forms import HiddenInput
+from django.utils.text import slugify
 from functools import partial
 from system.models import *
 

@@ -3,3 +3,4 @@ def url(request):
 
     value = {'url':request.path}
     return value
+

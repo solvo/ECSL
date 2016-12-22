@@ -1,5 +1,3 @@
-from _csv import list_dialects
-
 from django.contrib import admin
 from system.models import *
 # Register your models here.
@@ -12,9 +10,9 @@ admin.site.register(Topic)
 admin.site.register(DateState)
 
 
+
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
     list_display = ('topic', 'user', 'published', 'days', 'places')
 
     list_editable = ('published','days', 'places')
-
