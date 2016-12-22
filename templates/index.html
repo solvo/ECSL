@@ -9,9 +9,15 @@
         <div class="banner-opacity"></div>
         <a href="/" class="logo-img">
             <img src="{% static 'img/logo.png' %}" class="img-responsive">
+            <div class="promo">
+                <h3>
+                    {% trans "Costa Rica, 20-21 Julio 2017" %}
+                </h3>
+            </div>
         </a>
+
         {% if not user.is_authenticated %}
-        <a href="{% url 'New_Profile' %}" class="btn btn-lg btn-register">{% trans "Register" %}</a>
+            <a href="{% url 'New_Profile' %}" class="btn btn-lg btn-register">{% trans "Register" %}</a>
         {% endif %}
     </div>
     <div class="row-image"></div>
