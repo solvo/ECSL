@@ -16,6 +16,7 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/DjangoAjax.js' %}"></script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/min-height.js' %}"></script>
     <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
 </head>
@@ -54,11 +55,11 @@
 
                             {% endif %}
 
-                                <li><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
-                                <li><a href="{% url 'auth_password_change' %}">Password</a></li>
-                                <li><a href="{% url 'auth_logout' %}">Exit User</a></li>
-                                <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
-                                <li><a href="{% url 'edit_profile' user.profile.pk %}">Edit Profile</a></li>
+                            <li><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
+                            <li><a href="{% url 'auth_password_change' %}">Password</a></li>
+                            <li><a href="{% url 'auth_logout' %}">Exit User</a></li>
+                            <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
+                            <li><a href="{% url 'edit_profile' user.profile.pk %}">Edit Profile</a></li>
 
                         {% else %}
 
@@ -80,30 +81,20 @@
 </header>
 {% block banner %}
 {% endblock %}
-<div class="container">
+<div class="container main-container">
     <div class="row">
         <div class="col-sm-12">
-
-
-                	{% if messages %}
-		{% for message in messages %}
-			<div class="alert alert-{{ message.tags }}"><i
-				class="fa fa-{% if message.tags == 'success' %}check{% elif message.tags == 'warning' %}exclamation{% elif message.tags == 'danger' %}minus{% else %}{{ message.tags }}{% endif %}-circle"></i> {{ message }}
-			</div>
-		{% endfor %}
-	{% endif %}
-        	{% block messages %}{% endblock %}
-
-
-
-
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}"><i
+                            class="fa fa-{% if message.tags == 'success' %}check{% elif message.tags == 'warning' %}exclamation{% elif message.tags == 'danger' %}minus{% else %}{{ message.tags }}{% endif %}-circle"></i> {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block messages %}{% endblock %}
 
             {% block content %}
-
             {% endblock %}
-
-
-
         </div>
     </div>
 </div>
@@ -120,10 +111,10 @@
                             <li>
                                 <a><span class="fa fa-2x fa-facebook-square"></span></a>
                             </li>
-                             <li>
+                            <li>
                                 <a><span class="fa fa-2x fa-twitter-square"></span></a>
                             </li>
-                             <li>
+                            <li>
                                 <a><span class="fa fa-2x fa-linkedin-square"></span></a>
                             </li>
                         </ul>
@@ -131,9 +122,9 @@
                 </div>
             </div>
         </div>
-    <div class="footer-nav text-center">
-        <p>Alajuela, Costa Rica, 20-21 de julio de 2017</p>
-    </div>
+        <div class="footer-nav text-center">
+            <p>Alajuela, Costa Rica, 20-21 de julio de 2017</p>
+        </div>
     </footer>
 {% endblock %}
 </body>
