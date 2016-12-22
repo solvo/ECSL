@@ -2,5 +2,12 @@
 {% load i18n %}
 {% block content %}
     <p>{% trans "Logged out" %}</p>
-    # Redireccionar al index en 5-10 segundos
+<script type="text/javascript">
+    $(document).ready(function () {
+    // Handler for .ready() called.
+        window.setTimeout(function () {
+            location.href = "/";
+        }, 5000);
+    });
+</script>
 {% endblock %}

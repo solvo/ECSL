@@ -84,6 +84,7 @@
 <div class="container {% ifnotequal url "/" %}main-container{% endifnotequal %}">
     <div class="row">
         <div class="col-sm-12">
+            {% block messages %}
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert alert-{{ message.tags }}"><i
@@ -91,7 +92,7 @@
                     </div>
                 {% endfor %}
             {% endif %}
-            {% block messages %}{% endblock %}
+            {% endblock %}
 
             {% block content %}
             {% endblock %}
