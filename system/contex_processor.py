@@ -14,3 +14,9 @@ def menu(request):
         redirect('index')
     value = {'profile_pk': profile_pk}
     return value
+
+
+def url(request):
+
+    value = {'url':request.path}
+    return value
