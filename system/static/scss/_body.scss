@@ -2,9 +2,10 @@
   font-family: "ECSL";
   src: url("../fonts/ecsl.woff") format("woff");
 }
-
+.main-container{
+  margin-top: 80px;
+}
 .login-page {
-  margin-top: 25%;
   .login-content {
     .login-title {
       text-align: center;
@@ -28,7 +29,6 @@
 }
 
 .registry-page {
-  margin-top: 25%;
   .register-title {
     text-align: center;
   }
@@ -187,7 +187,6 @@
 }
 
 .pass-reset-page {
-  margin-top: 25%;
   .pass-reset-title {
     text-align: center;
   }
