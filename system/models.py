@@ -141,7 +141,7 @@ class Speech(Model):
     speaker_information = TextField(verbose_name=_('Speaker Information'))
     title = CharField(max_length=250, verbose_name=_('Title'))
     places = CharField(max_length=250, verbose_name=_('Places'))
-    days = CharField(max_length=250, verbose_name=_('Days'))
+    days = DateTimeField(verbose_name=_('Event Start'))
     slug = SlugField(unique=True)
     date_start = DateField(verbose_name=_('Start Date'), default='2016-01-01')
     date_created = DateTimeField(verbose_name=_('Created Date'), auto_now_add=True)
