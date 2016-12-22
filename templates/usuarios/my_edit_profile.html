@@ -3,114 +3,120 @@
 {% load bootstrap3 %}
 {% block content %}
     <div class="row">
-        <div class="col-sm-4 col-sm-offset-4">
+        <div class="col-sm-12">
             <div class="registry-page">
                 <div class="registry-content">
                     <h1 class="text-center">{% trans "Edit Profile" %}</h1>
                     <form class="registry-form" method="post">
                         {% csrf_token %}
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                             {% bootstrap_field form.name show_label=False show_help=False %}
-                           </div>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                 {% bootstrap_field form.name show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                 {% bootstrap_field form.last_name show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                                 {% bootstrap_field form.gender show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                 {% bootstrap_field form.born_date show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                                 {% bootstrap_field form.nationality show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                 {% bootstrap_field form.institution show_label=False block_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-indent"></i></span>
+                                 {% bootstrap_field form.identification show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
+                                 {% bootstrap_field form.alimentary_restriction show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
+                                 {% bootstrap_field form.health_consideration show_label=False show_help=False %}
+                               </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                             {% bootstrap_field form.last_name show_label=False show_help=False %}
-                           </div>
+                        <div class="col-sm-5 col-sm-offset-2">
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-send"></i></span>
+                                 {% bootstrap_field form.letter show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
+                                 {% bootstrap_field form.entry_country show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i></span>
+                                 {% bootstrap_field form.out_country show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                 {% bootstrap_field form.entry_port show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-book"></i></span>
+                                 {% bootstrap_field form.out_port show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                 {% bootstrap_field form.entry_country_date show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+                                 {% bootstrap_field form.out_country_date show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            <div class="form-group">
+                               <div class="input-group">
+                                 {% bootstrap_field form.snore show_label=False show_help=False %}
+                               </div>
+                            </div>
+                            </div>
+                        <div class="btn-edit-profile">
+                            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
                         </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-users"></i></span>
-                             {% bootstrap_field form.gender show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                             {% bootstrap_field form.born_date show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
-                             {% bootstrap_field form.nationality show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-home"></i></span>
-                             {% bootstrap_field form.institution show_label=False block_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-indent"></i></span>
-                             {% bootstrap_field form.identification show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
-                             {% bootstrap_field form.alimentary_restriction show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-hospital-o"></i></span>
-                             {% bootstrap_field form.health_consideration show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             {% bootstrap_field form.snore show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-send"></i></span>
-                             {% bootstrap_field form.letter show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></span>
-                             {% bootstrap_field form.entry_country show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-sort-numeric-desc"></i></span>
-                             {% bootstrap_field form.out_country show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                             {% bootstrap_field form.entry_port show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-book"></i></span>
-                             {% bootstrap_field form.out_port show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-                             {% bootstrap_field form.entry_country_date show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <div class="form-group">
-                           <div class="input-group">
-                             <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
-                             {% bootstrap_field form.out_country_date show_label=False show_help=False %}
-                           </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
                     </form>
                 </div>
             </div>
