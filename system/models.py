@@ -15,8 +15,6 @@ def get_active_period():
     return 0
 
 
-
-
 class Inscription(Model):
     user = OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
     mozilla_subvention = BooleanField(verbose_name=_('Mozilla Subvention?'))
@@ -38,9 +36,9 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    img1 = ImageField(verbose_name=_('Image 1'))
-    # img2 = ImageField(verbose_name=_('Image 2'))
-    # img3 = ImageField(verbose_name=_('Image 3'))
+    #img1 = ImageField(verbose_name=_('Image 1'))
+    #img2 = ImageField(verbose_name=_('Image 2'))
+    #img3 = ImageField(verbose_name=_('Image 3'))
 
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
@@ -151,7 +149,7 @@ class QuestionCategory(Model):
 class Question(Model):
     category = ForeignKey(QuestionCategory, on_delete=CASCADE)
     answer = TextField(verbose_name=_('Answer'))
-    created = DateField(verbose_name=_('Date Created'))
+    created = DateField(verbose_name=_('Date Created'), auto_now_add=True)
     published = BooleanField(verbose_name=_('Published'))
     question = TextField(verbose_name=_('Question'))
 

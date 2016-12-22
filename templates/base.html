@@ -43,6 +43,7 @@
                         <li class="active"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
                         <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
                         <li><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
+                        <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                             {% if user.is_authenticated %}
@@ -50,7 +51,7 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Profile" %} <span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
 
-                                            <li><a href="{% url 'View_Profile' user.profile.pk %}">{% trans "View" %}</a></li>
+                                        <li><a href="{% url 'View_Profile' user.profile.pk %}">{% trans "View" %}</a></li>
 
                                         <li><a href="{% url 'auth_password_change' %}">{% trans "Change Pass" %}</a></li>
                                         <li><a href="{% url 'edit_profile' user.profile.pk %}">{% trans "Edit" %}</a></li>
@@ -59,6 +60,7 @@
                                 <li><a href="{% url 'auth_logout' %}" title="Log Out">{% trans "Log Out " %}</a></li>
                         {% else %}
                             <li><a href="{% url 'auth_login' %}">{% trans "Login " %}</a></li>
+                            <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                         {% endif %}
                         </ul>
                 </div>

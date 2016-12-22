@@ -10,9 +10,16 @@ admin.site.register(Topic)
 admin.site.register(DateState)
 
 
-
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
     list_display = ('topic', 'user', 'published', 'days', 'places')
 
     list_editable = ('published','days', 'places')
+
+
+@admin.register(Question)
+class QuestionAdmin(admin.ModelAdmin):
+    list_display = ('category', 'question', 'answer','created','published')
+
+    list_editable = ('published',)
+

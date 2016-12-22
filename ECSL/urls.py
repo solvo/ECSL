@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from system.views import *
 from system.vistas.User import *
-
+from system.vistas.FAQ import *
 from system.vistas.Agenda import *
 
 from system.vistas.Speech import *
@@ -59,6 +59,7 @@ urlpatterns = extra_patterns + [
     # Esto es lo de dar like -------------------------
     url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
 
+    url(r'^faq/$', faq.as_view(), name='faq'),
 
 
 ]

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% for faq in faq_list %}
+    {{ faq.answer }}
+    {{ faq.question }}
+    {% empty %}
+    <h1>No hay sistema elaborado</h1>
+{% endfor %}
+
+
+{% endblock %}
