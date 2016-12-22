@@ -1,11 +1,95 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+{% load i18n %}
+
 
 {% block content %}
 
-    <h1>Ver perfiles</h1>
+    <h1 class="page-header">{% trans "My Profile" %}</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <div>
+                <strong>{% trans "Name:" %}</strong>
+                <span>{{ object.name }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Last Name:" %}</strong>
+                <span>{{ object.last_name }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Gender:" %}</strong>
+                <span>{{ object.gender }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Born Date:" %}</strong>
+                <span>{{ object.born_date }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Nationality:" %}</strong>
+                <span>{{ object.Nationality }}</span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div>
+                <strong>{% trans "Institution:" %}</strong>
+                <span>{{ object.institution }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Identification:" %}</strong>
+                <span>{{ object.identification }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Alimentary Restriction:" %}</strong>
+                <span>{{ object.alimentary_restriction }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Health Consideration:" %}</strong>
+                <span>{{ object.health_consideration }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Snore:" %}</strong>
+                <span>{% if object.snore %}
+                    {% trans "Yes" %}
+                {% else %}
+                    {% trans "No" %}
+                {% endif %}
+                </span>
+            </div>
+            <div>
+                <strong>{% trans "Letter:" %}</strong>
+                <span>{{ object.letter }}</span>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div>
+                <strong>{% trans "Entry Country:" %}</strong>
+                <span>{{ object.entry_country }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Out Country:" %}</strong>
+                <span>{{ object.out_country }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Entry Port:" %}</strong>
+                <span>{{ object.entry_port }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Out Port:" %}</strong>
+                <span>{{ object.out_port }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Entry Country Date:" %}</strong>
+                <span>{{ object.entry_country_date }}</span>
+            </div>
+            <div>
+                <strong>{% trans "Out Country Date:" %}</strong>
+                <span>{{ object.out_country_date }}</span>
+            </div>
+        </div>
+    </div>
 
-{{ object.name }}
+    <h1 class="page-header">{% trans "My Activities" %}</h1>
+
 
 
 {% endblock %}
