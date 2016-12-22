@@ -81,7 +81,7 @@
 </header>
 {% block banner %}
 {% endblock %}
-<div class="container main-container">
+<div class="container {% ifequal url "/" %}main-container{% endifequal %}">
     <div class="row">
         <div class="col-sm-12">
             {% if messages %}
@@ -101,7 +101,7 @@
 {% block fluid %}
 {% endblock %}
 {% block footer %}
-    <footer class="footer">
+    <footer class="footer {% ifequal url "/" %}footer-home{% endifequal %}">
         <div class="footer-container">
             <div class="container">
                 <div class="row">
