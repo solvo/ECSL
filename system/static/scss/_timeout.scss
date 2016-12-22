@@ -1,0 +1,95 @@
+.timeout {
+  width: 160px;
+  height: 160px;
+  border: 2px solid $brand_red;
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  padding: 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  left: calc(50% - 80px);
+  .timeout-border {
+    content: "";
+    position: absolute;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    border: 15px solid $brand_red;
+    left: -webkit-calc(50% - 145px / 2);
+    left: -moz-calc(50% - 145px / 2);
+    left: calc(50% - 145px / 2);
+    top: -webkit-calc(50% - 145px / 2);
+    top: -moz-calc(50% - 145px / 2);
+    top: calc(50% - 145px / 2);
+    width: 145px;
+    height: 145px;
+    background: #fff;
+    text-align: center;
+    display: table;
+    font-size: 18px;
+    line-height: 22px;
+    color: #999999;
+    .timeout-text {
+      display: table-cell;
+      vertical-align: middle;
+      .timeout-text-circle {
+        display: block;
+        font-size: 32px;
+        line-height: 40px;
+        color: #333333;
+      }
+    }
+  }
+}
+
+.c-pin {
+  position: absolute;
+  width: 152px;
+  height: 152px;
+  top: -20px;
+  left: -18px;
+  z-index: 100;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: solid 15px $brand_purple;
+  -moz-border: solid 4px #5873fe;
+  -webkit-border: solid 4px #5873fe;
+  opacity: 0;
+  animation-name: animation-fadein-infinite;
+  animation-duration: 1s;
+  animation-timing-function: easy-in-out;
+  animation-iteration-count: infinite;
+  -webkit-animation-name: animation-fadein-infinite;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: easy-in-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@keyframes animation-fadein-infinite {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes animation-fadein-infinite {
+  from {
+    -webkit-transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: scale(1);
+    opacity: 0;
+  }
+}
