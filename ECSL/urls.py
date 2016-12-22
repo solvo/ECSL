@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from system.views import *
 from system.vistas.User import *
+from system.vistas.Agenda import *
 from system.vistas.Speech import *
 from system.ajax import *
 
@@ -42,7 +43,9 @@ urlpatterns = extra_patterns + [
     url(r'^forum/insert_topic/$', insert_topic.as_view(), name='Insert_Topic'),
     url(r'^forum/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
 
-    # url(r'^forum/insert_speech/$', insert_speech.as_view(), name='Insert_Speech_None'),
+
+    url(r'^agenda/$', agenda, name='Agenda'),
+
 
 
     url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),

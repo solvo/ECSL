@@ -7,11 +7,13 @@ from django.utils.decorators import method_decorator
 from django.utils.text import slugify
 from system.forms import *
 from django.http import Http404
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 @method_decorator(login_required, name='dispatch')
 class foro(ListView):
-    model = Topic
+    queryset = Topic.objects.all().order_by('-date_created')
     template_name = 'foro/foro.html'
 
 
@@ -23,7 +25,7 @@ class foro_topic(ListView):
 
     def get_queryset(self, *args, **kwargs):
         self.editor = self.kwargs['slug']
-        return Speech.objects.filter(topic__slug = self.editor)
+        return Speech.objects.filter(topic__slug = self.editor).order_by('-date_created')
 
     def get_context_data(self, **kwargs):
         context = super(foro_topic, self).get_context_data(**kwargs)
@@ -40,14 +42,15 @@ class foro_detail(ListView):
     def get_queryset(self, *args, **kwargs):
         self.editor = self.kwargs['slug']
         self.detalles = self.kwargs['slug1']
-        return Speech.objects.get(topic__slug = self.editor, slug=self.detalles)
+        return Speech.objects.get(topic__slug= self.editor, slug=self.detalles)
 
 
-class insert_topic(CreateView):
+class insert_topic(SuccessMessageMixin, CreateView):
     template_name = 'foro/insert_topic.html'
     model = Topic
     form_class = InsertTopic
     success_url = '/forum/'
+    success_message = "Topic was added."
 
     def form_valid(self, form):
 
@@ -55,11 +58,12 @@ class insert_topic(CreateView):
         return super(insert_topic, self).form_valid(form)
 
 
-class insert_speech(CreateView):
+class insert_speech(SuccessMessageMixin, CreateView):
     template_name = 'foro/insert_speech.html'
     model = Speech
     form_class = InsertSpeech
     success_url = '/forum/'
+    success_message = "Speech was added. The Administrator will revise it for its approval"
 
     def get(self, request, *arg, **kwargs):
         try:

@@ -10,6 +10,7 @@ from registration import signals
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
+
 def index(request):
 
     return render(request, 'index.html')
