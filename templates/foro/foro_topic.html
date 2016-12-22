@@ -23,6 +23,13 @@
     Usuario:
 
     <p>{{ foo.user.username }}</p>
+    {% if foo.user == user %}
+    {% elif foo in user.profile.likes.all %}
+        <p>Me encanta cuando te gusta</p>
+    {% else %}
+        <a href="#" id="{{foo.pk}}" class="link-like">like</a>
+    {% endif %}
+    <br>
 
     Created:
 
@@ -32,9 +39,11 @@
 {% empty %}
 
     <h1>No hay actividades</h1>
+{% endfor %}
     <a href="{% url 'Insert_Speech' topic.slug %}">Insert Speech</a>
 
-{% endfor %}
+
+    <a href="{% url 'Insert_Speech' topic.slug %}" hidden>Insert Speech</a>
 
 <BR>
 <BR>
@@ -47,4 +56,26 @@
 <BR><BR>
 <BR><BR>
 <BR><BR>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" >
+$(document).ready(function() {
+    $('.link-like').click(function (event) {
+        event.preventDefault();
+        var id_speech = $(this).attr('id');
+        $.ajax({
+            url: '/ajax/add_like/',
+            type: "POST",
+            data: {'id_speech': id_speech},
+            success: function (response) {
+                //Esto les toca a los frontend ver que van a hacer cuando de like
+
+            }
+        });
+
+    });
+});
+
+</script>
 {% endblock %}

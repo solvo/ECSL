@@ -15,41 +15,6 @@ def get_active_period():
     return 0
 
 
-class Profile(Model):
-    gender_choice = (
-        ('M', 'Masculino'),
-        ('F', 'Femenino')
-    )
-    user = OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
-    name = CharField(max_length=255, verbose_name=_('Name'))
-    last_name = CharField(max_length=255, verbose_name=_('Last name'))
-    institution = CharField(max_length=12, verbose_name=_('Institution'))
-    alimentary_restriction = TextField(verbose_name=_('Food Restriction'), null=True)
-    born_date = DateField(verbose_name=_('Born Date'))
-    gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    health_consideration = TextField(verbose_name=_('Health Considerations'), null=True)
-    identification = CharField(max_length=12, verbose_name=_('Identification'), null=True)
-    nationality = CharField(max_length=12, verbose_name=_('Nationality'))
-    snore = BooleanField(verbose_name=_('Snore?'), default=False)
-    enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
-
-    entry_country = IntegerField(verbose_name=_('Entry and out from country'), null=True)
-    out_country = IntegerField(verbose_name=_('Entry and otu from country'), null=True)
-    entry_port = CharField(max_length=100, verbose_name=_('Entry port'), null=True)
-    out_port = CharField(max_length=100, verbose_name=_('Out port'), null=True)
-    entry_country_date = DateTimeField(verbose_name=_('Entry country Date'), null=True)
-    out_country_date = DateTimeField(verbose_name=_('Out country Date'), null=True)
-    letter = TextField(verbose_name=_('Migratory letter'), null=True)
-
-    def save(self, *args, **kwargs):
-        periodo = get_active_period()
-        if periodo != 0:
-            self.enrolled = True
-            super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
-        super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
-
-    def __str__(self):
-        return self.user.username
 
 
 class Inscription(Model):
@@ -205,3 +170,41 @@ class DateState(Model):
 
 
 
+class Profile(Model):
+    gender_choice = (
+        ('M', 'Masculino'),
+        ('F', 'Femenino')
+    )
+    user = OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
+    name = CharField(max_length=255, verbose_name=_('Name'))
+    last_name = CharField(max_length=255, verbose_name=_('Last name'))
+    institution = CharField(max_length=12, verbose_name=_('Institution'))
+    alimentary_restriction = TextField(verbose_name=_('Food Restriction'), null=True)
+    born_date = DateField(verbose_name=_('Born Date'))
+    gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
+    health_consideration = TextField(verbose_name=_('Health Considerations'), null=True)
+    identification = CharField(max_length=12, verbose_name=_('Identification'), null=True)
+    nationality = CharField(max_length=12, verbose_name=_('Nationality'))
+    snore = BooleanField(verbose_name=_('Snore?'), default=False)
+    enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
+
+    # About the likes and the register in the differents activities
+    likes = ManyToManyField(Speech, related_name='profile_speech_likes')
+    matriculatedspeechs = ManyToManyField(Speech)
+    entry_country = IntegerField(verbose_name=_('Entry and out from country'), null=True)
+    out_country = IntegerField(verbose_name=_('Entry and otu from country'), null=True)
+    entry_port = CharField(max_length=100, verbose_name=_('Entry port'), null=True)
+    out_port = CharField(max_length=100, verbose_name=_('Out port'), null=True)
+    entry_country_date = DateTimeField(verbose_name=_('Entry country Date'), null=True)
+    out_country_date = DateTimeField(verbose_name=_('Out country Date'), null=True)
+    letter = TextField(verbose_name=_('Migratory letter'), null=True)
+
+    def save(self, *args, **kwargs):
+        periodo = get_active_period()
+        if periodo != 0:
+            self.enrolled = True
+            super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
+        super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
+
+    def __str__(self):
+        return self.user.username

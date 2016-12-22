@@ -3,9 +3,10 @@ from django.shortcuts import render
 from system.models import *
 from system.forms import *
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from registration.backends.hmac.views import RegistrationView
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from registration import signals
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -45,4 +46,17 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'usuarios/my_edit_profile.html'
     success_url = "/"
     model = Profile
+
+
+# esto es lo de dar like
+def profileAddLike(request):
+    profile = request.user.profile
+    idSpeech = request.POST['id_speech']
+    speech = get_object_or_404(Speech, pk=idSpeech)
+    profile.likes.add(speech)
+    return JsonResponse({'mensaje': "Me gusta confirmado"})
+
+
+
+
 
