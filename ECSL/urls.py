@@ -44,7 +44,7 @@ urlpatterns = extra_patterns + [
     url(r'^forum/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
 
 
-    url(r'^agenda/$', agenda, name='Agenda'),
+    url(r'^agenda/$', agenda.as_view(), name='Agenda'),
 
 
 

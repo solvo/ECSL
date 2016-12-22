@@ -140,10 +140,10 @@ class Speech(Model):
     skill_level = PositiveIntegerField(verbose_name=_('Skill Level'))
     speaker_information = TextField(verbose_name=_('Speaker Information'))
     title = CharField(max_length=250, verbose_name=_('Title'))
-    places = CharField(max_length=250, verbose_name=_('Places'))
-    days = CharField(max_length=250, verbose_name=_('Days'))
+    places = CharField(max_length=250, verbose_name=_('Places'), null=True)
+    days = DateTimeField(verbose_name=_('Event Start'), null=True)
     slug = SlugField(unique=True)
-    date_start = DateField(verbose_name=_('Start Date'), default='2016-01-01')
+    date_start = DateTimeField(verbose_name=_('Start Date'), null=True)
     date_created = DateTimeField(verbose_name=_('Created Date'), auto_now_add=True)
     published = BooleanField(verbose_name=_('Published'), default=False)
 
