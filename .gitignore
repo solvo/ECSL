@@ -89,7 +89,7 @@ ENV/
 .ropeproject
 #IDEA
 .idea/
-.idea/*
+
 
 #style
 system/static/css/style.css

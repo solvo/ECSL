@@ -206,3 +206,9 @@ class Profile(Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Patrocinadores(Model):
+    name = CharField(max_length=100, verbose_name=_('Name'))
+    web = URLField(verbose_name=_('Web'))
+    logo = ImageField(verbose_name=_('logo'), upload_to='logos/')

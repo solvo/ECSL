@@ -9,6 +9,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
 
 
+@method_decorator(login_required, name='dispatch')
 class becas(CreateView, SuccessMessageMixin):
     template_name = 'becas/becas.html'
     model = Inscription
