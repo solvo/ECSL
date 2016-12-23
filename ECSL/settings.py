@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-
+from __future__ import absolute_import
+from celery.schedules import crontab
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -40,11 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PIL',
     'system',
-    'paypal',
     'django_ajax',
-    'ckeditor',
     'bootstrap3',
-    'djreservation',
+
 
 ]
 
@@ -143,6 +142,7 @@ LOGIN_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # Run the email's server in windows's MS-DOS
 # python -m smtpd -c DebuggingServer -n
+
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
@@ -150,5 +150,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
 
+
+
 EMAIL_HOST = "localhost"
 EMAIL_PORT = "8025"
+
+
+CELERY_MODULE = "system.celery"
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_ACCEPT_CONTENT = ['pickle', 'json']
+
+
+
+CELERYBEAT_SCHEDULE = {
+    # execute 12:30 pm
+    'send_daily_emails': {
+        'task': 'async_notifications.tasks.send_daily',
+        'schedule': crontab(minute=30, hour=0),
+    },
+}

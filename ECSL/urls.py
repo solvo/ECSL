@@ -21,6 +21,7 @@ from system.vistas.FAQ import *
 from system.vistas.Agenda import *
 from system.vistas.Speech import *
 from system.vistas.Tshirt import *
+from system.vistas.becas import *
 from system.ajax import *
 from django.conf.urls.static import static
 from django.conf import settings
@@ -70,6 +71,7 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
 
     url(r'^camisetas/$', tshirt_list.as_view(), name='tshirt'),
     url(r'^faq/$', faq.as_view(), name='faq'),
+    url(r'^becas/$', becas.as_view(), name='becas'),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,7 +2,6 @@ from django.contrib import admin
 from system.models import *
 # Register your models here.
 admin.site.register(Profile)
-admin.site.register(Inscription)
 admin.site.register(SpeechType)
 admin.site.register(Topic)
 admin.site.register(DateState)
@@ -31,6 +30,12 @@ class TshirtStyleAdmin(admin.ModelAdmin):
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('category', 'question', 'answer','created','published')
-
     list_editable = ('published',)
+
+
+@admin.register(Inscription)
+class InscriptionAdmin(admin.ModelAdmin):
+    list_display = ('mozilla_subvention_description', 'subvention_description', 'mozilla_subvention', )
+    list_editable = ('mozilla_subvention',)
+    list_display_links = ('mozilla_subvention_description',)
 

@@ -17,16 +17,16 @@ def get_active_period():
 
 class Inscription(Model):
     user = OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
-    mozilla_subvention = BooleanField(verbose_name=_('Mozilla Subvention?'))
+    mozilla_subvention = BooleanField(verbose_name=_('Mozilla Subvention?'), default=False)
     mozilla_subvention_description = TextField(verbose_name=_('Mozilla Subvention Description'))
-    payed = BooleanField(verbose_name=_('Payed?'))
+    payed = BooleanField(verbose_name=_('Payed?'), default=False)
     preregistered = BooleanField(verbose_name=_('Preregistered'))
     registered = BooleanField(verbose_name=_('Registered'))
     subvention_description = TextField(verbose_name=_('Subvention Description'))  # Preguntar para que es
-    subvention_request = BooleanField(verbose_name=_('Subvention Request'))
+    subvention_request = BooleanField(verbose_name=_('Subvention Request'), default=False)
 
     def __str__(self):
-        return self.registered
+        return self.user.username
 
 
 class TshirtStyle(Model):
