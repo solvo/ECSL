@@ -19,7 +19,6 @@ from system.views import *
 from system.vistas.User import *
 from system.vistas.FAQ import *
 from system.vistas.Agenda import *
-
 from system.vistas.Speech import *
 from system.ajax import *
 
@@ -28,37 +27,41 @@ extra_patterns = [
     url(r'^accounts/', include('registration.backends.hmac.urls')),
 
     ]
-urlpatterns = extra_patterns + [
+
+user_patterns = [
+
+    url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
+    url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
+    url(r'^accounts/edit_profile/(?P<pk>[0-9]+)$', ProfileUpdateView.as_view(), name='edit_profile'),
+
+]
+
+forum_patterns = [
+
+    url(r'^forum/$', foro.as_view(), name='Forum'),
+    url(r'^forum/insert_topic/$', insert_topic.as_view(), name='Insert_Topic'),
+    url(r'^forum/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
+    url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
+    url(r'^forum/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
+]
+
+ajax_patterns = [
+        # Esto es lo de matricularse ------------
+    url(r'^ajax/matricularse/', matricularse, name='ajax_matricula'),
+    url(r'^ajax/delete_matricula/', deleteMatricularse, name='ajax_delete_matricula'),
+    # Esto es lo de dar like -------------------------
+    url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
+]
+
+
+urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + [
+
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
 
 
-    url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
-    url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
-
-    url(r'^accounts/edit_profile/(?P<pk>[0-9]+)$', ProfileUpdateView.as_view(), name='edit_profile'),
-
-
-
-    url(r'^forum/$', foro.as_view(), name='Forum'),
-    url(r'^forum/insert_topic/$', insert_topic.as_view(), name='Insert_Topic'),
-    url(r'^forum/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
-
-
     url(r'^agenda/$', agenda.as_view(), name='Agenda'),
-
-    url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
-    url(r'^forum/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
-
-    # Esto es lo de matricularse ------------
-    url(r'^ajax/matricularse/', matricularse, name='ajax_matricula'),
-    url(r'^ajax/delete_matricula/', deleteMatricularse, name='ajax_delete_matricula'),
-
-
-    # Esto es lo de dar like -------------------------
-    url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
-
     url(r'^faq/$', faq.as_view(), name='faq'),
 
 

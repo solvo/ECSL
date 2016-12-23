@@ -23,7 +23,6 @@ class view_profile(DetailView):
     model = Profile
 
 
-
 @login_required()
 def testing(request):
 

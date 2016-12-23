@@ -55,7 +55,7 @@ def profileAddLike(request):
     idSpeech = request.POST['id_speech']
     speech = get_object_or_404(Speech, pk=idSpeech)
     profile.likes.add(speech)
-    return JsonResponse({'mensaje': "Me gusta confirmado"})
+    return JsonResponse({'messages': "Me gusta confirmado"})
 
 
 @login_required()
@@ -64,7 +64,7 @@ def matricularse(request):
     idSpeech = request.POST['id_speech']
     speech = get_object_or_404(Speech, pk=idSpeech)
     profile.matriculatedspeechs.add(speech)
-    return JsonResponse({'mensaje': "Matricula confirmada"})
+    return JsonResponse({'messages': "Matricula confirmada"})
 
 
 @login_required()
