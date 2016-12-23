@@ -43,6 +43,7 @@
                         <li class="active"><a href="{% url 'index' %}">{% trans "Home" %}</a></li>
                         <li><a href="{% url 'Forum' %}">{% trans "Forum" %}</a></li>
                         <li><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
+                        <li><a href="{% url 'tshirt' %}">{% trans "Camisetas" %}</a></li>
                         <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -61,6 +62,7 @@
                         {% else %}
                             <li><a href="{% url 'auth_login' %}">{% trans "Login " %}</a></li>
                             <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                            <li><a href="{% url 'tshirt' %}">{% trans "Camisetas" %}</a></li>
                         {% endif %}
                         </ul>
                 </div>

@@ -36,15 +36,15 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    #img1 = ImageField(verbose_name=_('Image 1'))
-    #img2 = ImageField(verbose_name=_('Image 2'))
-    #img3 = ImageField(verbose_name=_('Image 3'))
+    img1 = ImageField(verbose_name=_('Image 1'), upload_to='Tshirt/')
+    img2 = ImageField(verbose_name=_('Image 2'), upload_to='Tshirt/')
+    img3 = ImageField(verbose_name=_('Image 3'), upload_to='Tshirt/')
 
     name = CharField(max_length=45, verbose_name=_('Name'))
-    price = DecimalField(verbose_name=_('Image 1'), decimal_places=2, max_digits=6)
+    price = DecimalField(verbose_name=_('Price'), decimal_places=2, max_digits=6)
 
     def __str__(self):
-        return self.gender_choice
+        return self.name
 
 
 class Tshirt(Model):
@@ -53,6 +53,9 @@ class Tshirt(Model):
     amount = PositiveIntegerField(verbose_name=_('Amount'))
     last_update = DateField(verbose_name=_('Last Update'))
     size = CharField(max_length=15, verbose_name=_('Size'))
+
+    def __str__(self):
+        return self.style.name + ' ' + self.style.description
 
 
 class SpeechType(Model):

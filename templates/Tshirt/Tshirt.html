@@ -13,12 +13,14 @@
 <br>
 <br>
 
-    {% for foo in object_list %}
-        {{ foo.title }}
-        {% empty %}
-        <h1>No hay actividades</h1>
-    {% endfor %}
+{% for foo in camisetas %}
 
+    <img src="{{ foo.style.img1.url }}">
+    <img src="{{ foo.style.img2.url }}">
+    <img src="{{ foo.style.img3.url }}">
+    <h1>{{ foo.size }}</h1>
+    <h1>{{ foo.style.name }}</h1>
+{% endfor %}
 
 
 <br>

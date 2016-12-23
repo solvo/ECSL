@@ -1,8 +1,6 @@
 from django.contrib import admin
 from system.models import *
 # Register your models here.
-admin.site.register(TshirtStyle)
-admin.site.register(Tshirt)
 admin.site.register(Profile)
 admin.site.register(Inscription)
 admin.site.register(SpeechType)
@@ -16,6 +14,19 @@ class SpeechAdmin(admin.ModelAdmin):
 
     list_editable = ('published','days', 'places')
 
+
+@admin.register(Tshirt)
+class TshirtAdmin(admin.ModelAdmin):
+    list_display = ('style','user', 'amount', 'size')
+    list_display_links = ('style',)
+    list_editable = ('amount', 'size')
+
+
+@admin.register(TshirtStyle)
+class TshirtStyleAdmin(admin.ModelAdmin):
+    list_display = ('name','description', 'img1', 'img2', 'img3',)
+    list_editable = ('description', 'img1', 'img2', 'img3',)
+    list_display_links = ('name',)
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):

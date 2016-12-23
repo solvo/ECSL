@@ -20,7 +20,10 @@ from system.vistas.User import *
 from system.vistas.FAQ import *
 from system.vistas.Agenda import *
 from system.vistas.Speech import *
+from system.vistas.Tshirt import *
 from system.ajax import *
+from django.conf.urls.static import static
+from django.conf import settings
 
 extra_patterns = [
 
@@ -60,10 +63,14 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
 
+    url(r'^media/$', testing, name='Testing'), #esto es pa probar quitar al final
+
 
     url(r'^agenda/$', agenda.as_view(), name='Agenda'),
+
+    url(r'^camisetas/$', tshirt_list.as_view(), name='tshirt'),
     url(r'^faq/$', faq.as_view(), name='faq'),
 
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
