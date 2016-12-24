@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.utils.text import slugify
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import Http404
+from django.contrib import messages
 
 
 @method_decorator(login_required, name='dispatch')
@@ -28,3 +29,11 @@ class becas(CreateView, SuccessMessageMixin):
             form.instance.preregistered = True
             form.instance.registered = False
         return super(becas, self).form_valid(form)
+
+    def dispatch(self, request, *args, **kwargs):
+        if Inscription.objects.filter(user=self.request.user):
+            messages.add_message(request, messages.WARNING, 'Usted ya esta registrado')
+            return redirect('/')
+        else:
+            return super(becas, self).dispatch(request, *args, **kwargs)
+

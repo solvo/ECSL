@@ -29,8 +29,6 @@ class TshirtAdmin(admin.ModelAdmin):
 #     list_editable = ('description', 'img1', 'img2', 'img3',)
 #     list_display_links = ('name',)
 
-
-
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('category', 'question', 'answer','created','published')
@@ -42,21 +40,38 @@ class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('mozilla_subvention_description', 'subvention_description', 'mozilla_subvention', )
     list_editable = ('mozilla_subvention',)
     list_display_links = ('mozilla_subvention_description',)
-    actions = ['test']
+    actions = ['send_mail_aprove', 'send_email_denieg']
 
-    def test(self, request, queryset):
+    def send_mail_aprove(self, request, queryset):
 
         #
         # print(queryset[0].user.username)
         for date in queryset:
-          send_mail('Hola','texto del mensanje', 'chicomtz.sr@gmail.com',[date.user.email])
+          send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
 
-        # rows_updated = queryset.update(mozilla_subvention=True)
+        rows_updated = queryset.update(mozilla_subvention=True)
+
+        if rows_updated == 1:
+            message_bit = "1 email was sent"
+        else:
+            message_bit = "%s emails were sent" % rows_updated
+        self.message_user(request, "%s successfully" % message_bit)
+
+    send_mail_aprove.short_description = 'Send aprove email'
+
+    def send_email_denieg(self, request, queryset):
+
         #
-        # if rows_updated == 1:
-        #     message_bit = "1 story was"
-        # else:
-        #     message_bit = "%s stories were" % rows_updated
-        # self.message_user(request, "%s successfully marked as published." % message_bit)
+        # print(queryset[0].user.username)
+        for date in queryset:
+          send_mail('Hola','Ha sido denegado', 'chicomtz.sr@gmail.com',[date.user.email])
 
-    test.short_description = 'Email'
+        rows_updated = queryset.update(mozilla_subvention=False)
+
+        if rows_updated == 1:
+            message_bit = "1 email was sent"
+        else:
+            message_bit = "%s emails were sent" % rows_updated
+        self.message_user(request, "%s successfully" % message_bit)
+
+    send_email_denieg.short_description = 'Send denieg email'
