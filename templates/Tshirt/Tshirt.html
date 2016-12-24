@@ -20,6 +20,8 @@
     <img src="{{ foo.style.img3.url }}">
     <h1>{{ foo.size }}</h1>
     <h1>{{ foo.style.name }}</h1>
+    {% empty %}
+    <h1>No hay fotos subidas</h1>
 {% endfor %}
 
 

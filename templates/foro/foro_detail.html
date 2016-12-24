@@ -32,6 +32,7 @@
     Nivel del Autor:
     {{ pedro.skill_level }}
 
+
    {% if pedro in user.profile.matriculatedspeechs.all %}
    <a href="#" onclick="desmatricular({{ pedro.pk }})">Desmatricularme</a>
     {% else %}

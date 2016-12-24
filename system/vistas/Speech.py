@@ -45,19 +45,6 @@ class foro_detail(ListView):
         return Speech.objects.get(topic__slug= self.editor, slug=self.detalles)
 
 
-class insert_topic(SuccessMessageMixin, CreateView):
-    template_name = 'foro/insert_topic.html'
-    model = Topic
-    form_class = InsertTopic
-    success_url = '/forum/'
-    success_message = "Topic was added."
-
-    def form_valid(self, form):
-
-        form.instance.slug = slugify(form.instance.name)
-        return super(insert_topic, self).form_valid(form)
-
-
 class insert_speech(SuccessMessageMixin, CreateView):
     template_name = 'foro/insert_speech.html'
     model = Speech

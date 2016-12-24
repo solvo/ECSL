@@ -80,7 +80,7 @@ function like (id_speech){
 
 function matricular(id_speech){
         $.ajax({
-             url: '/ajax/matricularse/',
+             url: '/ajax/enroll/',
              type: "POST",
              data: {'id_speech': id_speech},
              success: function (response) {
@@ -90,7 +90,7 @@ function matricular(id_speech){
     }
     function desmatricular(id_speech){
         $.ajax({
-             url: '/ajax/delete_matricula/',
+             url: '/ajax/delete_enroll/',
              type: "POST",
              data: {'id_speech': id_speech},
              success: function (response) {

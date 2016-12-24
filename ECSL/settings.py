@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
+from __future__ import absolute_import
+from celery.schedules import crontab
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -39,10 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'PIL',
     'system',
-    'django_ajax',
     'bootstrap3',
-	'xhtml2pdf',
-
 
 ]
 
@@ -147,3 +146,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
 EMAIL_HOST = "localhost"
 EMAIL_PORT = "8025"
+

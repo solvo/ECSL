@@ -42,17 +42,16 @@ user_patterns = [
 
 forum_patterns = [
 
-    url(r'^forum/$', foro.as_view(), name='Forum'),
-    url(r'^forum/insert_topic/$', insert_topic.as_view(), name='Insert_Topic'),
-    url(r'^forum/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
-    url(r'^forum/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
-    url(r'^forum/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
+    url(r'^activity/$', foro.as_view(), name='Forum'),
+    url(r'^activity/(?P<slug>[\w-]+)/insert_speech/$', insert_speech.as_view(), name='Insert_Speech'),
+    url(r'^activity/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
+    url(r'^activity/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
 ]
 
 ajax_patterns = [
         # Esto es lo de matricularse ------------
-    url(r'^ajax/matricularse/', matricularse, name='ajax_matricula'),
-    url(r'^ajax/delete_matricula/', deleteMatricularse, name='ajax_delete_matricula'),
+    url(r'^ajax/enroll/', matricularse, name='ajax_matricula'),
+    url(r'^ajax/delete_enroll/', deleteMatricularse, name='ajax_delete_matricula'),
     # Esto es lo de dar like -------------------------
     url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
 ]
@@ -64,12 +63,12 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
 
-    url(r'^media/$', testing, name='Testing'), #esto es pa probar quitar al final
+    url(r'^media/$', testing, name='Media'), #esto es pa probar quitar al final
 
 
-    url(r'^agenda/$', agenda.as_view(), name='Agenda'),
+    url(r'^calender/$', agenda.as_view(), name='Agenda'),
 
-    url(r'^camisetas/$', tshirt_list.as_view(), name='tshirt'),
+    url(r'^tshirt/$', tshirt_list.as_view(), name='tshirt'),
     url(r'^faq/$', faq.as_view(), name='faq'),
     url(r'^becas/$', becas.as_view(), name='becas'),
 
