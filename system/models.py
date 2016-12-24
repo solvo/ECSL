@@ -36,9 +36,9 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    img1 = ImageField(verbose_name=_('Image 1'), upload_to='Tshirt/')
-    img2 = ImageField(verbose_name=_('Image 2'), upload_to='Tshirt/')
-    img3 = ImageField(verbose_name=_('Image 3'), upload_to='Tshirt/')
+    #img1 = ImageField(verbose_name=_('Image 1'), upload_to='Tshirt/')
+    #img2 = ImageField(verbose_name=_('Image 2'), upload_to='Tshirt/')
+    #img3 = ImageField(verbose_name=_('Image 3'), upload_to='Tshirt/')
 
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Price'), decimal_places=2, max_digits=6)
@@ -211,4 +211,4 @@ class Profile(Model):
 class Patrocinadores(Model):
     name = CharField(max_length=100, verbose_name=_('Name'))
     web = URLField(verbose_name=_('Web'))
-    logo = ImageField(verbose_name=_('logo'), upload_to='logos/')
+    # logo = ImageField(verbose_name=_('logo'), upload_to='logos/')

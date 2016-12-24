@@ -9,8 +9,6 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-from __future__ import absolute_import
-from celery.schedules import crontab
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -43,6 +41,8 @@ INSTALLED_APPS = [
     'system',
     'django_ajax',
     'bootstrap3',
+	
+	'celery',
 
 
 ]
@@ -155,17 +155,3 @@ STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static',
 EMAIL_HOST = "localhost"
 EMAIL_PORT = "8025"
 
-
-CELERY_MODULE = "system.celery"
-CELERY_TIMEZONE = TIME_ZONE
-CELERY_ACCEPT_CONTENT = ['pickle', 'json']
-
-
-
-CELERYBEAT_SCHEDULE = {
-    # execute 12:30 pm
-    'send_daily_emails': {
-        'task': 'async_notifications.tasks.send_daily',
-        'schedule': crontab(minute=30, hour=0),
-    },
-}
