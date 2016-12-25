@@ -65,7 +65,7 @@ class insert_speech(SuccessMessageMixin, CreateView):
     template_name = 'foro/insert_speech.html'
     model = Speech
     form_class = InsertSpeech
-    success_url = '/forum/'
+    success_url = '/activity/'
     success_message = "Speech was added. The Administrator will revise it for its approval"
 
     def get(self, request, *arg, **kwargs):

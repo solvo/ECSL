@@ -3,8 +3,6 @@ from system.models import *
 from django.core.mail import send_mail
 # Register your models here.
 admin.site.register(Profile)
-admin.site.register(SpeechType)
-admin.site.register(Topic)
 admin.site.register(DateState)
 admin.site.register(Patrocinadores)
 
@@ -14,6 +12,19 @@ class SpeechAdmin(admin.ModelAdmin):
     list_display = ('topic', 'user', 'published', 'days', 'places')
 
     list_editable = ('published','days', 'places')
+
+
+
+@admin.register(Topic)
+class TopicAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
+
+
+
+@admin.register(SpeechType)
+class SpeechTypeAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug':('name',)}
+
 
 
 @admin.register(Tshirt)

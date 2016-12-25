@@ -73,7 +73,7 @@ class SpeechType(Model):
     )
     name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
     icons = CharField(max_length=45, verbose_name=_('Icons'), choices=speech_icons)
-    slug = SlugField()
+    slug = SlugField(unique=True, help_text='Generador de url, se recomienda no modificar')
 
     def __str__(self):
         return self.name
@@ -83,7 +83,7 @@ class Topic(Model):
 
     name = CharField(max_length=45, verbose_name=_('Name'),unique=True)
     description = TextField(verbose_name=_('Description'))
-    slug = SlugField(unique=True)
+    slug = SlugField(unique=True, help_text='Generador de url, se recomienda no modificar')
     date_created = DateTimeField(verbose_name=_('Created Date'), auto_now_add=True)
 
     class Meta:
@@ -117,7 +117,7 @@ class Speech(Model):
     title = CharField(max_length=250, verbose_name=_('Title'))
     places = CharField(max_length=250, verbose_name=_('Places'), null=True)
     days = DateTimeField(verbose_name=_('Event Start'), null=True)
-    slug = SlugField(unique=True)
+    slug = SlugField(unique=True, help_text='Generador de url, se recomienda no modificar')
     date_start = DateTimeField(verbose_name=_('Start Date'), null=True)
     date_created = DateTimeField(verbose_name=_('Created Date'), auto_now_add=True)
     published = BooleanField(verbose_name=_('Published'), default=False)
