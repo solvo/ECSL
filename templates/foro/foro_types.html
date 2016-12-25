@@ -1,53 +1,40 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% load i18n %}
-
-
 
 {% block content %}
 
-            <br>
-            <br>
-            <br>
-            <br>
-    <h1>Actividades</h1>
-
-
-{% for foo in pedro %}
+{% for type in foro_types %}
 
     Titulo del Curso:
 
-        <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">{{ foo.title }}</a>
+        <a href="{% url 'Forum_Detail' type.topic.slug type.slug %}">{{ type.title }}</a>
 
     Usuario:
 
-    <p>{{ foo.user.username }}</p>
-    {% if foo.user == user %}
-    {% elif foo in user.profile.likes.all %}
+    <p>{{ type.user.username }}</p>
+    {% if type.user == user %}
+    {% elif type in user.profile.likes.all %}
         <p>Me encanta cuando te gusta</p>
     {% else %}
-        <a href="#" onclick="like({{ foo.pk }})">like</a>
+        <a href="#" onclick="like({{ type.pk }})">like</a>
     {% endif %}
 
-    {% if foo.user == user %}
-   {% elif foo in user.profile.matriculatedspeechs.all %}
-   <a href="#" onclick="desmatricular({{ foo.pk }})">Desmatricularme</a>
+    {% if type.user == user %}
+   {% elif type in user.profile.matriculatedspeechs.all %}
+   <a href="#" onclick="desmatricular({{ type.pk }})">Desmatricularme</a>
     {% else %}
-     <a href="#" onclick="matricular({{ foo.pk }})" >Matricularme</a>
+     <a href="#" onclick="matricular({{ type.pk }})" >Matricularme</a>
     {% endif %}
     <br>
     Created:
-    {{ foo.date_created }}
-
+    {{ type.date_created }}
+    <a href="{% url 'Insert_Speech' type.topic.slug %}">Insertar Actividad</a>
 
 
 {% empty %}
 
     <h1>No hay actividades</h1>
 {% endfor %}
-    <a href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
-
-
-
 
 <BR>
 <BR>
@@ -61,6 +48,10 @@
 <BR><BR>
 <BR><BR>
 {% endblock %}
+
+
+
+
 
 {% block script %}
 <script type="text/javascript" >

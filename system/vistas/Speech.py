@@ -45,6 +45,22 @@ class foro_detail(ListView):
         return Speech.objects.get(topic__slug= self.editor, slug=self.detalles)
 
 
+@method_decorator(login_required, name='dispatch')
+class foro_types(ListView):
+
+    template_name = 'foro/foro_types.html'
+    context_object_name = 'foro_types'
+
+    def get_queryset(self, *args, **kwargs):
+        self.types = self.kwargs['slug']
+        return Speech.objects.filter(speech_type__slug= self.types)
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super(foro_types, self).get_context_data(**kwargs)
+    #     context['topic'] = Topic.objects.get(slug=self.types)
+    #     return context
+
+
 class insert_speech(SuccessMessageMixin, CreateView):
     template_name = 'foro/insert_speech.html'
     model = Speech

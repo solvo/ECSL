@@ -1,0 +1,4 @@
+django==1.10
+PIL
+django-bootstrap3
+Pillow

@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.db.models import *
 from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now
+from django.conf import settings
 
 
 def get_active_period():
@@ -60,11 +61,19 @@ class Tshirt(Model):
 
 class SpeechType(Model):
     speech_choice = (
-        ('Talleres', 'T'),
-        ('Charlas', 'CH'),
-        ('Dialogos', 'D')
+        ('Talleres', 'Talleres'),
+        ('Charlas', 'Charlas'),
+        ('Dialogos', 'Dialogos')
+    )
+
+    speech_icons = (
+        (settings.STATIC_URL + 'img/talleres.png', 'T'),
+        (settings.STATIC_URL + 'img/charlas.png', 'CH'),
+        (settings.STATIC_URL + 'img/dialogos.png', 'D')
     )
     name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
+    icons = CharField(max_length=45, verbose_name=_('Icons'), choices=speech_icons)
+    slug = SlugField()
 
     def __str__(self):
         return self.name

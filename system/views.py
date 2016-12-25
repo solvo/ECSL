@@ -14,7 +14,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def index(request):
 
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'types': SpeechType.objects.all()})
 
 
 class createProfile(RegistrationView):
