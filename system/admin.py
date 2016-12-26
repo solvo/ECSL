@@ -5,14 +5,14 @@ from django.core.mail import send_mail
 admin.site.register(Profile)
 admin.site.register(DateState)
 admin.site.register(Patrocinadores)
+admin.site.register(Room)
+admin.site.register(Hotel)
 
 
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
     list_display = ('topic', 'user', 'published', 'days', 'places')
-
     list_editable = ('published','days', 'places')
-
 
 
 @admin.register(Topic)
@@ -20,11 +20,9 @@ class TopicAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
 
 
-
 @admin.register(SpeechType)
 class SpeechTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
-
 
 
 @admin.register(Tshirt)
@@ -34,11 +32,11 @@ class TshirtAdmin(admin.ModelAdmin):
     list_editable = ('amount', 'size')
 
 
-# @admin.register(TshirtStyle)
-# class TshirtStyleAdmin(admin.ModelAdmin):
-#     list_display = ('name','description', 'img1', 'img2', 'img3',)
-#     list_editable = ('description', 'img1', 'img2', 'img3',)
-#     list_display_links = ('name',)
+@admin.register(TshirtStyle)
+class TshirtStyleAdmin(admin.ModelAdmin):
+     list_display = ('name','description', 'img1', 'img2', 'img3',)
+     list_editable = ('description', 'img1', 'img2', 'img3',)
+     list_display_links = ('name',)
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):

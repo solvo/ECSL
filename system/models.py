@@ -9,8 +9,7 @@ from django.conf import settings
 
 
 def get_active_period():
-    period = DateState.objects.filter(start_date__lte=now(),
-                                   finish_date__gte=now())
+    period = DateState.objects.filter(start_date__lte=now(), finish_date__gte=now())
     if period.exists():
         return period.last()
     return 0
@@ -37,9 +36,9 @@ class TshirtStyle(Model):
     )
     description = TextField(verbose_name=_('Description'))
     gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Gender'))
-    #img1 = ImageField(verbose_name=_('Image 1'), upload_to='Tshirt/')
-    #img2 = ImageField(verbose_name=_('Image 2'), upload_to='Tshirt/')
-    #img3 = ImageField(verbose_name=_('Image 3'), upload_to='Tshirt/')
+    img1 = ImageField(verbose_name=_('Image 1'), upload_to='Tshirt/')
+    img2 = ImageField(verbose_name=_('Image 2'), upload_to='Tshirt/')
+    img3 = ImageField(verbose_name=_('Image 3'), upload_to='Tshirt/')
 
     name = CharField(max_length=45, verbose_name=_('Name'))
     price = DecimalField(verbose_name=_('Price'), decimal_places=2, max_digits=6)
@@ -71,6 +70,7 @@ class SpeechType(Model):
         (settings.STATIC_URL + 'img/charlas.png', 'CH'),
         (settings.STATIC_URL + 'img/dialogos.png', 'D')
     )
+
     name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
     icons = CharField(max_length=45, verbose_name=_('Icons'), choices=speech_icons)
     slug = SlugField(unique=True, help_text='Generador de url, se recomienda no modificar')
@@ -138,6 +138,7 @@ class Hotel(Model):
 
 class Room(Model):
     hotel = ForeignKey(Hotel, on_delete=CASCADE, verbose_name=_('Hotel'))
+    user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
     available_beds = SmallIntegerField(verbose_name=_('Available Beds'))
     coin = CharField(max_length=100, verbose_name=_('Coin'))
     floor = SmallIntegerField(verbose_name=_('Floor'))
@@ -147,7 +148,7 @@ class Room(Model):
     total_beds = SmallIntegerField(verbose_name=_('Total Beds'))
 
     def __str__(self):
-        return self.hotel
+        return self.hotel.name
 
 
 class QuestionCategory(Model):
@@ -210,8 +211,8 @@ class Profile(Model):
         periodo = get_active_period()
         if periodo != 0:
             self.enrolled = True
-            super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
-        super(Profile, self).save(*args, **kwargs) # Call the "real" save() method.
+            super(Profile, self).save(*args, **kwargs)
+        super(Profile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.user.username
@@ -220,4 +221,4 @@ class Profile(Model):
 class Patrocinadores(Model):
     name = CharField(max_length=100, verbose_name=_('Name'))
     web = URLField(verbose_name=_('Web'))
-    #logo = ImageField(verbose_name=_('logo'), upload_to='logos/')
+    logo = ImageField(verbose_name=_('logo'), upload_to='logos/')
