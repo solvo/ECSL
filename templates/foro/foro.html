@@ -9,7 +9,10 @@
             <br>
             <br>
             <br>
+
+    {% if object_list %}
     <h1>Actividades</h1>
+    {% endif %}
 
     {% for foo in object_list %}
         <a href="{% url 'Forum_Topic' foo.slug %}">{{ foo.name }}</a>

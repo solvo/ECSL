@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import *
@@ -21,7 +22,7 @@ class foro(ListView):
 class foro_topic(ListView):
 
     template_name = 'foro/foro_topic.html'
-    context_object_name = 'pedro'
+    context_object_name = 'topic_list'
 
     def get_queryset(self, *args, **kwargs):
         self.editor = self.kwargs['slug']
@@ -37,7 +38,7 @@ class foro_topic(ListView):
 class foro_detail(ListView):
 
     template_name = 'foro/foro_detail.html'
-    context_object_name = 'pedro'
+    context_object_name = 'speech_details'
 
     def get_queryset(self, *args, **kwargs):
         self.editor = self.kwargs['slug']
@@ -66,7 +67,7 @@ class insert_speech(SuccessMessageMixin, CreateView):
     model = Speech
     form_class = InsertSpeech
     success_url = '/activity/'
-    success_message = "Speech was added. The Administrator will revise it for its approval"
+    success_message = "La actividad fue creada. Necesita la aprobación de un administrador"
 
     def get(self, request, *arg, **kwargs):
         try:

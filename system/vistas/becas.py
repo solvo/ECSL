@@ -37,3 +37,11 @@ class becas(CreateView, SuccessMessageMixin):
         else:
             return super(becas, self).dispatch(request, *args, **kwargs)
 
+
+@method_decorator(login_required, name='dispatch')
+class hotel(ListView):
+    template_name = 'hotel/hotel.html'
+    model = Hotel
+    context_object_name = 'hotel'
+
+
