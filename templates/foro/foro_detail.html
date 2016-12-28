@@ -4,80 +4,64 @@
 
 
 {% block content %}
+    <h1 class="page-header">{{ speech_details.title }}</h1>
 
-            <br>
-            <br>
-            <br>
-            <br>
-    <h1>Actividades</h1>
-
-    Titulo del Curso:
-    {{ speech_details.title }}
-    <br>
-    Usuario:
-    {{ speech_details.user.username }}
-    <br>
-    Detalles:
-    {{ speech_details.description }}
-    <br>
-    Tipo de Actividad:
-    {{ speech_details.speech_type.name }}
-    <br>
-    Acerca del autor:
-    {{ speech_details.speaker_information }}
-    <br>
-    Para:
-    {{ speech_details.audience }}
-    <br>
-    Nivel del Autor:
-    {{ speech_details.skill_level }}
-
-
-   {% if speech_details in user.profile.matriculatedspeechs.all %}
-   <a href="#" onclick="desmatricular({{ speech_details.pk }})">Desmatricularme</a>
-    {% else %}
-     <a href="#" onclick="matricular({{ speech_details.pk }})">Matricularme</a>
-    {% endif %}
-
-
-<BR>
-<BR>
-<BR>
-<BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
+    <div class="row-field">
+        <strong class="row-item">Usuario:</strong>
+        <p class="row-item">{{ speech_details.user.username }}</p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-field">
+        <strong class="row-item">Detalles:</strong>
+        <p class="row-item">{{ speech_details.description }}</p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-field">
+        <strong class="row-item">Tipo de Actividad:</strong>
+        <p class="row-item">{{ speech_details.speech_type.name }}</p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-field">
+        <strong class="row-item">Acerca del autor:</strong>
+        <p class="row-item">{{ speech_details.speaker_information }}</p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-field">
+        <strong class="row-item">Para:</strong>
+        <p class="row-item">{{ speech_details.audience }}</p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-field">
+        <strong class="row-item">Nivel del Autor:</strong>
+        <p class="row-item">{{ speech_details.skill_level }}</p>
+    </div>
 {% endblock %}
 
 {% block script %}
 
     <script type="text/javascript">
-    function matricular(id_speech){
-        $.ajax({
-             url: '/ajax/matricularse/',
-             type: "POST",
-             data: {'id_speech': id_speech},
-             success: function (response) {
+        function matricular(id_speech) {
+            $.ajax({
+                url: '/ajax/matricularse/',
+                type: "POST",
+                data: {'id_speech': id_speech},
+                success: function (response) {
 
-                 //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
-             }
-        });
-    }
-    function desmatricular(id_speech){
-        $.ajax({
-             url: '/ajax/delete_matricula/',
-             type: "POST",
-             data: {'id_speech': id_speech},
-             success: function (response) {
+                    //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
+                }
+            });
+        }
+        function desmatricular(id_speech) {
+            $.ajax({
+                url: '/ajax/delete_matricula/',
+                type: "POST",
+                data: {'id_speech': id_speech},
+                success: function (response) {
 
-                 //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
-             }
-    });
-    }
+                    //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
+                }
+            });
+        }
 
     </script>
 

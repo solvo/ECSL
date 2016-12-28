@@ -40,15 +40,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-
-                        <li class="active"><a href="{% url 'index' %}">{% trans "Inicio" %}</a></li>
-                        <li><a href="{% url 'Forum' %}">{% trans "Actividades" %}</a></li>
-                        <li><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
-                        <li><a href="{% url 'tshirt' %}">{% trans "Camisetas" %}</a></li>
-                        <li><a href="{% url 'becas' %}">{% trans "Becas" %}</a></li>
-                        <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
-
-
+                        <li {% ifequal url "/" %}class="active"{% endifequal %}><a href="{% url 'index' %}">{% trans "Inicio" %}</a></li>
+                        <li {% ifequal url "/activity/" %}class="active"{% endifequal %}><a href="{% url 'Forum' %}">{% trans "Actividades" %}</a></li>
+                        <li {% ifequal url "/calender/" %}class="active"{% endifequal %}><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
+                        <li {% ifequal url "/tshirt/" %}class="active"{% endifequal %}><a href="{% url 'tshirt' %}">{% trans "Camisetas" %}</a></li>
+                        <li {% ifequal url "/becas/" %}class="active"{% endifequal %}><a href="{% url 'becas' %}">{% trans "Becas" %}</a></li>
+                        <li {% ifequal url "/faq/" %}class="active"{% endifequal %}><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                             {% if user.is_authenticated %}
@@ -122,9 +119,9 @@
         <div class="footer-nav text-center">
             <p>Alajuela, Costa Rica, 20-21 de julio de 2017</p>
 
-{#            {% for foo in imagen %}#}
-{#                <img src="{{ foo.logo.url }}">#}
-{#            {% endfor %}#}
+            {% for foo in imagen %}
+                <img src="{{ foo.logo.url }}">
+            {% endfor %}
 
         </div>
     </footer>

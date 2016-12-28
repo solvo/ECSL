@@ -26,4 +26,6 @@ class view_profile(DetailView):
 @login_required()
 def testing(request):
 
+
+
     return render(request, 'testing.html')
