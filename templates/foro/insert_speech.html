@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="post">
-    {% csrf_token %}
-{{ form }}
-    <input type="submit" value="Crear">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load i18n %}
+{% load bootstrap3 %}
+{% block content %}
+    <h1>{% trans "New Speech" %}</h1>
+
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+        {% bootstrap_field form.title %}
+        {% bootstrap_field form.description %}
+        {% bootstrap_field form.notes %}
+        {% bootstrap_field form.speaker_information %}
+        {% bootstrap_field form.audience %}
+        {% bootstrap_field form.skill_level %}
+        {% bootstrap_field form.speech_type %}
+        {% bootstrap_field form.topic %}
+            <button class="btn btn-primary" type="submit">{% trans "Crear" %}</button>
+        </form>
+    </div>
+{% endblock %}

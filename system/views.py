@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from registration import signals
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.mail import EmailMessage
+from xhtml2pdf import pisa
 
 
 def index(request):
@@ -33,6 +35,23 @@ class createProfile(RegistrationView):
                                   born_date=form.cleaned_data["born_date"],
                                   nationality=form.cleaned_data["nationality"],
                                   institution=form.cleaned_data["institution"],)
+        email_user = [form.cleaned_data['email'], ]
+
+        sourceHtml = "<html><body><p>To PDF or not to PDF</p></body></html>"
+        print(settings.MEDIA_ROOT)
+        outputFilename = settings.MEDIA_ROOT + '/pdf/invitacion.pdf'
+        resultFile = open(outputFilename, "w+b")
+
+        pisaStatus = pisa.CreatePDF(
+            sourceHtml,  # the HTML to convert
+            dest=resultFile)  # file handle to recieve result
+
+        resultFile.close()
+
+        correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com', [email_user, ])
+
+        correo.attach_file(outputFilename)
+        correo.send()
         profile.save()
         return new_user
 
@@ -74,7 +93,4 @@ def deleteMatricularse(request):
     speech = get_object_or_404(Speech, pk=idSpeech)
     profile.matriculatedspeechs.remove(speech)
     return JsonResponse({'mensaje': "Matricula eliminada"})
-
-
-
 

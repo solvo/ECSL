@@ -206,6 +206,7 @@ class Profile(Model):
     entry_country_date = DateTimeField(verbose_name=_('Entry country Date'), null=True)
     out_country_date = DateTimeField(verbose_name=_('Out country Date'), null=True)
     letter = TextField(verbose_name=_('Migratory letter'), null=True)
+    invitation_file = BooleanField(verbose_name=_('Invitation email'), default=False)
 
     def save(self, *args, **kwargs):
         periodo = get_active_period()

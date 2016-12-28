@@ -1,8 +1,9 @@
 from django.contrib import admin
 from system.models import *
 from django.core.mail import send_mail
+from django.core.mail import EmailMessage
+from django.conf import settings
 # Register your models here.
-admin.site.register(Profile)
 admin.site.register(DateState)
 admin.site.register(Patrocinadores)
 admin.site.register(Room)
@@ -38,6 +39,7 @@ class TshirtStyleAdmin(admin.ModelAdmin):
      list_editable = ('description', 'img1', 'img2', 'img3',)
      list_display_links = ('name',)
 
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('category', 'question', 'answer','created','published')
@@ -49,14 +51,12 @@ class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('mozilla_subvention_description', 'subvention_description', 'mozilla_subvention', )
     list_editable = ('mozilla_subvention',)
     list_display_links = ('mozilla_subvention_description',)
-    actions = ['send_mail_aprove', 'send_email_denieg']
+    actions = ['send_email_aprove', 'send_email_denieg']
 
-    def send_mail_aprove(self, request, queryset):
-
-        #
-        # print(queryset[0].user.username)
+    def send_email_aprove(self, request, queryset):
         for date in queryset:
           send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
+
 
         rows_updated = queryset.update(mozilla_subvention=True)
 
@@ -66,13 +66,12 @@ class InscriptionAdmin(admin.ModelAdmin):
             message_bit = "%s emails were sent" % rows_updated
         self.message_user(request, "%s successfully" % message_bit)
 
-    send_mail_aprove.short_description = 'Send aprove email'
+    send_email_aprove.short_description = 'Enviar correo de aprobado'
 
     def send_email_denieg(self, request, queryset):
 
-        #
-        # print(queryset[0].user.username)
         for date in queryset:
+
           send_mail('Hola','Ha sido denegado', 'chicomtz.sr@gmail.com',[date.user.email])
 
         rows_updated = queryset.update(mozilla_subvention=False)
@@ -83,4 +82,29 @@ class InscriptionAdmin(admin.ModelAdmin):
             message_bit = "%s emails were sent" % rows_updated
         self.message_user(request, "%s successfully" % message_bit)
 
-    send_email_denieg.short_description = 'Send denieg email'
+    send_email_denieg.short_description = 'Enviar correo de no aprobado'
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    actions = ['send_email_invitation', ]
+    list_display = ['name', 'enroll', 'invitation_file']
+
+    def send_email_invitation(self, request, queryset):
+
+        for date in queryset:
+            correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com',
+                                  [date.user.email, ])
+
+            correo.attach_file(settings.MEDIA_ROOT + '/pdf/invitacion.pdf')
+            correo.send()
+
+        rows_updated = queryset.update(invitation_file=True)
+
+        if rows_updated == 1:
+            message_bit = "1 email was sent"
+        else:
+            message_bit = "%s emails were sent" % rows_updated
+        self.message_user(request, "%s successfully" % message_bit)
+
+    send_email_invitation.short_description = 'Enviar archivo de invitacion'
