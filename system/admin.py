@@ -87,8 +87,8 @@ class InscriptionAdmin(admin.ModelAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    actions = ['send_email_invitation', ]
-    list_display = ['name', 'enroll', 'invitation_file']
+    actions = ['send_email_invitation', 'send_email_diploma']
+    list_display = ['name', 'enrolled', 'invitation_file']
 
     def send_email_invitation(self, request, queryset):
 
@@ -108,3 +108,22 @@ class ProfileAdmin(admin.ModelAdmin):
         self.message_user(request, "%s successfully" % message_bit)
 
     send_email_invitation.short_description = 'Enviar archivo de invitacion'
+
+    def send_email_diploma(self, request, queryset):
+
+        for date in queryset:
+            correo = EmailMessage('Gracias por asistir', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com',
+                                  [date.user.email, ])
+
+            correo.attach_file(settings.MEDIA_ROOT + '/pdf/diploma.pdf')
+            correo.send()
+
+        rows_updated = queryset.update(diploma=True)
+
+        if rows_updated == 1:
+            message_bit = "1 email was sent"
+        else:
+            message_bit = "%s emails were sent" % rows_updated
+        self.message_user(request, "%s successfully" % message_bit)
+
+    send_email_invitation.short_description = 'Enviar archivo de diploma'

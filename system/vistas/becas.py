@@ -20,22 +20,26 @@ class becas(CreateView, SuccessMessageMixin):
     success_message = 'Tu propuesta ha sido enviada. Necesita la aprobacion de un administrador'
 
     def form_valid(self, form):
-
+        form.instance.subvention_request = True
         form.instance.user = self.request.user
-        if self.request.user.profile.enrolled:
-            form.instance.preregistered = False
-            form.instance.registered = True
-        else:
-            form.instance.preregistered = True
-            form.instance.registered = False
+        form.instance.preregistered = True
+
         return super(becas, self).form_valid(form)
 
     def dispatch(self, request, *args, **kwargs):
-        if Inscription.objects.filter(user=self.request.user):
-            messages.add_message(request, messages.WARNING, 'Usted ya esta registrado')
-            return redirect('/')
-        else:
+        if not Inscription.objects.filter(user=self.request.user):
             return super(becas, self).dispatch(request, *args, **kwargs)
+
+        estado = Inscription.objects.get(user=self.request.user)
+        if estado.subvention_request and estado.not_registered and estado.registered:
+            return render(self.request, 'becas/becas.html', {'estado': 'Analizando'})
+        elif estado.subvention_request and estado.not_registered == False and estado.registered:
+            return render(self.request, 'becas/becas.html', {'estado': 'Ha sido Aprobado'})
+
+        elif estado.subvention_request and estado.not_registered and estado.registered ==False:
+            return render(self.request, 'becas/becas.html', {'estado': 'Denegado'})
+        elif estado.subvention_request and estado.not_registered == False and estado.registered == False:
+            return render(self.request, 'becas/becas.html', {'estado': 'Analizando'})
 
 
 @method_decorator(login_required, name='dispatch')
