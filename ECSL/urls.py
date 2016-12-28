@@ -72,6 +72,7 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
     url(r'^tshirt/$', tshirt_list.as_view(), name='tshirt'),
     url(r'^faq/$', faq.as_view(), name='faq'),
     url(r'^becas/$', becas.as_view(), name='becas'),
+    url(r'^hotel/$', becas.as_view(), name='hotel'),
 
 
 
