@@ -40,6 +40,45 @@
         {% endif %}
     </div>
 
+    {% if pedro %}
+    <h1>Actividades</h1>
+    {% endif %}
+
+
+{% for foo in topic_list %}
+
+    Titulo del Curso:
+
+        <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">{{ foo.title }}</a>
+
+    Usuario:
+
+    <p>{{ foo.user.username }}</p>
+    {% if foo.user == user %}
+    {% elif foo in user.profile.likes.all %}
+        <p>Me encanta cuando te gusta</p>
+    {% else %}
+        <a href="#" onclick="like({{ foo.pk }})">like</a>
+    {% endif %}
+
+    {% if foo.user == user %}
+   {% elif foo in user.profile.matriculatedspeechs.all %}
+   <a href="#" onclick="desmatricular({{ foo.pk }})">Desmatricularme</a>
+    {% else %}
+     <a href="#" onclick="matricular({{ foo.pk }})" >Matricularme</a>
+    {% endif %}
+    <br>
+    Created:
+    {{ foo.date_created }}
+
+
+
+{% empty %}
+
+    <h1>No hay actividades</h1>
+{% endfor %}
+    <a href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
+
 {% endblock %}
 
 {% block script %}

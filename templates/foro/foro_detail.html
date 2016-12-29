@@ -35,6 +35,39 @@
         <strong class="row-item">Nivel del Autor:</strong>
         <p class="row-item">{{ speech_details.skill_level }}</p>
     </div>
+
+
+    <h1>Actividades</h1>
+
+    Titulo del Curso:
+    {{ speech_details.title }}
+    <br>
+    Usuario:
+    {{ speech_details.user.username }}
+    <br>
+    Detalles:
+    {{ speech_details.description }}
+    <br>
+    Tipo de Actividad:
+    {{ speech_details.speech_type.name }}
+    <br>
+    Acerca del autor:
+    {{ speech_details.speaker_information }}
+    <br>
+    Para:
+    {{ speech_details.audience }}
+    <br>
+    Nivel del Autor:
+    {{ speech_details.skill_level }}
+
+
+   {% if speech_details in user.profile.matriculatedspeechs.all %}
+   <a href="#" onclick="desmatricular({{ speech_details.pk }})">Desmatricularme</a>
+    {% else %}
+     <a href="#" onclick="matricular({{ speech_details.pk }})">Matricularme</a>
+    {% endif %}
+
+
 {% endblock %}
 
 {% block script %}

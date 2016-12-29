@@ -10,8 +10,12 @@ from django.http import JsonResponse
 from registration import signals
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 from django.core.mail import EmailMessage
 from xhtml2pdf import pisa
+
+from django.core.mail import send_mail
+from xhtml2pdf import pisa  # import python module
 
 
 def index(request):
@@ -37,11 +41,13 @@ class createProfile(RegistrationView):
                                   institution=form.cleaned_data["institution"],)
         email_user = [form.cleaned_data['email'], ]
 
+
         outputFilename = createPDF()
         correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com', [email_user, ])
 
         correo.attach_file(outputFilename)
         correo.send()
+
         profile.save()
         return new_user
 

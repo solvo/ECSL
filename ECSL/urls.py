@@ -75,5 +75,6 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
 
 
 
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
