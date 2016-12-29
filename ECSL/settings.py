@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 from __future__ import absolute_import
 import os
-
+from django.utils.timezone import timedelta
+import djcelery
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,6 +43,9 @@ INSTALLED_APPS = [
     'system',
     'bootstrap3',
     'xhtml2pdf',
+    'djcelery',
+    'djkombu',
+
 
 ]
 
@@ -100,7 +104,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -119,6 +122,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+djcelery.setup_loader()
+BROKER_URL = 'django://'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/

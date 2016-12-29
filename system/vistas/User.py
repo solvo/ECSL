@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import *
 from system.models import *
 from django.utils.decorators import method_decorator
-from django.views.generic.detail import SingleObjectMixin
+from ECSL.celery import add
 
 
 @method_decorator(login_required, name='dispatch')
@@ -23,9 +23,7 @@ class view_profile(DetailView):
     model = Profile
 
 
-@login_required()
 def testing(request):
-
-
+    add(12,11)
 
     return render(request, 'testing.html')
