@@ -125,6 +125,15 @@ AUTH_PASSWORD_VALIDATORS = [
 djcelery.setup_loader()
 BROKER_URL = 'django://'
 
+CELERYBEAT_SCHEDULE = {
+    'envios_correo': {
+        'task': 'ECSL.celery.envios_correo',
+        'schedule': timedelta(seconds=30),
+        # 'args': (15, 35)
+    },
+}
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
