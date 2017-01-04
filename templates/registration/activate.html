@@ -1,8 +1,17 @@
-{% extends "base.html" %}
 {% load i18n %}
-
+{% load static %}
 {% block content %}
-
-<p>{% trans "Account activation failed" %}</p>
-
+<div class="text-center">
+        <h2>{% trans "Account activation failed" %}</h2>
+        <h3 class="title-logout">{% trans "La página se redireccionará en:" %}</h3>
+        <div class="timeout">
+            <div class="timeout-border">
+                <div class="timeout-text">
+                  <span class="timeout-text-circle">5</span>
+                    <div class="c-pin"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/redirect.js' %}"></script>
 {% endblock %}
