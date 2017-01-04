@@ -40,34 +40,38 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-
-                        <li class="active"><a href="{% url 'index' %}">{% trans "Inicio" %}</a></li>
-                        <li><a href="{% url 'Forum' %}">{% trans "Actividades" %}</a></li>
-                        <li><a href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
-                        <li><a href="{% url 'tshirt' %}">{% trans "Camisetas" %}</a></li>
-                        <li><a href="{% url 'becas' %}">{% trans "Becas" %}</a></li>
-                        <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
-
-
+                        <li {% ifequal url "/" %}class="active"{% endifequal %}><a
+                                href="{% url 'index' %}">{% trans "Inicio" %}</a></li>
+                        <li {% ifequal url "/activity/" %}class="active"{% endifequal %}><a
+                                href="{% url 'Forum' %}">{% trans "Actividades" %}</a></li>
+                        <li {% ifequal url "/calender/" %}class="active"{% endifequal %}><a
+                                href="{% url 'Agenda' %}">{% trans "Agenda" %}</a></li>
+                        <li {% ifequal url "/tshirt/" %}class="active"{% endifequal %}><a
+                                href="{% url 'tshirt' %}">{% trans "Camisetas" %}</a></li>
+                        <li {% ifequal url "/becas/" %}class="active"{% endifequal %}><a
+                                href="{% url 'becas' %}">{% trans "Becas" %}</a></li>
+                        <li {% ifequal url "/faq/" %}class="active"{% endifequal %}><a
+                                href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                            {% if user.is_authenticated %}
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Profile" %} <span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
+                        {% if user.is_authenticated %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Profile" %}
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
 
-                                        <li><a href="{% url 'View_Profile' user.profile.pk %}">{% trans "View" %}</a></li>
+                                    <li><a href="{% url 'View_Profile' user.profile.pk %}">{% trans "View" %}</a></li>
 
-                                        <li><a href="{% url 'auth_password_change' %}">{% trans "Change Pass" %}</a></li>
-                                        <li><a href="{% url 'edit_profile' user.profile.pk %}">{% trans "Edit" %}</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{% url 'auth_logout' %}" title="Log Out">{% trans "Log Out " %}</a></li>
+                                    <li><a href="{% url 'auth_password_change' %}">{% trans "Change Pass" %}</a></li>
+                                    <li><a href="{% url 'edit_profile' user.profile.pk %}">{% trans "Edit" %}</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{% url 'auth_logout' %}" title="Log Out">{% trans "Log Out " %}</a></li>
                         {% else %}
-                            <li><a href="{% url 'auth_login' %}">{% trans "Login " %}</a></li>
+                            <li {% ifequal url "/accounts/login/" %}class="active"{% endifequal %}><a href="{% url 'auth_login' %}">{% trans "Login " %}</a></li>
 
                         {% endif %}
-                        </ul>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -81,13 +85,13 @@
     <div class="row">
         <div class="col-sm-12">
             {% block messages %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}"><i
-                            class="fa fa-{% if message.tags == 'success' %}check{% elif message.tags == 'warning' %}exclamation{% elif message.tags == 'danger' %}minus{% else %}{{ message.tags }}{% endif %}-circle"></i> {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}"><i
+                                class="fa fa-{% if message.tags == 'success' %}check{% elif message.tags == 'warning' %}exclamation{% elif message.tags == 'danger' %}minus{% else %}{{ message.tags }}{% endif %}-circle"></i> {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             {% endblock %}
 
             {% block content %}
@@ -103,7 +107,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <h2>{% trans 'Stay Connected' %}</h2>
+                        <h2 class="text-uppercase">
+                            Síguenos
+                        </h2>
                         <ul>
                             <li>
                                 <a><span class="fa fa-2x fa-facebook-square"></span></a>
@@ -116,16 +122,29 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="col-sm-8">
+                        <h2 class="text-center text-uppercase patrocinadores-title">
+                            <span>Patrocinadores</span>
+                        </h2>
+                        <div class="row patrocinadores">
+                            {% for foo in imagen %}
+                                {% if forloop.counter <= 4 %}
+                                    <a href="{{ foo.web }}" target="_blank"
+                                       class="col-sm-4 col-md-3 patrocinador-item text-center">
+                                        <div class="patrocinador-img">
+                                            <img src="{{ foo.logo.url }}" class="img-responsive">
+                                        </div>
+                                        <span>{{ foo.name }}</span>
+                                    </a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="footer-nav text-center">
             <p>Alajuela, Costa Rica, 20-21 de julio de 2017</p>
-
-{#            {% for foo in imagen %}#}
-{#                <img src="{{ foo.logo.url }}">#}
-{#            {% endfor %}#}
-
         </div>
     </footer>
 {% endblock %}

@@ -5,37 +5,26 @@
 
 {% block content %}
 
-            <br>
-            <br>
-            <br>
-            <br>
-
     {% if object_list %}
-    <h1>Actividades</h1>
+        <h1 class="page-header">
+            {% trans "Actividades" %}
+        </h1>
     {% endif %}
-
-    {% for foo in object_list %}
-        <a href="{% url 'Forum_Topic' foo.slug %}">{{ foo.name }}</a>
-        {{ foo.description }}
-        Created: {{ foo.date_created }}
-        {% empty %}
-        <h1>No existen aun temas que mostrar</h1>
-        <br>
-    {% endfor %}
-
-
-        <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-
-
+    <div class="row">
+        {% for  foo in object_list %}
+            <div class="col-sm-4">
+                <a href="{% url 'Forum_Topic' foo.slug %}">
+                    <h3>{{ foo.name }}</h3>
+                </a>
+                <p>{{ foo.description|truncatewords:"30" }}</p>
+                <p class="date-activity"><span class="fa fa-calendar"></span>{{ foo.date_created }}</p>
+            </div>
+        {% endfor %}
+        {% if not object_list %}
+            <div class="col-sm-12">
+                <h1>No existen aun temas que mostrar</h1>
+                <br>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

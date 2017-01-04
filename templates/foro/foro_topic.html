@@ -5,101 +5,118 @@
 
 {% block content %}
 
-            <br>
-            <br>
-            <br>
-            <br>
+    <h1 class="page-header">
+        Actividades
+        <a class="btn btn-primary pull-right" href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
+    </h1>
 
-    {% if pedro %}
-    <h1>Actividades</h1>
-    {% endif %}
+    <div class="row">
+        {% for foo in topic_list %}
+            <div class="col-sm-4">
+                <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">
+                    <h3>{{ foo.title }}</h3>
+                </a>
+                <p>{{ foo.description|truncatewords:"30" }}</p>
+                <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
+                {% if foo.user == user %}
+                {% elif foo in user.profile.likes.all %}
+                    <a href="#" class="icon-animation" onclick="like({{ foo.pk }})">
+                        <span class="fa icon-like  fa-thumbs-up"></span>
+                    </a>
+                {% else %}
+                    <a href="#" class="icon-animation" onclick="like({{ foo.pk }})">
+                        <span class="fa icon-like  fa-thumbs-o-up"></span>
+                    </a>
+                {% endif %}
 
+                {% if foo.user == user %}
+                {% elif foo in user.profile.matriculatedspeechs.all %}
+                    <a href="#" class="matricula-link" onclick="desmatricular({{ foo.pk }})">
+                        <span>Desmatricularme</span>
+                    </a>
+                {% else %}
+                    <a href="#" class="matricula-link" onclick="matricular({{ foo.pk }})">
+                        <span>Matricularme</span>
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+        {% if not topic_list %}
+            <div class="col-sm-12">
+                <h3 class="text-warning">No hay actividades</h3>
+            </div>
+        {% endif %}
+    </div>
 
-{% for foo in topic_list %}
-
-    Titulo del Curso:
-
-        <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">{{ foo.title }}</a>
-
-    Usuario:
-
-    <p>{{ foo.user.username }}</p>
-    {% if foo.user == user %}
-    {% elif foo in user.profile.likes.all %}
-        <p>Me encanta cuando te gusta</p>
-    {% else %}
-        <a href="#" onclick="like({{ foo.pk }})">like</a>
-    {% endif %}
-
-    {% if foo.user == user %}
-   {% elif foo in user.profile.matriculatedspeechs.all %}
-   <a href="#" onclick="desmatricular({{ foo.pk }})">Desmatricularme</a>
-    {% else %}
-     <a href="#" onclick="matricular({{ foo.pk }})" >Matricularme</a>
-    {% endif %}
-    <br>
-    Created:
-    {{ foo.date_created }}
-
-
-
-{% empty %}
-
-    <h1>No hay actividades</h1>
-{% endfor %}
-    <a href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
-
-
-
-
-<BR>
-<BR>
-<BR>
-<BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
-<BR><BR>
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript" >
+    <script type="text/javascript">
 
-function like (id_speech){
-    $.ajax({
-             url: '/ajax/add_like/',
-             type: "POST",
-             data: {'id_speech': id_speech},
-             success: function (response) {
-                 //Esto les toca a los frontend ver que van a hacer cuando de like
-             }
-    });
-}
+        function like(id_speech) {
+            if(!$('.icon-like').hasClass('fa-thumbs-up')) {
+                $('.icon-like').addClass('animation-left');
+                $.ajax({
+                    url: '/ajax/add_like/',
+                    type: "POST",
+                    data: {'id_speech': id_speech},
+                    success: function (response) {
+                        setTimeout(function () {
+                            $('.icon-like').removeClass('fa-thumbs-o-up');
+                            $('.icon-like').addClass('fa-thumbs-up');
+                            $('.icon-like').addClass('animation-right');
+                        }, 500);
+                    }
+                });
+            }
+        }
 
-function matricular(id_speech){
-        $.ajax({
-             url: '/ajax/enroll/',
-             type: "POST",
-             data: {'id_speech': id_speech},
-             success: function (response) {
-                 //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
-             }
-        });
-    }
-    function desmatricular(id_speech){
-        $.ajax({
-             url: '/ajax/delete_enroll/',
-             type: "POST",
-             data: {'id_speech': id_speech},
-             success: function (response) {
-                 //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
-             }
-    });
-    }
+        function matricular(id_speech) {
+            var texto = $('.matricula-link span').text();
+            if (texto == 'Matricularme') {
+                $('.matricula-link span').removeClass('animation-right');
+                $('.matricula-link span').addClass('animation-left');
+                $.ajax({
+                    url: '/ajax/enroll/',
+                    type: "POST",
+                    data: {'id_speech': id_speech},
+                    success: function (response) {
+                        setTimeout(function () {
+                            $('.matricula-link span').text(texto == 'Matricularme' ? 'Desmatricularme' : 'Matricularme');
+                            $('.matricula-link span').addClass('animation-right');
+                            $('.matricula-link span').removeClass('animation-left');
+                        }, 1000);
+                    }
+                });
+            } else {
+                desmatricular(id_speech);
+            }
+        }
+        function desmatricular(id_speech) {
+            var texto = $('.matricula-link span').text();
+            if (texto == 'Desmatricularme') {
+                $('.matricula-link span').removeClass('animation-right');
+                $('.matricula-link span').addClass('animation-left');
+                $.ajax({
+                    url: '/ajax/delete_enroll/',
+                    type: "POST",
+                    data: {'id_speech': id_speech},
+                    success: function (response) {
+                        setTimeout(function () {
+                            var texto = $('.matricula-link span').text();
+                            $('.matricula-link span').text(texto == 'Matricularme' ? 'Desmatricularme' : 'Matricularme');
+                            $('.matricula-link span').addClass('animation-right');
+                            $('.matricula-link span').removeClass('animation-left');
+                        }, 1000);
+                    }
+                });
+            }
+            else {
+                matricular(id_speech);
+            }
+        }
+        ;
 
 
-</script>
+    </script>
 {% endblock %}

@@ -3,46 +3,76 @@
 {% load static %}
 {% block content %}
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+    <h1 class="page-header">
+        Camisetas
+    </h1>
 
-{% for foo in camisetas %}
+    <div class="row">
 
-    <img src="{{ foo.style.img1.url }}">
-    <img src="{{ foo.style.img2.url }}">
-    <img src="{{ foo.style.img3.url }}">
-    <h1>{{ foo.size }}</h1>
-    <h1>{{ foo.style.name }}</h1>
-    {% empty %}
-    <h1>No hay fotos subidas</h1>
-{% endfor %}
+        {% for foo in camisetas %}
+            <div class="col-sm-4">
+                <div class="product">
+                    <div class="make3D">
+                        <div class="product-front">
+                            <div class="shadow"></div>
+                            <img src="{{ foo.style.img1.url }}" class="img-responsive">
+                            <div class="image_overlay"></div>
+                            <div class="view_gallery">Ver más</div>
+                            <div class="stats">
+                                <div class="stats-container">
+                                    <span class="product_price">$39</span>
+                                    <span class="product_name">{{ foo.style.name }}</span>
+                                    <p>Tallas: {{ foo.size }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-back">
+                            <div class="shadow"></div>
 
+                            <div id="carousel-{{ forloop.counter }}" class="carousel slide" data-ride="carousel">
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <img src="{{ foo.style.img1.url }}" class="img-responsive">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{{ foo.style.img2.url }}" class="img-responsive">
+                                    </div>
+                                    <div class="item">
+                                        <img src="{{ foo.style.img3.url }}" class="img-responsive">
+                                    </div>
+                                </div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+                                <!-- Controls -->
+                                <a class="carouselPrev visible carousel-control" href="#carousel-{{ forloop.counter }}" role="button"
+                                   data-slide="prev">
+                                    <div class="y"></div>
+                                    <div class="x"></div>
+                                </a>
+                                <a class="carouselNext visible carousel-control" href="#carousel-{{ forloop.counter }}" role="button"
+                                   data-slide="next">
+                                    <div class="y"></div>
+                                    <div class="x"></div>
+                                </a>
+                            </div>
+                            <div class="flip-back">
+                            <div class="cy s1 s2 s3"></div>
+                            <div class="cx s1 s2 s3"></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        {% endfor %}
+
+        {% if not camisetas %}
+            <div class="col-sm-12">
+                <h3 class="text-warning">No quedan camisetas</h3>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/tshirt.js' %}"></script>
 {% endblock %}

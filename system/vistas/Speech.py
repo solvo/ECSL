@@ -62,6 +62,7 @@ class foro_types(ListView):
     #     return context
 
 
+@method_decorator(login_required, name='dispatch')
 class insert_speech(SuccessMessageMixin, CreateView):
     template_name = 'foro/insert_speech.html'
     model = Speech
