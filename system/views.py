@@ -10,6 +10,10 @@ from django.http import JsonResponse
 from registration import signals
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from django.core.mail import EmailMessage
+from xhtml2pdf import pisa
+
 from django.core.mail import send_mail
 from xhtml2pdf import pisa  # import python module
 
@@ -38,25 +42,11 @@ class createProfile(RegistrationView):
         email_user = [form.cleaned_data['email'], ]
 
 
-        # Define your data
-        sourceHtml = "<html><body><p>To PDF or not to PDF</p></body></html>"
-        outputFilename = "test.pdf"
+        outputFilename = createPDF()
+        correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com', [email_user, ])
 
-        # Utility function
-
-
-        # open output file for writing (truncated binary)
-        resultFile = open(outputFilename, "w+b")
-        # convert HTML to PDF
-        pisaStatus = pisa.CreatePDF(
-            sourceHtml,  # the HTML to convert
-            dest=resultFile)  # file handle to recieve result
-        # close output file
-          # close output file
-        # return True on success and False on errors
-
-
-        resultFile.close()
+        correo.attach_file(outputFilename)
+        correo.send()
 
         profile.save()
         return new_user
@@ -101,5 +91,26 @@ def deleteMatricularse(request):
     return JsonResponse({'mensaje': "Matricula eliminada"})
 
 
+def createPDF():
+    sourceHtml = "<html><body><p>To PDF or not to PDF</p></body></html>"
 
+    outputFilename = settings.MEDIA_ROOT + '/pdf/invitacion.pdf'
+    resultFile = open(outputFilename, "w+b")
 
+    pisaStatus = pisa.CreatePDF(
+        sourceHtml,  # the HTML to convert
+        dest=resultFile)  # file handle to recieve result
+
+    resultFile.close()
+
+    sourceHtml = "<html><body><p>Diploma de particiacion</p></body></html>"
+
+    outputFilename = settings.MEDIA_ROOT + '/pdf/diploma.pdf'
+    resultFile = open(outputFilename, "w+b")
+
+    pisaStatus = pisa.CreatePDF(
+        sourceHtml,  # the HTML to convert
+        dest=resultFile)  # file handle to recieve result
+
+    resultFile.close()
+    return outputFilename

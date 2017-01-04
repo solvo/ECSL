@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'xhtml2pdf',
 
+
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ECSL',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '3306',
 
@@ -118,6 +119,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+#
+# djcelery.setup_loader()
+# BROKER_URL = 'django://'
+#
+# CELERYBEAT_SCHEDULE = {
+#     'envios_correo': {
+#         'task': 'ECSL.celery.envios_correo',
+#         'schedule': timedelta(seconds=30),
+#         # 'args': (15, 35)
+#     },
+# }
 
 
 # Internationalization
@@ -147,4 +159,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
 EMAIL_HOST = "localhost"
 EMAIL_PORT = "8025"
-

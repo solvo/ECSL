@@ -20,8 +20,8 @@ class Inscription(Model):
     mozilla_subvention = BooleanField(verbose_name=_('Mozilla Subvention?'), default=False)
     mozilla_subvention_description = TextField(verbose_name=_('Mozilla Subvention Description'))
     payed = BooleanField(verbose_name=_('Payed?'), default=False)
-    preregistered = BooleanField(verbose_name=_('Preregistered'))
-    registered = BooleanField(verbose_name=_('Registered'))
+    not_registered = BooleanField(verbose_name=_('Not aprove '), default=False)
+    registered = BooleanField(verbose_name=_('Aprove'), default=False)
     subvention_description = TextField(verbose_name=_('Subvention Description'))  # Preguntar para que es
     subvention_request = BooleanField(verbose_name=_('Subvention Request'), default=False)
 
@@ -206,6 +206,8 @@ class Profile(Model):
     entry_country_date = DateTimeField(verbose_name=_('Entry country Date'), null=True)
     out_country_date = DateTimeField(verbose_name=_('Out country Date'), null=True)
     letter = TextField(verbose_name=_('Migratory letter'), null=True)
+    invitation_file = BooleanField(verbose_name=_('Invitation email'), default=False)
+    diploma = BooleanField(verbose_name=_('Diploma archivo'), default=False)
 
     def save(self, *args, **kwargs):
         periodo = get_active_period()
@@ -222,3 +224,32 @@ class Patrocinadores(Model):
     name = CharField(max_length=100, verbose_name=_('Name'))
     web = URLField(verbose_name=_('Web'))
     logo = ImageField(verbose_name=_('logo'), upload_to='logos/')
+
+
+# Solo funciona en mi trabajo con celery
+
+# from djkombu.managers import QueueManager, MessageManager
+#
+#
+# class djkombu_Queue(models.Model):
+#     name = models.CharField(_("name"), max_length=200, unique=True)
+#
+#     objects = QueueManager()
+#
+#     class Meta:
+#         verbose_name = _("queue")
+#         verbose_name_plural = _("queues")
+#
+#
+# class djkombu_Message(models.Model):
+#     visible = models.BooleanField(default=True, db_index=True)
+#     sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
+#                 auto_now_add=True)
+#     payload = models.TextField(_("payload"), null=False)
+#     queue = models.ForeignKey(djkombu_Queue, related_name="messages")
+#
+#     objects = MessageManager()
+#
+#     class Meta:
+#         verbose_name = _("message")
+#         verbose_name_plural = _("messages")
