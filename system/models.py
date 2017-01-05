@@ -66,9 +66,9 @@ class SpeechType(Model):
     )
 
     speech_icons = (
-        (settings.STATIC_URL + 'img/talleres.png', 'T'),
-        (settings.STATIC_URL + 'img/charlas.png', 'CH'),
-        (settings.STATIC_URL + 'img/dialogos.png', 'D')
+        (settings.STATIC_URL + 'img/talleres.png', 'Talleres'),
+        (settings.STATIC_URL + 'img/charlas.png', 'Charlas'),
+        (settings.STATIC_URL + 'img/dialogos.png', 'Diálogos')
     )
 
     name = CharField(max_length=45, verbose_name=_('Name'), choices=speech_choice)
@@ -108,7 +108,7 @@ class Speech(Model):
 
     speech_type = ForeignKey(SpeechType, verbose_name=_('Speech Type'))
     topic = ForeignKey(Topic, verbose_name=_('Topic'))
-    user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('User'))
+    user = ForeignKey(User, on_delete=CASCADE, related_name='speechs', verbose_name=_('User'))
     audience = CharField(verbose_name=_('Audience'), choices=speech_audience, max_length=45)
     description = TextField(verbose_name=_('Description'))
     notes = TextField(verbose_name=_('Notes'))
@@ -197,8 +197,8 @@ class Profile(Model):
     enrolled = BooleanField(verbose_name=_('Enrolled?'), default=False)
 
     # About the likes and the register in the differents activities
-    likes = ManyToManyField(Speech, related_name='profile_speech_likes')
-    matriculatedspeechs = ManyToManyField(Speech)
+    likes = ManyToManyField(Speech, related_name='profile_speech_likes', blank=True)
+    matriculatedspeechs = ManyToManyField(Speech, blank=True)
     entry_country = IntegerField(verbose_name=_('Entry and out from country'), null=True)
     out_country = IntegerField(verbose_name=_('Entry and otu from country'), null=True)
     entry_port = CharField(max_length=100, verbose_name=_('Entry port'), null=True)
@@ -226,29 +226,39 @@ class Patrocinadores(Model):
     logo = ImageField(verbose_name=_('logo'), upload_to='logos/')
 
 
-from djkombu.managers import QueueManager, MessageManager
+class SpeechResource(Model):
+    speech = ForeignKey(Speech, related_name='recursos')
+    recurso = FileField(upload_to='recursos/')
+
+    def nombre(self):
+        direccion = self.recurso.name
+        nombre = direccion.split('/').pop()
+        return nombre
 
 
-class djkombu_Queue(models.Model):
-    name = models.CharField(_("name"), max_length=200, unique=True)
-
-    objects = QueueManager()
-
-    class Meta:
-        verbose_name = _("queue")
-        verbose_name_plural = _("queues")
-
-
-class djkombu_Message(models.Model):
-    visible = models.BooleanField(default=True, db_index=True)
-    sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
-                auto_now_add=True)
-    payload = models.TextField(_("payload"), null=False)
-    queue = models.ForeignKey(djkombu_Queue, related_name="messages")
-
-    objects = MessageManager()
-
-    class Meta:
-        verbose_name = _("message")
-        verbose_name_plural = _("messages")
+# from djkombu.managers import QueueManager, MessageManager
+#
+#
+# class djkombu_Queue(models.Model):
+#     name = models.CharField(_("name"), max_length=200, unique=True)
+#
+#     objects = QueueManager()
+#
+#     class Meta:
+#         verbose_name = _("queue")
+#         verbose_name_plural = _("queues")
+#
+#
+# class djkombu_Message(models.Model):
+#     visible = models.BooleanField(default=True, db_index=True)
+#     sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
+#                 auto_now_add=True)
+#     payload = models.TextField(_("payload"), null=False)
+#     queue = models.ForeignKey(djkombu_Queue, related_name="messages")
+#
+#     objects = MessageManager()
+#
+#     class Meta:
+#         verbose_name = _("message")
+#         verbose_name_plural = _("messages")
 

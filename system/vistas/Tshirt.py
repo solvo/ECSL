@@ -10,3 +10,7 @@ class tshirt_list(ListView):
     template_name = 'Tshirt/Tshirt.html'
     model = Tshirt
     context_object_name = 'camisetas'
+
+
+class createCamiseta(CreateView):
+    template_name = 'Tshirt/crear_camiseta.html'

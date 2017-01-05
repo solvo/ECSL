@@ -56,10 +56,8 @@ class InscriptionAdmin(admin.ModelAdmin):
 
     def send_email_aprove(self, request, queryset):
         for date in queryset:
-          send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
-
-
-        rows_updated = queryset.update(registered=True)
+            send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
+        queryset.update(registered=True)
         rows_updated = queryset.update(not_registered=False)
 
         if rows_updated == 1:
@@ -76,7 +74,7 @@ class InscriptionAdmin(admin.ModelAdmin):
 
           send_mail('Hola','Ha sido denegado', 'chicomtz.sr@gmail.com',[date.user.email])
 
-        rows_updated = queryset.update(not_registered=True)
+        queryset.update(not_registered=True)
         rows_updated = queryset.update(registered=False)
 
         if rows_updated == 1:
