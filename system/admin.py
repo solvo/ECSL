@@ -57,7 +57,6 @@ class PatrocinadoresAdmin(admin.ModelAdmin):
 class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('user', 'subvention_request', 'registered', 'not_registered')
     list_editable = ('registered', 'not_registered')
-    # list_display_links = ('mozilla_subvention_description',)
     actions = ['send_email_aprove', 'send_email_denieg']
 
     def send_email_aprove(self, request, queryset):
