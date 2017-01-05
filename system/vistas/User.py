@@ -23,7 +23,7 @@ class view_profile(DetailView):
 
 
 def testing(request):
- all_s = Speech.objects.filter(user__profile__in=Profile.objects.all())
+    all_s = Speech.objects.filter(user__profile__in=Profile.objects.all())
     for aa in all_s:
 
         send_mail('Comienzo del curso', 'Hola ' + aa.user.username + ' usted se registro en el curso: '

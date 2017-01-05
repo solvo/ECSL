@@ -36,33 +36,3 @@
 
 {% endblock %}
 
-{% block script %}
-
-    <script type="text/javascript">
-        function matricular(id_speech) {
-            $.ajax({
-                url: '/ajax/matricularse/',
-                type: "POST",
-                data: {'id_speech': id_speech},
-                success: function (response) {
-
-                    //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
-                }
-            });
-        }
-        function desmatricular(id_speech) {
-            $.ajax({
-                url: '/ajax/delete_matricula/',
-                type: "POST",
-                data: {'id_speech': id_speech},
-                success: function (response) {
-
-                    //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
-                }
-            });
-        }
-
-    </script>
-
-{% endblock %}
-
