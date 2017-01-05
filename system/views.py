@@ -13,5 +13,3 @@ class subirRecurso(CreateView):
     model = SpeechResource
     fields = ('recurso', 'speech', )
     template_name = 'foro/subir_recurso.html'
-
-

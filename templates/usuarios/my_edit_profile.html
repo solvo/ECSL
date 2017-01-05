@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load bootstrap3 %}
+{% load static %}
 {% block content %}
     <div class="row">
         <div class="col-sm-12">
@@ -150,4 +151,6 @@
         $('.datepicker').datepicker();
     });
 </script>
+ <script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/tab-activate.js' %}"></script>
 {% endblock %}

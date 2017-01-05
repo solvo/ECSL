@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 @method_decorator(login_required, name='dispatch')
 class tshirt_list(ListView):
     template_name = 'Tshirt/Tshirt.html'
-    model = Tshirt
+    model = TshirtStyle
     context_object_name = 'camisetas'
 
 
