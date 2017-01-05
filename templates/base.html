@@ -40,6 +40,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
+
                         <li {% ifequal url "/" %}class="active"{% endifequal %}><a
                                 href="{% url 'index' %}">{% trans "Inicio" %}</a></li>
                         <li {% ifequal url "/activity/" %}class="active"{% endifequal %}><a
@@ -52,6 +53,7 @@
                                 href="{% url 'becas' %}">{% trans "Becas" %}</a></li>
                         <li {% ifequal url "/faq/" %}class="active"{% endifequal %}><a
                                 href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}

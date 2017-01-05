@@ -17,4 +17,5 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 
 @shared_task
 def envios_correo():
+
     print('sdfsdfsdf')

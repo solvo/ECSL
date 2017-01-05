@@ -5,11 +5,10 @@
 
 {% block content %}
 
-    <h1 class="page-header">
-        Actividades
-        <a class="btn btn-primary pull-right" href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
-    </h1>
-
+        <h1 class="page-header">
+            Actividades
+            <a class="btn btn-primary pull-right" href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
+        </h1>
     <div class="row">
         {% for foo in topic_list %}
             <div class="col-sm-4">
@@ -20,6 +19,7 @@
                 <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
                 {% if foo.user == user %}
                 {% elif foo in user.profile.likes.all %}
+
                     <a href="#" class="icon-animation" onclick="like({{ foo.pk }})">
                         <span class="fa icon-like  fa-thumbs-up"></span>
                     </a>
@@ -27,10 +27,16 @@
                     <a href="#" class="icon-animation" onclick="like({{ foo.pk }})">
                         <span class="fa icon-like  fa-thumbs-o-up"></span>
                     </a>
+
+                    <p>Me encanta cuando te gusta</p>
+                {% else %}
+                    <a href="#" onclick="like({{ foo.pk }})">like</a>
+
                 {% endif %}
 
                 {% if foo.user == user %}
                 {% elif foo in user.profile.matriculatedspeechs.all %}
+
                     <a href="#" class="matricula-link" onclick="desmatricular({{ foo.pk }})">
                         <span>Desmatricularme</span>
                     </a>
@@ -38,6 +44,9 @@
                     <a href="#" class="matricula-link" onclick="matricular({{ foo.pk }})">
                         <span>Matricularme</span>
                     </a>
+                    <a href="#" onclick="desmatricular({{ foo.pk }})">Desmatricularme</a>
+                {% else %}
+                    <a href="#" onclick="matricular({{ foo.pk }})">Matricularme</a>
                 {% endif %}
             </div>
         {% endfor %}
@@ -48,7 +57,6 @@
         {% endif %}
     </div>
 
-{% endblock %}
 
 {% block script %}
     <script type="text/javascript">
@@ -116,7 +124,6 @@
             }
         }
         ;
-
 
     </script>
 {% endblock %}

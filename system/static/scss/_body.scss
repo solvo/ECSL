@@ -2,11 +2,9 @@
   font-family: "ECSL";
   src: url("../fonts/ecsl.woff") format("woff");
 }
-
-.main-container {
+.main-container{
   margin-top: 80px;
 }
-
 .login-page {
   .login-content {
     .login-title {
@@ -174,7 +172,7 @@
     font-weight: bold;
     text-align: center;
   }
-  .links-center-icon {
+   .links-center-icon {
     position: absolute;
     top: 70px;
     left: 0;
@@ -211,6 +209,7 @@
   margin-bottom: 1rem;
 }
 
+<<<<<<< HEAD
 .date-activity {
   opacity: 0.5;
   span {
@@ -282,4 +281,19 @@
   .agenda-day{
     font-size: 40px;
   }
+=======
+.date-activity{
+  opacity: 0.5;
+  span{
+    margin-right: 10px;
+  }
+}
+
+.row-field{
+  display: inline-block;
+  margin-bottom: 5px;
+  .row-item{
+    display: inline;
+  }
+>>>>>>> 2da95e517f915b0aa51d40bfb1f63350a4c51821
 }
