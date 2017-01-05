@@ -5,7 +5,6 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 # Register your models here.
 admin.site.register(DateState)
-admin.site.register(Patrocinadores)
 admin.site.register(Room)
 admin.site.register(Hotel)
 admin.site.register(QuestionCategory)
@@ -20,11 +19,13 @@ class SpeechAdmin(admin.ModelAdmin):
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
+    list_display = ('name', 'description',)
 
 
 @admin.register(SpeechType)
 class SpeechTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
+    list_display = ('name',)
 
 
 @admin.register(Tshirt)
@@ -45,6 +46,11 @@ class TshirtStyleAdmin(admin.ModelAdmin):
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('category', 'question', 'answer','created','published')
     list_editable = ('published',)
+
+
+@admin.register(Patrocinadores)
+class PatrocinadoresAdmin(admin.ModelAdmin):
+    list_display = ('name', 'web', 'logo',)
 
 
 @admin.register(Inscription)
@@ -127,4 +133,4 @@ class ProfileAdmin(admin.ModelAdmin):
             message_bit = "%s emails were sent" % rows_updated
         self.message_user(request, "%s successfully" % message_bit)
 
-    send_email_invitation.short_description = 'Enviar archivo de diploma'
+    send_email_diploma.short_description = 'Enviar archivo de diploma'
