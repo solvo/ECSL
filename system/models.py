@@ -234,28 +234,28 @@ class SpeechResource(Model):
         return nombre
 
 
-# from djkombu.managers import QueueManager, MessageManager
-#
-#
-# class djkombu_Queue(models.Model):
-#     name = models.CharField(_("name"), max_length=200, unique=True)
-#
-#     objects = QueueManager()
-#
-#     class Meta:
-#         verbose_name = _("queue")
-#         verbose_name_plural = _("queues")
-#
-#
-# class djkombu_Message(models.Model):
-#     visible = models.BooleanField(default=True, db_index=True)
-#     sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
-#                 auto_now_add=True)
-#     payload = models.TextField(_("payload"), null=False)
-#     queue = models.ForeignKey(djkombu_Queue, related_name="messages")
-#
-#     objects = MessageManager()
-#
-#     class Meta:
-#         verbose_name = _("message")
-#         verbose_name_plural = _("messages")
+from djkombu.managers import QueueManager, MessageManager
+
+
+class djkombu_Queue(models.Model):
+    name = models.CharField(_("name"), max_length=200, unique=True)
+
+    objects = QueueManager()
+
+    class Meta:
+        verbose_name = _("queue")
+        verbose_name_plural = _("queues")
+
+
+class djkombu_Message(models.Model):
+    visible = models.BooleanField(default=True, db_index=True)
+    sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
+                auto_now_add=True)
+    payload = models.TextField(_("payload"), null=False)
+    queue = models.ForeignKey(djkombu_Queue, related_name="messages")
+
+    objects = MessageManager()
+
+    class Meta:
+        verbose_name = _("message")
+        verbose_name_plural = _("messages")
