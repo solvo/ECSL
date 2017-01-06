@@ -16,7 +16,7 @@ class becas(CreateView, SuccessMessageMixin):
     model = Inscription
     context_object_name = 'becas'
     success_url = '/'
-    fields = ['subvention_description']
+    fields = ['mozilla_subvention_description']
     success_message = 'Tu propuesta ha sido enviada. Necesita la aprobacion de un administrador'
 
     def form_valid(self, form):

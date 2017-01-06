@@ -5,7 +5,6 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 # Register your models here.
 admin.site.register(DateState)
-admin.site.register(Patrocinadores)
 admin.site.register(Room)
 admin.site.register(Hotel)
 admin.site.register(QuestionCategory)
@@ -20,11 +19,13 @@ class SpeechAdmin(admin.ModelAdmin):
 @admin.register(Topic)
 class TopicAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
+    list_display = ('name', 'description',)
 
 
 @admin.register(SpeechType)
 class SpeechTypeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
+    list_display = ('name',)
 
 
 @admin.register(Tshirt)
@@ -47,19 +48,21 @@ class QuestionAdmin(admin.ModelAdmin):
     list_editable = ('published',)
 
 
+@admin.register(Patrocinadores)
+class PatrocinadoresAdmin(admin.ModelAdmin):
+    list_display = ('name', 'web', 'logo',)
+
+
 @admin.register(Inscription)
 class InscriptionAdmin(admin.ModelAdmin):
     list_display = ('user', 'subvention_request', 'registered', 'not_registered')
     list_editable = ('registered', 'not_registered')
-    # list_display_links = ('mozilla_subvention_description',)
     actions = ['send_email_aprove', 'send_email_denieg']
 
     def send_email_aprove(self, request, queryset):
         for date in queryset:
-          send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
-
-
-        rows_updated = queryset.update(registered=True)
+            send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
+        queryset.update(registered=True)
         rows_updated = queryset.update(not_registered=False)
 
         if rows_updated == 1:
@@ -76,7 +79,7 @@ class InscriptionAdmin(admin.ModelAdmin):
 
           send_mail('Hola','Ha sido denegado', 'chicomtz.sr@gmail.com',[date.user.email])
 
-        rows_updated = queryset.update(not_registered=True)
+        queryset.update(not_registered=True)
         rows_updated = queryset.update(registered=False)
 
         if rows_updated == 1:
@@ -129,4 +132,4 @@ class ProfileAdmin(admin.ModelAdmin):
             message_bit = "%s emails were sent" % rows_updated
         self.message_user(request, "%s successfully" % message_bit)
 
-    send_email_invitation.short_description = 'Enviar archivo de diploma'
+    send_email_diploma.short_description = 'Enviar archivo de diploma'

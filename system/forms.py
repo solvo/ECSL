@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 from registration.forms import *
-from django.forms import HiddenInput
-from django.utils.text import slugify
 from functools import partial
 from system.models import *
 
@@ -29,4 +27,5 @@ class InsertSpeech(forms.ModelForm):
 
     class Meta:
         model = Speech
-        fields = ['title', 'description', 'notes', 'speaker_information','audience', 'skill_level', 'speech_type', 'topic']
+        fields = ['title', 'description', 'notes', 'speaker_information','audience', 'skill_level',
+                  'speech_type', 'topic']
