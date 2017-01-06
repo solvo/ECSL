@@ -73,6 +73,10 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
     url(r'^faq/$', faq.as_view(), name='faq'),
     url(r'^becas/$', becas.as_view(), name='becas'),
 
+    url(r'^tshirt/(?P<pk>[0-9]+)/encargar$', becas.as_view(), name='encargar_camiseta'),
+    url(r'^activity/(?P<pk>[0-9]+)/nuevo_recurso$', subirRecurso.as_view(), name='subir_recurso'),
+    url(r'^ajax/delete_recurso/', deleteRecurso, name='ajax_delete_recurso'),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -5,6 +5,8 @@ $(document).ready(function () {
     }, 5000);
     window.setInterval(function () {
         var valtime=parseInt($('.timeout .timeout-text-circle').text());
-       $('.timeout .timeout-text-circle').text(valtime-1);
+        if(valtime >= 0) {
+            $('.timeout .timeout-text-circle').text(valtime-1);
+        }
     }, 1000);
 });

@@ -114,3 +114,29 @@ def createPDF():
 
     resultFile.close()
     return outputFilename
+
+
+class subirRecurso(CreateView):
+    model = SpeechResource
+    fields = ('recurso', 'speech', )
+    template_name = 'foro/subir_recurso.html'
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(subirRecurso, self).get_context_data(**kwargs)
+    #     context['speech'] = get_object_or_404(Speech, pk=self.kwargs['pk'])
+    #     return context
+
+
+
+
+@login_required()
+def deleteRecurso(request):
+    user = request.user
+    idRecurso = request.POST['id_recurso']
+    recurso = get_object_or_404(SpeechResource, pk=idRecurso)
+    if user != recurso.speech.user:
+        return HttpResponseBadRequest()
+    else:
+        recurso.recurso.delete()
+        recurso.delete()
+    return JsonResponse({'mensaje': "Recurso eliminado"})
