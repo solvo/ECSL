@@ -10,6 +10,8 @@ from django.http import JsonResponse
 from registration import signals
 from django.views.generic import *
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.mail import send_mail
+from xhtml2pdf import pisa  # import python module
 
 
 def index(request):
@@ -33,6 +35,29 @@ class createProfile(RegistrationView):
                                   born_date=form.cleaned_data["born_date"],
                                   nationality=form.cleaned_data["nationality"],
                                   institution=form.cleaned_data["institution"],)
+        email_user = [form.cleaned_data['email'], ]
+
+
+        # Define your data
+        sourceHtml = "<html><body><p>To PDF or not to PDF</p></body></html>"
+        outputFilename = "test.pdf"
+
+        # Utility function
+
+
+        # open output file for writing (truncated binary)
+        resultFile = open(outputFilename, "w+b")
+        # convert HTML to PDF
+        pisaStatus = pisa.CreatePDF(
+            sourceHtml,  # the HTML to convert
+            dest=resultFile)  # file handle to recieve result
+        # close output file
+          # close output file
+        # return True on success and False on errors
+
+
+        resultFile.close()
+
         profile.save()
         return new_user
 

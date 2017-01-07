@@ -7,6 +7,7 @@ admin.site.register(DateState)
 admin.site.register(Patrocinadores)
 admin.site.register(Room)
 admin.site.register(Hotel)
+admin.site.register(QuestionCategory)
 
 
 @admin.register(Speech)
@@ -38,6 +39,7 @@ class TshirtStyleAdmin(admin.ModelAdmin):
      list_editable = ('description', 'img1', 'img2', 'img3',)
      list_display_links = ('name',)
 
+
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ('category', 'question', 'answer','created','published')
@@ -58,6 +60,7 @@ class InscriptionAdmin(admin.ModelAdmin):
         for date in queryset:
           send_mail('Hola','Ustaed ha sido aprobado', 'chicomtz.sr@gmail.com',[date.user.email])
 
+
         rows_updated = queryset.update(mozilla_subvention=True)
 
         if rows_updated == 1:
@@ -70,9 +73,8 @@ class InscriptionAdmin(admin.ModelAdmin):
 
     def send_email_denieg(self, request, queryset):
 
-        #
-        # print(queryset[0].user.username)
         for date in queryset:
+
           send_mail('Hola','Ha sido denegado', 'chicomtz.sr@gmail.com',[date.user.email])
 
         rows_updated = queryset.update(mozilla_subvention=False)

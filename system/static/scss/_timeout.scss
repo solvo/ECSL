@@ -51,6 +51,10 @@
   height: 152px;
   top: -20px;
   left: -18px;
+  @-moz-document url-prefix() {
+    top: -5px;
+    left: -2px;
+  }
   z-index: 100;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
