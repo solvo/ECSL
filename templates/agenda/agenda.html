@@ -9,6 +9,12 @@
         {% empty %}
         <h1>No hay actividades</h1>
     {% endfor %}{% endcomment %}
+
+    {% for oo, foo in po.items %}
+       <h1> {{ foo.title }} </h1>
+    {% endfor %}
+
+
     <h1 class="page-header">Agenda</h1>
     <table class="table table-bordered">
         <thead>

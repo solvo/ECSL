@@ -67,7 +67,7 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
     url(r'^media/$', testing, name='Media'), #esto es pa probar quitar al final
 
 
-    url(r'^calender/$', agenda.as_view(), name='Agenda'),
+    url(r'^calender/$', agenda, name='Agenda'),
 
     url(r'^tshirt/$', tshirt_list.as_view(), name='tshirt'),
     url(r'^faq/$', faq.as_view(), name='faq'),

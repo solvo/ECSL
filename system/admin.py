@@ -12,8 +12,8 @@ admin.site.register(QuestionCategory)
 
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'user', 'published', 'days', 'places')
-    list_editable = ('published','days', 'places')
+    list_display = ('topic', 'user', 'published', 'pepe', 'places')
+    list_editable = ('published','pepe', 'places')
 
 
 @admin.register(Topic)

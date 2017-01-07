@@ -114,9 +114,8 @@ class Speech(Model):
     speaker_information = TextField(verbose_name=_('Información del Autor'))
     title = CharField(max_length=250, verbose_name=_('Título'))
     places = CharField(max_length=250, verbose_name=_('Lugares'), null=True)
-    days = DateTimeField(verbose_name=_('Fecha del Evento'), null=True)
-    slug = SlugField(unique=True, help_text='Generador de url, se recomienda no modificar')
-    date_start = DateTimeField(verbose_name=_('Fecha de Inicio'), null=True)
+    pepe = DateTimeField(verbose_name=_('Fecha del Evento'), null=True)
+    slug = SlugField(unique=True, help_text='Generador de url, se recomienda no modificar', max_length=255)
     date_created = DateTimeField(verbose_name=_('Fecha de Creado'), auto_now_add=True)
     published = BooleanField(verbose_name=_('¿Publicado?'), default=False)
 
