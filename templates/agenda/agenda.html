@@ -3,11 +3,12 @@
 {% load static %}
 {% block content %}
 
-    {% comment %} {% for foo in object_list %}
+     {% for foo in object_list %}
         {{ foo.title }}
         {{ foo.date_start }}
         {% empty %}
         <h1>No hay actividades</h1>
+<<<<<<< HEAD
     {% endfor %}{% endcomment %}
 
     {% for oo, foo in po.items %}
@@ -15,6 +16,9 @@
     {% endfor %}
 
 
+=======
+    {% endfor %}
+>>>>>>> 951ffbf5632de8a5580fd093ed0662176e701dbe
     <h1 class="page-header">Agenda</h1>
     <table class="table table-bordered">
         <thead>
