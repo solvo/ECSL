@@ -14,10 +14,8 @@
     <script src="{% static 'js/jquery-ui.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/DjangoAjax.js' %}"></script>
-    <script src="{% static 'js/script.js' %}"></script>
     <script src="{% static 'js/min-height.js' %}"></script>
-    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'django_ajax/js/jquery.ajax-plugin.min.js' %}"></script>
+
 </head>
 <body>
 <header>
@@ -56,20 +54,19 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "My Profile" %}
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Mi Perfil" %}
                                     <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
 
-                                    <li><a href="{% url 'View_Profile' user.profile.pk %}">{% trans "View" %}</a></li>
+                                    <li><a href="{% url 'View_Profile' user.profile.pk %}">{% trans "Ver Perfil" %}</a></li>
 
-                                    <li><a href="{% url 'auth_password_change' %}">{% trans "Change Pass" %}</a></li>
-                                    <li><a href="{% url 'edit_profile' user.profile.pk %}">{% trans "Edit" %}</a></li>
+                                    <li><a href="{% url 'auth_password_change' %}">{% trans "Cambiar Contraseña" %}</a></li>
+                                    <li><a href="{% url 'edit_profile' user.profile.pk %}">{% trans "Editar" %}</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'auth_logout' %}" title="Log Out">{% trans "Log Out " %}</a></li>
+                            <li><a href="{% url 'auth_logout' %}" title="Log Out">{% trans "Salir " %}</a></li>
                         {% else %}
-                            <li {% ifequal url "/accounts/login/" %}class="active"{% endifequal %}><a href="{% url 'auth_login' %}">{% trans "Login " %}</a></li>
-
+                            <li {% ifequal url "/accounts/login/" %}class="active"{% endifequal %}><a href="{% url 'auth_login' %}">{% trans "Entrar " %}</a></li>
                         {% endif %}
                     </ul>
                 </div>

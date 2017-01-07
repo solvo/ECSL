@@ -2,11 +2,15 @@
 {% load i18n %}
 
 {% block content %}
+    {{ estado }}
+    {% if form %}
+        {% load bootstrap3 %}
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
+        </form>
 
-{% load bootstrap3 %}
-    <form method="post">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
-    </form>
+
+    {% endif %}
 {% endblock %}

@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 from __future__ import absolute_import
 import os
-
+from django.utils.timezone import timedelta
+# import djcelery
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -42,6 +43,9 @@ INSTALLED_APPS = [
     'system',
     'bootstrap3',
     'xhtml2pdf',
+    # 'djcelery',
+    # 'djkombu',
+
 
 ]
 
@@ -100,7 +104,6 @@ DATABASES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -118,6 +121,17 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# djcelery.setup_loader()
+# BROKER_URL = 'django://'
+#
+# CELERYBEAT_SCHEDULE = {
+#     'envios_correo': {
+#         'task': 'ECSL.celery.envios_correo',
+#         'schedule': timedelta(seconds=30),
+#         # 'args': (15, 35)
+#     },
+# }
 
 
 # Internationalization
@@ -147,4 +161,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
 EMAIL_HOST = "localhost"
 EMAIL_PORT = "8025"
-

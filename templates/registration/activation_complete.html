@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load i18n %}
-
+{% load static %}
 {% block content %}
-<p>{% trans "Your account is now activated." %}</p>
-    <p>{% trans "Now you will be reedirct to the login's page to login" %}</p>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-    // Handler for .ready() called.
-        window.setTimeout(function () {
-            location.href = "/";
-        }, 5000);
-    });
-</script>
-
+<div class="text-center">
+        <h2>{% trans "La cuenta está ahora activada." %}</h2>
+        <h3 class="title-logout">{% trans "La página se redireccionará en:" %}</h3>
+        <div class="timeout">
+            <div class="timeout-border">
+                <div class="timeout-text">
+                  <span class="timeout-text-circle">5</span>
+                    <div class="c-pin"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/redirect.js' %}"></script>
 {% endblock %}

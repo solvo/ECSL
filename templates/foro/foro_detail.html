@@ -2,6 +2,7 @@
 {% load i18n %}
 
 {% block content %}
+
     <h1 class="page-header">{{ speech_details.title }}</h1>
 
     <div class="row-field">
@@ -33,6 +34,29 @@
         <strong class="row-item">Nivel del Autor:</strong>
         <p class="row-item">{{ speech_details.skill_level }}</p>
     </div>
+
+
+    {% if speech_details.user == user %}
+        <br>
+        <h2>Recursos</h2>
+        {% for archivo in speech_details.recursos.all %}
+            <div class="row-field">
+                <strong class="row-item">Archivo:</strong>
+                <p class="row-item">{{ archivo.nombre}}</p>
+            <a href="#" onclick="eliminarRecurso({{archivo.pk}})">eliminar</a>
+            </div>
+            <br>
+        {% empty %}
+            <p>No existen recursos para esta actividad</p>
+        {% endfor %}
+        <br>
+        <a href="{% url 'subir_recurso' speech_details.pk %}" class="btn btn-success">Subir recurso</a>
+   {% elif speech_details in user.profile.matriculatedspeechs.all %}
+   <a href="#" onclick="desmatricular({{ speech_details.pk }})">Desmatricularme</a>
+    {% else %}
+     <a href="#" onclick="matricular({{ speech_details.pk }})">Matricularme</a>
+    {% endif %}
+
 {% endblock %}
 
 {% block script %}
@@ -54,6 +78,17 @@
                 url: '/ajax/delete_matricula/',
                 type: "POST",
                 data: {'id_speech': id_speech},
+                success: function (response) {
+
+                    //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
+                }
+            });
+        }
+        function eliminarRecurso(id_recurso) {
+            $.ajax({
+                url: '/ajax/delete_recurso/',
+                type: "POST",
+                data: {'id_recurso': id_recurso},
                 success: function (response) {
 
                     //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar

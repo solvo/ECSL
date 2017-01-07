@@ -88,7 +88,21 @@
         </div>
     </div>
 
-    <h3>Charlas que le gustan</h3>
+    <h3>Actividades propuestas</h3>
+    {% for speech in user.speechs.all %}
+      <h4>Título: {{ speech.title }}</h4>
+        <h5>Estado:
+        {% if speech.published %}
+            Aprovada</h5>
+        {% else %}
+             Pendiente a revisión</h5>
+        {% endif %}
+        {% empty %}
+        <p>Ninguna</p>
+    {% endfor %}
+
+
+    <h3>Actividades que le gustan</h3>
 
     {% for speech in user.profile.likes.all %}
       {{ speech.title }}
@@ -97,7 +111,7 @@
         <p>Ninguna</p>
     {% endfor %}
 
-    <h3>Charlas que en las que esta registrado</h3>
+    <h3>Actividades en las que esta registrado</h3>
 
     {% for speech in user.profile.matriculatedspeechs.all %}
       {{ speech.title }}

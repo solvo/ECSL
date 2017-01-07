@@ -2,11 +2,9 @@
   font-family: "ECSL";
   src: url("../fonts/ecsl.woff") format("woff");
 }
-
-.main-container {
+.main-container{
   margin-top: 80px;
 }
-
 .login-page {
   .login-content {
     .login-title {
@@ -174,7 +172,7 @@
     font-weight: bold;
     text-align: center;
   }
-  .links-center-icon {
+   .links-center-icon {
     position: absolute;
     top: 70px;
     left: 0;
@@ -292,4 +290,7 @@
 
 .like-button,.matricula-link{
   cursor: pointer;
+  .agenda-day{
+    font-size: 40px;
+  }
 }
