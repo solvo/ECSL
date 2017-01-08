@@ -4725,7 +4725,9 @@ $.extend(Datepicker.prototype, {
 
 		dateStr = (dateStr != null ? dateStr : this._formatDate(inst));
 		if (inst.input) {
-			inst.input.val(dateStr);
+			var a = dateStr.split('/');
+			var modified_date = a[1] + '/' + a[0] + '/' + a[2];
+			inst.input.val(modified_date);
 		}
 		this._updateAlternate(inst);
 
