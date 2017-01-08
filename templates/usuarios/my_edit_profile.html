@@ -11,9 +11,9 @@
                     <form class="registry-form" method="post">
                         {% csrf_token %}
                         <ul id="myTab" class="nav nav-tabs" role="tablist">
-                          <li class="active"><a href="#simple_profile" role="tab" data-toggle="tab">Sobre mi...</a></li>
-                          <li><a href="#medical_profile" role="tab" data-toggle="tab">Salud</a></li>
-                          <li><a href="#in_out_profile" role="tab" data-toggle="tab">Entradas y Salidas</a></li>
+                          <li class="about active"><a href="#simple_profile" role="tab" data-toggle="tab">Sobre mi...</a></li>
+                          <li class="medical"><a href="#medical_profile" role="tab" data-toggle="tab">Salud</a></li>
+                          <li class="in_out"><a href="#in_out_profile" role="tab" data-toggle="tab">Entradas y Salidas</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
                             <div class="tab-pane fade in active" id="simple_profile">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
                         <div class="btn-edit-profile">
-                            <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                            <button type="submit" class="btn btn-primary btn-edit-submit">{% trans "Save" %}</button>
                         </div>
                     </form>
                 </div>
@@ -152,5 +152,5 @@
     });
 </script>
  <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/tab-activate.js' %}"></script>
+<script src="{% static 'js/validation.js' %}"></script>
 {% endblock %}
