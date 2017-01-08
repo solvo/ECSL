@@ -277,6 +277,19 @@
     color: #fff;
     vertical-align: middle;
   }
+  .agenda-hour {
+    background: rgba(138, 186, 228, 0.63);
+    margin: -8px -8px 5px;
+    padding: 4px 10px;
+    text-align: center;
+  }
+  .agenda-day{
+    font-size: 40px;
+  }
+}
+
+.like-button,.matricula-link{
+  cursor: pointer;
   .agenda-day{
     font-size: 40px;
   }

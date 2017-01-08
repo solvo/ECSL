@@ -18,25 +18,24 @@
                 </a>
                 <p>{{ foo.description|truncatewords:"30" }}</p>
                 <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
-
                 {% if foo.user == user %}
                 {% elif foo in user.profile.likes.all %}
-                    <a href="#" class="icon-animation" onclick="like({{ foo.pk }})">
+                    <a class="icon-animation like-button" data-pk="{{ foo.pk }}">
                         <span class="fa icon-like  fa-thumbs-up"></span>
                     </a>
                 {% else %}
-                    <a href="#" class="icon-animation" onclick="like({{ foo.pk }})">
+                    <a class="icon-animation like-button" data-pk="{{ foo.pk }}">
                         <span class="fa icon-like  fa-thumbs-o-up"></span>
                     </a>
                 {% endif %}
 
                 {% if foo.user == user %}
                 {% elif foo in user.profile.matriculatedspeechs.all %}
-                    <a href="#" class="matricula-link" onclick="desmatricular({{ foo.pk }})">
+                    <a class="matricula-link" data-pk="{{ foo.pk }}">
                         <span>Desmatricularme</span>
                     </a>
                 {% else %}
-                    <a href="#" class="matricula-link" onclick="matricular({{ foo.pk }})">
+                    <a class="matricula-link" data-pk="{{ foo.pk }}">
                         <span>Matricularme</span>
                     </a>
                 {% endif %}
@@ -54,60 +53,83 @@
 {% block script %}
     <script type="text/javascript">
 
-        function like(id_speech) {
-            if(!$('.icon-like').hasClass('fa-thumbs-up')) {
-                $('.icon-like').addClass('animation-left');
+        $('.like-button').click(function () {
+            var id_speech = $(this).attr('data-pk');
+            var element = $(this).find('.icon-like');
+            if (!$(element[0]).hasClass('fa-thumbs-up')) {
+                $(element[0]).addClass('animation-left');
                 $.ajax({
                     url: '/ajax/add_like/',
                     type: "POST",
                     data: {'id_speech': id_speech},
                     success: function (response) {
                         setTimeout(function () {
-                            $('.icon-like').removeClass('fa-thumbs-o-up');
-                            $('.icon-like').addClass('fa-thumbs-up');
-                            $('.icon-like').addClass('animation-right');
+                            $(element[0]).removeClass('fa-thumbs-o-up');
+                            $(element[0]).addClass('fa-thumbs-up');
+                            $(element[0]).addClass('animation-right');
+                        }, 500);
+                    }
+                });
+            } else {
+                $(element[0]).addClass('animation-left');
+                $.ajax({
+                    url: '/ajax/add_like/',
+                    type: "POST",
+                    data: {'id_speech': id_speech},
+                    success: function (response) {
+                        setTimeout(function () {
+                            $(element[0]).removeClass('fa-thumbs-up');
+                            $(element[0]).addClass('fa-thumbs-o-up');
+                            $(element[0]).addClass('animation-right');
                         }, 500);
                     }
                 });
             }
-        }
+        });
 
-        function matricular(id_speech) {
-            var texto = $('.matricula-link span').text();
+
+        $('.matricula-link').click(function () {
+            var id_speech = $(this).attr('data-pk');
+            var element = $(this).find('span');
+            matricular(element[0],id_speech);
+        });
+
+        function matricular(element, id_speech) {
+            var texto = $(element).text();
             if (texto == 'Matricularme') {
-                $('.matricula-link span').removeClass('animation-right');
-                $('.matricula-link span').addClass('animation-left');
+                $(element).removeClass('animation-right');
+                $(element).addClass('animation-left');
                 $.ajax({
                     url: '/ajax/enroll/',
                     type: "POST",
                     data: {'id_speech': id_speech},
                     success: function (response) {
                         setTimeout(function () {
-                            $('.matricula-link span').text(texto == 'Matricularme' ? 'Desmatricularme' : 'Matricularme');
-                            $('.matricula-link span').addClass('animation-right');
-                            $('.matricula-link span').removeClass('animation-left');
+                            $(element).text(texto == 'Matricularme' ? 'Desmatricularme' : 'Matricularme');
+                            $(element).addClass('animation-right');
+                            $(element).removeClass('animation-left');
                         }, 1000);
                     }
                 });
             } else {
-                desmatricular(id_speech);
+                desmatricular(element, id_speech);
             }
         }
-        function desmatricular(id_speech) {
-            var texto = $('.matricula-link span').text();
+        function desmatricular(element, id_speech) {
+            var texto = $(element).text();
             if (texto == 'Desmatricularme') {
-                $('.matricula-link span').removeClass('animation-right');
-                $('.matricula-link span').addClass('animation-left');
+                $(element).removeClass('animation-right');
+                $(element).addClass('animation-left');
                 $.ajax({
                     url: '/ajax/delete_enroll/',
                     type: "POST",
                     data: {'id_speech': id_speech},
                     success: function (response) {
                         setTimeout(function () {
-                            var texto = $('.matricula-link span').text();
-                            $('.matricula-link span').text(texto == 'Matricularme' ? 'Desmatricularme' : 'Matricularme');
-                            $('.matricula-link span').addClass('animation-right');
-                            $('.matricula-link span').removeClass('animation-left');
+                            var texto = $(element).text();
+                            $(element).text(texto == 'Matricularme' ? 'Desmatricularme' : 'Matricularme');
+                            $(element).addClass('animation-right');
+                            $(element).removeClass('animation-left');
                         }, 1000);
                     }
                 });
@@ -116,8 +138,5 @@
                 matricular(id_speech);
             }
         }
-
-
-
     </script>
 {% endblock %}

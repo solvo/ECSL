@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-
-
 {% block content %}
 
     <h1 class="page-header">{{ speech_details.title }}</h1>
@@ -37,6 +35,7 @@
         <p class="row-item">{{ speech_details.skill_level }}</p>
     </div>
 
+
     {% if speech_details.user == user %}
         <br>
         <h2>Recursos</h2>
@@ -57,7 +56,6 @@
     {% else %}
      <a href="#" onclick="matricular({{ speech_details.pk }})">Matricularme</a>
     {% endif %}
-
 
 {% endblock %}
 
