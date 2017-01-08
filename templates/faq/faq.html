@@ -2,13 +2,33 @@
 {% load i18n %}
 
 {% block content %}
-
-{% for faq in faq_list %}
-    {{ faq.answer }}
-    {{ faq.question }}
-    {% empty %}
-    <h1>No hay sistema elaborado</h1>
-{% endfor %}
-
-
+    <div class="row faq">
+    <h1 class="page-header">Preguntas y Respuestas</h1>
+        {% if faq_list %}
+            <div class="panel-group" id="accordion">
+                {% for faq in faq_list %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion"
+                                   href="#collapse{{ forloop.counter }}">
+                                    {{ faq.question }}
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                {{ faq.answer }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="col-sm-12">
+                <h1>No existen preguntas.</h1>
+                <br>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
