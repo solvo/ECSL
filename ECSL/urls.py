@@ -37,7 +37,7 @@ user_patterns = [
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
     url(r'^accounts/edit_profile/(?P<pk>[0-9]+)$', ProfileUpdateView.as_view(), name='edit_profile'),
-
+    url(r'^accounts/completar_registro/(?P<next>[\S]*)$', completarRegistro, name='completar_registro'),
 ]
 
 forum_patterns = [
@@ -73,9 +73,16 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + 
     url(r'^faq/$', faq.as_view(), name='faq'),
     url(r'^becas/$', becas.as_view(), name='becas'),
 
-    url(r'^tshirt/(?P<pk>[0-9]+)/encargar$', becas.as_view(), name='encargar_camiseta'),
-    url(r'^activity/(?P<pk>[0-9]+)/nuevo_recurso$', subirRecurso.as_view(), name='subir_recurso'),
+    url(r'^tshirt/(?P<style_id>[0-9]+)/encargar/$', createCamiseta.as_view(), name='encargar_camiseta'),
+    url(r'^carrito/$', Carrito.as_view(), name='carrito'),
+    url(r'^activity/(?P<speech_id>[0-9]+)/nuevo_recurso$', subirRecurso.as_view(), name='subir_recurso'),
+    url(r'^ajax/delete_pedido/', deletePedido, name='ajax_delete_pedido'),
+
     url(r'^ajax/delete_recurso/', deleteRecurso, name='ajax_delete_recurso'),
+    url(r'^carrito/pagar_pedido/(?P<pedido_id>[0-9]+)/$', pagarPedido, name='pagar_pedido'),
+    url(r'^carrito/editar_pedido/(?P<pk>[0-9]+)/$', editarPedido.as_view(), name='editar_pedido'),
+    url(r'^carrito/pagar_todos/$', pagarTodo, name='pagar_todo'),
+    url(r'^ajax/camisetas_pendientes/$', camisetas_pendientes, name='camisetas_pendientes'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

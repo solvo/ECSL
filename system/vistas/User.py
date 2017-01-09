@@ -12,7 +12,7 @@ from django.core.mail import EmailMessage
 from xhtml2pdf import pisa  # import python module
 from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
-
+from django.contrib import messages
 
 @method_decorator(login_required, name='dispatch')
 class view_profile(DetailView):
@@ -93,3 +93,13 @@ def testing(request):
                   + ' por favor no falte atentamente el Administrador', 'chicomtz.sr@gmail.com',
                   [aa.user.email, ])
     return render(request, 'testing.html')
+
+def completarRegistro(request, next):
+    perfil = request.user.profile
+    if perfil.alimentary_restriction and perfil.entry_country and perfil.entry_port and perfil.entry_country_date and perfil.health_consideration and perfil.identification and perfil.letter and perfil.out_country and perfil.out_country_date and perfil.out_port:
+        if next == '':
+            return redirect('index')
+        return redirect(next)
+    else:
+        messages.add_message(request, messages.WARNING, 'Por favor complete su registro')
+        return redirect('edit_profile', perfil.pk)

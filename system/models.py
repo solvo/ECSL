@@ -51,6 +51,7 @@ class Tshirt(Model):
     amount = PositiveIntegerField(verbose_name=_('Cantidad'))
     last_update = DateField(verbose_name=_('Última Actualización'))
     size = CharField(max_length=15, verbose_name=_('Talla'))
+    pagada = BooleanField(default=False)
 
     def __str__(self):
         return self.style.name + ' ' + self.style.description
@@ -121,6 +122,10 @@ class Speech(Model):
 
     def __str__(self):
         return self.speech_type.name + ' de ' + self.topic.name
+
+    def cantidad_de_likes(self):
+        likes = self.profile_speech_likes.all()
+        return likes.count()
 
 
 class Hotel(Model):
@@ -216,6 +221,17 @@ class Profile(Model):
     def __str__(self):
         return self.user.username
 
+    def camisetas_sin_pagar(self):
+        camisetas = Tshirt.objects.filter(user=self.user, pagada=False)
+        return camisetas.count()
+
+
+class Matriculado(Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    speech = models.ForeignKey(Speech, on_delete=models.CASCADE)
+    # para el tema de los 10 min de antelacion
+    avisado = models.BooleanField(default=False)
+
 
 class Patrocinadores(Model):
     name = CharField(max_length=100, verbose_name=_('Nombre'))
@@ -232,6 +248,8 @@ class SpeechResource(Model):
         nombre = direccion.split('/').pop()
         return nombre
 
+    def get_absolute_url(self):
+        return '/activity/' + self.speech.topic.slug + "/" + self.speech.slug
 
 from djkombu.managers import QueueManager, MessageManager
 

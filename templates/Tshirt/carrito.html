@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+    <h1 class="page-header">
+        Encargos
+    </h1>
+
+    {% for encargo in camisetas %}
+        <h2> Estilo:{{ encargo.style.name }}</h2>
+        <h3>Talla: {{ encargo.size}}</h3>
+        <h3>Cantidad: {{ encargo.amount }}</h3>
+        <a class="btn btn-success" href="{% url 'pagar_pedido' encargo.pk %}">Pagar</a>
+        <a class="btn btn-info" href="{% url 'editar_pedido' encargo.pk %}">Editar</a>
+        <a class="btn btn-danger" href="#" onclick="eliminarPedido({{encargo.pk}})">Eliminar</a>
+    {% empty %}
+    <h3>No tiene ningun encargo</h3>
+    {% endfor %}
+
+    <br>
+    <br>
+    <br>
+    {% if camisetas %}
+        <a class="btn btn-success" href="{% url 'pagar_todo' %}"> Pagar Todo</a>
+    {% endif %}
+
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/tshirt.js' %}"></script>
+    <script type="text/javascript">
+    function eliminarPedido(id_pedido) {
+            $.ajax({
+                url: '/ajax/delete_pedido/',
+                type: "POST",
+                data: {'id_pedido': id_pedido},
+                success: function (response) {
+                    $(document).reload;
+                    //Esto les toca a los frontend ver que van a hacer cuando se elimine el pedido Arreglar
+                }
+            });
+        }
+    </script>
+
+{% endblock %}
