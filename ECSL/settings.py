@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'system',
     'bootstrap3',
     'xhtml2pdf',
-    'djcelery',
-    'djkombu',
+    # 'djcelery',
+    # 'djkombu',
 
 
 ]
@@ -122,16 +122,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-djcelery.setup_loader()
-BROKER_URL = 'django://'
-
-CELERYBEAT_SCHEDULE = {
-    'envios_correo': {
-        'task': 'ECSL.celery.envios_correo',
-        'schedule': timedelta(seconds=30),
-        # 'args': (15, 35)
-    },
-}
+# djcelery.setup_loader()
+# BROKER_URL = 'django://'
+#
+# CELERYBEAT_SCHEDULE = {
+#     'envios_correo': {
+#         'task': 'ECSL.celery.envios_correo',
+#         'schedule': timedelta(seconds=30),
+#         # 'args': (15, 35)
+#     },
+# }
 
 
 # Internationalization

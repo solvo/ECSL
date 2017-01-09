@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponseBadRequest
 
+
 @method_decorator(login_required, name='dispatch')
 class tshirt_list(ListView):
     template_name = 'Tshirt/Tshirt.html'

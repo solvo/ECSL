@@ -177,7 +177,7 @@ class DateState(Model):
     finish_date = models.DateField(verbose_name=_("Fecha de Conclusión"))
 
     def __str__(self):
-        return 'Período'
+        return 'Tiempo Registro'
 
 
 class Profile(Model):
@@ -251,28 +251,28 @@ class SpeechResource(Model):
     def get_absolute_url(self):
         return '/activity/' + self.speech.topic.slug + "/" + self.speech.slug
 
-from djkombu.managers import QueueManager, MessageManager
-
-
-class djkombu_Queue(models.Model):
-    name = models.CharField(_("name"), max_length=200, unique=True)
-
-    objects = QueueManager()
-
-    class Meta:
-        verbose_name = _("queue")
-        verbose_name_plural = _("queues")
-
-
-class djkombu_Message(models.Model):
-    visible = models.BooleanField(default=True, db_index=True)
-    sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
-                auto_now_add=True)
-    payload = models.TextField(_("payload"), null=False)
-    queue = models.ForeignKey(djkombu_Queue, related_name="messages")
-
-    objects = MessageManager()
-
-    class Meta:
-        verbose_name = _("message")
-        verbose_name_plural = _("messages")
+# from djkombu.managers import QueueManager, MessageManager
+#
+#
+# class djkombu_Queue(models.Model):
+#     name = models.CharField(_("name"), max_length=200, unique=True)
+#
+#     objects = QueueManager()
+#
+#     class Meta:
+#         verbose_name = _("queue")
+#         verbose_name_plural = _("queues")
+#
+#
+# class djkombu_Message(models.Model):
+#     visible = models.BooleanField(default=True, db_index=True)
+#     sent_at = models.DateTimeField(null=True, blank=True, db_index=True,
+#                 auto_now_add=True)
+#     payload = models.TextField(_("payload"), null=False)
+#     queue = models.ForeignKey(djkombu_Queue, related_name="messages")
+#
+#     objects = MessageManager()
+#
+#     class Meta:
+#         verbose_name = _("message")
+#         verbose_name_plural = _("messages")

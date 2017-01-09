@@ -14,6 +14,7 @@ from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
 from django.contrib import messages
 
+
 @method_decorator(login_required, name='dispatch')
 class view_profile(DetailView):
     template_name = 'usuarios/view_profile.html'
