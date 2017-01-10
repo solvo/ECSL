@@ -303,7 +303,7 @@
       color: #fff;
       background-color: #38b94e;
       border-color: #38b94e;
-      a{
+      a {
         text-decoration: none !important;
       }
     }
@@ -311,4 +311,10 @@
       border-top-color: #38b94e !important;
     }
   }
+}
+
+.card-activity {
+  background: rgba(221, 221, 221, 0.6);
+  margin-top: 20px;
+  padding: 20px;
 }
