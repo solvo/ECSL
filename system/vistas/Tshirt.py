@@ -21,17 +21,17 @@ class tshirt_list(ListView):
         return context
 
 
-class createCamiseta(CreateView, LoginRequiredMixin):
-    template_name = 'Tshirt/crear_camiseta.html'
-    model = Tshirt
-    fields = ['size', 'amount', ]
-    success_url = '/tshirt'
-
-    def form_valid(self, form):
-        form.instance.style_id = self.kwargs['style_id']
-        form.instance.user = self.request.user
-        form.instance.last_update = now()
-        return super(createCamiseta, self).form_valid(form)
+# class createCamiseta(CreateView, LoginRequiredMixin):
+#     template_name = 'Tshirt/crear_camiseta.html'
+#     model = Tshirt
+#     fields = ['size', 'amount', ]
+#     success_url = '/tshirt'
+#
+#     def form_valid(self, form):
+#         form.instance.style_id = self.kwargs['style_id']
+#         form.instance.user = self.request.user
+#         form.instance.last_update = now()
+#         return super(createCamiseta, self).form_valid(form)
 
 
 class Carrito(ListView, LoginRequiredMixin):
