@@ -10,9 +10,9 @@ from django.http import Http404
 
 
 def agenda(request):
+
     dia20 = Speech.objects.filter(published=True).filter(pepe__day=20)
     dia21 = Speech.objects.filter(published=True).filter(pepe__day=21)
-    dicc = {}
     lista = []
     if dia20.count() < dia21.count():
         mayor = dia21.count()
@@ -25,14 +25,10 @@ def agenda(request):
 
         if ii < dia20.count():
             var20 = dia20[ii].title
-        else:
-
-            var20 = ''
 
         if ii < dia21.count():
             var21 = dia21[ii].title
-        else:
-            var21 = ''
+
         dicc = {'dia20': var20, 'dia21': var21}
         lista.append(dicc)
 

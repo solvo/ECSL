@@ -31,6 +31,7 @@ class foro_topic(ListView):
     def get_context_data(self, **kwargs):
         context = super(foro_topic, self).get_context_data(**kwargs)
         context['topic'] = Topic.objects.get(slug=self.editor)
+
         return context
 
 

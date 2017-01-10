@@ -12,7 +12,8 @@ def profileAddLike(request):
     idSpeech = request.POST['id_speech']
     speech = get_object_or_404(Speech, pk=idSpeech)
     profile.likes.add(speech)
-    return JsonResponse({'messages': "Me gusta confirmado"})
+
+    return JsonResponse({'messages': profile.likes.count()})
 
 
 @login_required()
