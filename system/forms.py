@@ -4,6 +4,8 @@ from functools import partial
 from system.models import *
 
 #formulario de creacion de usuarios  quitar al final
+
+
 class ProfileForm(RegistrationForm):
     name = forms.CharField(label='Name', required=True, )
     last_name = forms.CharField(label='Last name', required=True)
@@ -26,3 +28,9 @@ class InsertSpeech(forms.ModelForm):
         model = Speech
         fields = ['title', 'description', 'notes', 'speaker_information','audience', 'skill_level',
                   'speech_type', 'topic']
+
+
+class TshirtForm(forms.ModelForm):
+    class Meta:
+        model = Tshirt
+        fields = ['size', 'amount']
