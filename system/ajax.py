@@ -13,7 +13,7 @@ def profileAddLike(request):
     speech = get_object_or_404(Speech, pk=idSpeech)
     profile.likes.add(speech)
 
-    return JsonResponse({'messages': speech.cantidad_de_likes()})
+    return JsonResponse({'messages': speech.profile_speech_likes.count()})
 
 
 @login_required()
