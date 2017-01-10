@@ -116,6 +116,17 @@
                 matricular(id_speech);
             }
         }
+        function eliminarRecurso(id_recurso) {
+            $.ajax({
+                url: '/ajax/delete_recurso/',
+                type: "POST",
+                data: {'id_recurso': id_recurso},
+                success: function (response) {
+
+                    //Esto les toca a los frontend ver que van a hacer cuando se matricule el hombre Arreglar
+                }
+            });
+        }
 
     </script>
 

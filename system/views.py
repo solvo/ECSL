@@ -2,6 +2,7 @@
 from system.forms import *
 from django.shortcuts import render
 from django.views.generic import *
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 
 
 def index(request):
@@ -11,5 +12,9 @@ def index(request):
 
 class subirRecurso(CreateView):
     model = SpeechResource
-    fields = ('recurso', 'speech', )
+    fields = ('recurso', )
     template_name = 'foro/subir_recurso.html'
+
+    def form_valid(self, form):
+        form.instance.speech = get_object_or_404(Speech, pk= self.kwargs['speech_id'])
+        return super(subirRecurso, self).form_valid(form)

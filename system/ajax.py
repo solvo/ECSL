@@ -12,7 +12,6 @@ def profileAddLike(request):
     idSpeech = request.POST['id_speech']
     speech = get_object_or_404(Speech, pk=idSpeech)
     profile.likes.add(speech)
-    print(Profile.objects.filter(likes=idSpeech).count())
     return JsonResponse({'messages': Profile.objects.filter(likes=idSpeech).count()})
 
 
