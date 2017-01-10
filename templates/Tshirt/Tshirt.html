@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+{% load bootstrap3 %}
+
 {% block content %}
 
     <h1 class="page-header">
@@ -8,17 +10,35 @@
     </h1>
 
     <div class="row">
-        {{ form.as_p }}
+
+
+    <div class="modal fade" id="modalCart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Pedidos</h4>
+        </div>
+        <div class="modal-body">
+               {% csrf_token %}
+        {% bootstrap_form form%}
+        </div>
+        <div class="modal-footer">
+          <a class="btn btn-success cd-add-to-cart">Encargar</a>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
         {% for foo in camisetas %}
             <div class="col-sm-4">
-                <div class="product">
+                <div class="product-item">
                     <div class="make3D">
                         <div class="product-front">
                             <div class="shadow"></div>
                             <img src="{{ foo.img1.url }}" class="img-responsive">
                             <div class="image_overlay"></div>
                             <div class="view_gallery">Ver más</div>
-                            <div class="add_to_cart">Encargar</div>
+                            <a data-toggle="modal" href="#modalCart" class="add_to_cart" data-idcart="{{ foo.pk }}" data-price="{{ foo.price }}" data-shirtname="{{ foo.name }}">Encargar</a>
                             <div class="stats">
                                 <div class="stats-container">
                                     <span class="product_price">${{ foo.price }}</span>
@@ -65,7 +85,6 @@
 
                 </div>
 
-            <a class="btn btn-success " style="margin-top: 20px;" href="{% url 'encargar_camiseta' foo.pk %}">Encargar</a>
             </div>
 
         {% endfor %}
