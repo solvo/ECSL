@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from registration.forms import *
-from functools import partial
 from system.models import *
 
 #formulario de creacion de usuarios  quitar al final
@@ -34,3 +33,15 @@ class TshirtForm(forms.ModelForm):
     class Meta:
         model = Tshirt
         fields = ['size', 'amount']
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name', 'last_name', 'gender', 'born_date', 'nationality', 'institution', 'identification',
+                  'alimentary_restriction', 'health_consideration', 'snore', 'letter', 'entry_country', 'out_country',
+                  'entry_port', 'out_port', 'entry_country_date', 'out_country_date', ]
+        widgets = {
+            'entry_country_date': forms.TextInput(attrs={'class': 'datepicker'}),
+            'out_country_date': forms.TextInput(attrs={'class': 'datepicker'}),
+        }
