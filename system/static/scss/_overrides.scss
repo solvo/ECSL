@@ -92,7 +92,7 @@ body {
   background-color: #ffffff;
 }
 
-.btn-primary:focus {
+.btn-primary:focus, .btn-primary:active:focus, .btn-primary:active {
     color: #fff;
     background-color: $brand_purple;
     border-color: $brand_purple
