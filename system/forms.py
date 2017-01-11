@@ -44,4 +44,5 @@ class EditProfileForm(forms.ModelForm):
         widgets = {
             'entry_country_date': forms.TextInput(attrs={'class': 'datepicker'}),
             'out_country_date': forms.TextInput(attrs={'class': 'datepicker'}),
+            'born_date': forms.TextInput(attrs={'class': 'datepicker'}),
         }
