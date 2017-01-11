@@ -9,6 +9,27 @@ from system.forms import *
 from django.http import Http404
 
 
-class agenda(ListView):
-    template_name = 'agenda/agenda.html'
-    queryset = Speech.objects.filter(published=True).order_by('-date_start')
+def agenda(request):
+    day20 = Speech.objects.filter(published=True).filter(pepe__day=20).order_by('-pepe')
+    day21 = Speech.objects.filter(published=True).filter(pepe__day=21).order_by('-pepe')
+    dicc = {}
+
+    if day20.count() < day21.count():
+        mayor = day21.count()
+    else:
+        mayor = day20.count()
+
+    for ii in range(0, mayor):
+
+        if ii < day20.count():
+            dicc = {'v20': day20[ii].title, }
+
+        else:
+            dicc = {'v20': '', }
+        if ii < day21.count():
+            dicc = {'v21': day21[ii].title, }
+
+        else:
+            dicc = {'v21': '', }
+
+    return render(request, 'agenda/agenda.html')

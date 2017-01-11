@@ -37,7 +37,7 @@ user_patterns = [
     url(r'^accounts/view_profile/(?P<pk>[\w-]+)/$', view_profile.as_view(), name='View_Profile'),
     url(r'^accounts/new_profile/$', createProfile.as_view(), name='New_Profile'),
     url(r'^accounts/edit_profile/(?P<pk>[0-9]+)$', ProfileUpdateView.as_view(), name='edit_profile'),
-
+    url(r'^accounts/completar_registro/(?P<next>[\S]*)$', completarRegistro, name='completar_registro'),
 ]
 
 forum_patterns = [
@@ -47,35 +47,46 @@ forum_patterns = [
     url(r'^activity/(?P<slug>[\w-]+)/$', foro_topic.as_view(), name='Forum_Topic'),
     url(r'^activity/(?P<slug>[\w-]+)/(?P<slug1>[\w-]+)/$', foro_detail.as_view(), name='Forum_Detail'),
     url(r'^activity/filter/type/(?P<slug>[\w-]+)/$', foro_types.as_view(), name='Forum_Types'),
+    url(r'^activity/(?P<speech_id>[0-9]+)/nuevo_recurso$', subirRecurso.as_view(), name='subir_recurso'),
+
 ]
 
 ajax_patterns = [
-        # Esto es lo de matricularse ------------
+
+        # Esto es lo de los sistemas por ajax
     url(r'^ajax/enroll/', matricularse, name='ajax_matricula'),
     url(r'^ajax/delete_enroll/', deleteMatricularse, name='ajax_delete_matricula'),
-    # Esto es lo de dar like -------------------------
     url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
+    url(r'^ajax/camisetas_pendientes/$', camisetas_pendientes, name='camisetas_pendientes'),
+    url(r'^ajax/delete_pedido/', deletePedido, name='ajax_delete_pedido'),
+    url(r'^ajax/delete_recurso/', deleteRecurso, name='ajax_delete_recurso'),
+
+]
+
+tshirt_patterns = [
+        # Esto es lo de las camisetas
+    url(r'^carrito/pagar_pedido/(?P<pedido_id>[0-9]+)/$', pagarPedido, name='pagar_pedido'),
+    url(r'^carrito/editar_pedido/(?P<pk>[0-9]+)/$', editarPedido.as_view(), name='editar_pedido'),
+    url(r'^carrito/pagar_todos/$', pagarTodo, name='pagar_todo'),
+    url(r'^carrito/$', Carrito.as_view(), name='carrito'),
+    url(r'^tshirt/(?P<style_id>[0-9]+)/encargar/$', createCamiseta.as_view(), name='encargar_camiseta'),
+    url(r'^tshirt/$', tshirt_list.as_view(), name='tshirt'),
+
 ]
 
 
-urlpatterns = user_patterns + extra_patterns + forum_patterns + ajax_patterns + [
+urlpatterns = user_patterns + extra_patterns + forum_patterns + tshirt_patterns + ajax_patterns + [
 
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
 
     url(r'^media/$', testing, name='Media'), #esto es pa probar quitar al final
+    url(r'^calender/$', agenda, name='Agenda'),
 
-
-    url(r'^calender/$', agenda.as_view(), name='Agenda'),
-
-    url(r'^tshirt/$', tshirt_list.as_view(), name='tshirt'),
     url(r'^faq/$', faq.as_view(), name='faq'),
     url(r'^becas/$', becas.as_view(), name='becas'),
 
-    url(r'^tshirt/(?P<pk>[0-9]+)/encargar$', becas.as_view(), name='encargar_camiseta'),
-    url(r'^activity/(?P<pk>[0-9]+)/nuevo_recurso$', subirRecurso.as_view(), name='subir_recurso'),
-    url(r'^ajax/delete_recurso/', deleteRecurso, name='ajax_delete_recurso'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

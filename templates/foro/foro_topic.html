@@ -18,6 +18,8 @@
                 </a>
                 <p>{{ foo.description|truncatewords:"30" }}</p>
                 <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
+                <p>{{ foo.cantidad_de_likes }} Likes</p>
+
                 {% if foo.user == user %}
                 {% elif foo in user.profile.likes.all %}
                     <a class="icon-animation like-button" data-pk="{{ foo.pk }}">

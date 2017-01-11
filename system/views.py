@@ -8,6 +8,7 @@ def index(request):
 
     return render(request, 'index.html', {'types': SpeechType.objects.all()})
 
+
 class subirRecurso(CreateView):
     model = SpeechResource
     fields = ('recurso', 'speech', )
