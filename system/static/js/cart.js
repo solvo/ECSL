@@ -27,7 +27,7 @@ jQuery(document).ready(function ($) {
                     type: "POST",
                     data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
                     success: function (response) {
-                        response['id_camiseta']
+
                         addToCart(datacart);
                         }});
 
@@ -57,13 +57,7 @@ jQuery(document).ready(function ($) {
         //delete an item from the cart
         cartList.on('click', '.delete-item', function (event) {
             event.preventDefault();
-            $.ajax({
-                    url: '/ajax/delete_pedido/',
-                    type: "POST",
-                    data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_pedido': datacart['idshirt']},
-                    success: function (response) {
-                        removeProduct($(event.target).parents('.product'));
-                        }});
+
 
         });
 

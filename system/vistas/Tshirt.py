@@ -90,10 +90,10 @@ def agregar_pedido(request):
     talla = request.POST['talla']
 
     id_sty = request.POST['id_style']
-    print id_sty
+
     obj = TshirtStyle.objects.get(pk=id_sty)
     Tshirt.objects.create(user=user, style=obj, amount=amount, last_update=now(), size=talla)
-    return JsonResponse({'id_camiseta': Tshirt.objects.get(user=user).pk})
+    return JsonResponse({'id_camiseta': Tshirt.objects.last().pk})
 
 
 # para poder saber las camisetas sin pagar mediante ajax pa los fronten cuando eliminen un pedido
