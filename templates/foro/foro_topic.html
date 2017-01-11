@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
-
+{% load static %}
 
 {% block content %}
 
@@ -10,37 +10,43 @@
         <a class="btn btn-primary pull-right" href="{% url 'Insert_Speech' topic.slug %}">Insertar Actividad</a>
     </h1>
 
-    <div class="row">
+    <div class="row foro-topic">
         {% for foo in topic_list %}
-            <div class="col-sm-4">
-                <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">
-                    <h3>{{ foo.title }}</h3>
-                </a>
-                <p>{{ foo.description|truncatewords:"30" }}</p>
-                <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
-                <p><div class="likes activity-{{ foo.pk }}"><span>{{ foo.cantidad_de_likes }}</span></div> Likes</p>
+            <div class="col-sm-3">
+                <div class="card">
+                    <div class="header">
+                        <a href="{% url 'Forum_Detail' foo.topic.slug foo.slug %}">
+                            <h3>{{ foo.title }}</h3>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <p>{{ foo.description|truncatewords:"30" }}</p>
+                        <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
+                        <p><div class="likes activity-{{ foo.pk }}"><span>{{ foo.cantidad_de_likes }} Likes</span></div></p>
 
-                {% if foo.user == user %}
-                {% elif foo in user.profile.likes.all %}
-                    <a class="icon-animation like-button" data-pk="{{ foo.pk }}">
-                        <span class="fa icon-like  fa-thumbs-up"></span>
-                    </a>
-                {% else %}
-                    <a class="icon-animation like-button" data-pk="{{ foo.pk }}">
-                        <span class="fa icon-like  fa-thumbs-o-up"></span>
-                    </a>
-                {% endif %}
+                        {% if foo.user == user %}
+                        {% elif foo in user.profile.likes.all %}
+                            <a class="icon-animation like-button" data-pk="{{ foo.pk }}">
+                                <span class="fa icon-like  fa-thumbs-up"></span>
+                            </a>
+                        {% else %}
+                            <a class="icon-animation like-button" data-pk="{{ foo.pk }}">
+                                <span class="fa icon-like  fa-thumbs-o-up"></span>
+                            </a>
+                        {% endif %}
 
-                {% if foo.user == user %}
-                {% elif foo in user.profile.matriculatedspeechs.all %}
-                    <a class="matricula-link" data-pk="{{ foo.pk }}">
-                        <span>Desmatricularme</span>
-                    </a>
-                {% else %}
-                    <a class="matricula-link" data-pk="{{ foo.pk }}">
-                        <span>Matricularme</span>
-                    </a>
-                {% endif %}
+                        {% if foo.user == user %}
+                        {% elif foo in user.profile.matriculatedspeechs.all %}
+                            <a class="matricula-link" data-pk="{{ foo.pk }}">
+                                <span>Desmatricularme</span>
+                            </a>
+                        {% else %}
+                            <a class="matricula-link" data-pk="{{ foo.pk }}">
+                                <span>Matricularme</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         {% endfor %}
         {% if not topic_list %}
@@ -133,4 +139,5 @@
             }
         }
     </script>
+    <script src="{% static 'js/same-height.js' %}"></script>
 {% endblock %}

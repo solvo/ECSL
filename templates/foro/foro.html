@@ -9,14 +9,20 @@
             {% trans "Temas" %}
         </h1>
     {% endif %}
-    <div class="row">
+    <div class="row foro">
         {% for  foo in object_list %}
             <div class="col-sm-4">
-                <a href="{% url 'Forum_Topic' foo.slug %}">
-                    <h3>{{ foo.name }}</h3>
-                </a>
-                <p>{{ foo.description|truncatewords:"30" }}</p>
-                <p class="date-activity"><span class="fa fa-calendar"></span>{{ foo.date_created }}</p>
+                <div class="card">
+                    <div class="header">
+                        <a href="{% url 'Forum_Topic' foo.slug %}">
+                            <h3>{{ foo.name }}</h3>
+                        </a>
+                    </div>
+                    <div class="content">
+                        <p>{{ foo.description|truncatewords:"30" }}</p>
+                        <p class="date-activity"><span class="fa fa-calendar"></span>{{ foo.date_created }}</p>
+                    </div>
+                </div>
             </div>
         {% endfor %}
         {% if not object_list %}
