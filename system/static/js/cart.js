@@ -64,7 +64,7 @@
         });
 
         //update item quantity
-        cartList.on('keyup', 'input', function (event) {
+        cartList.on('change', 'input', function (event) {
             quickUpdateCart();
         });
 
