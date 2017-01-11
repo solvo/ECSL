@@ -12,64 +12,26 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>
-                <p class="agenda-hour">9:00am - 10:30am</p>
-                Tratamiento de base de datos de grandes volumenes de datos.
-                <p class="date-activity">
-                    <span class="fa fa-user"></span>Alberto Ceballo Sanchez
-                    <span class="type-speech">Taller</span>
-                </p>
-            </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <p class="agenda-hour">9:00am - 10:30am</p>
-                Seguridad de sistemas de gestion documental.
-                <p class="date-activity">
-                    <span class="fa fa-user"></span>Alejandro Rodriguez Toledo
-                    <span class="type-speech">Charla</span>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="agenda-hour">11:00am - 12:30pm</p>
-                Seguridad de sistemas de gestion documental.
-                <p class="date-activity">
-                    <span class="fa fa-user"></span>Alejandro Rodriguez Toledo
-                    <span class="type-speech">Charla</span>
-                </p>
-            </td>
-            <td>
-                <p class="agenda-hour">9:00am - 10:30am</p>
-                Tratamiento de base de datos de grandes volumenes de datos.
-                <p class="date-activity">
-                    <span class="fa fa-user"></span>Alberto Ceballo Sanchez
-                    <span class="type-speech">Taller</span>
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="agenda-hour">9:00am - 10:30am</p>
-                Seguridad de sistemas de gestion documental.
-                <p class="date-activity">
-                    <span class="fa fa-user"></span>Alejandro Rodriguez Toledo
-                    <span class="type-speech">Charla</span>
-                </p>
-            </td>
-            <td>
-                <p class="agenda-hour">9:00am - 10:30am</p>
-                Tratamiento de base de datos de grandes volumenes de datos.
-                <p class="date-activity">
-                    <span class="fa fa-user"></span>Alberto Ceballo Sanchez
-                    <span class="type-speech">Taller</span>
-                </p>
-            </td>
-        </tr>
+        {% for foo in lista %}
+            <tr>
+                <td>
+                    <p class="agenda-hour">{{ foo.dia20.pepe }}</p>
+                    {{ foo.dia20.title }}
+                    <p class="date-activity">
+                        <span class="fa fa-user"></span>{{ foo.dia20.user.first_name }}
+                        <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
+                    </p>
+                </td>
+                <td>
+                    <p class="agenda-hour">{{ foo.dia21.pepe }}</p>
+                    {{ foo.dia21.title }}
+                    <p class="date-activity">
+                        <span class="fa fa-user"></span>{{ foo.dia21.user.first_name }}
+                        <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
+                    </p>
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}
