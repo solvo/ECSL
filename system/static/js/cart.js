@@ -1,4 +1,3 @@
-jQuery(document).ready(function ($) {
     var cartWrapper = $('.cd-cart-container');
     //product id - you don't need a counter in your real project but you can use your real product id
     var productId = 0;
@@ -118,12 +117,10 @@ jQuery(document).ready(function ($) {
         //you should insert an item with the selected product info
         //replace productId, productName, price and url with your real product info
         productId = productId + 1;
-        var productAdded = $('<li class="product"><div class="product-details"><h3><a href="#0">' + datacart['name'] + '</a></h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="'+idcamiseta+'">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number"></span></div></div></div></li>');
+        var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="'+idcamiseta+'">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number"></span></div></div></div></li>');
         cartList.prepend(productAdded);
-        setTimeout(function () {
             $('#cd-product-' + productId).val(datacart['amount']);
             quickUpdateCart();
-        }, 100);
 
     }
 
@@ -164,4 +161,3 @@ jQuery(document).ready(function ($) {
     function updateCartTotal(price, bool) {
         bool ? cartTotal.text((Number(cartTotal.text()) + Number(price)).toFixed(2)) : cartTotal.text((Number(cartTotal.text()) - Number(price)).toFixed(2));
     }
-});
