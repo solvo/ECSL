@@ -464,6 +464,7 @@ Main Components
   font-size: 1.4rem;
   height: 1.6em;
   line-height: 1.6em;
+  display: inline-block;
 }
 
 .cd-cart .actions::after {
@@ -473,7 +474,7 @@ Main Components
 }
 
 .cd-cart .delete-item, .cd-cart .quantity {
-  float: left;
+  display: inline-block;
   color: #808b97;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
