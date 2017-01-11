@@ -273,6 +273,31 @@
   }
 }
 
+.matricula-link-detail {
+  cursor: pointer;
+  display: inline-flex;;
+  overflow: hidden;
+  border-left: 1px solid;
+  text-decoration: none !important;
+  top: -8px;
+  padding-left: 5px;
+  margin-left: 5px;
+  span {
+    transition: .9s;
+    display: inline-block;
+    &.animation-left {
+      -webkit-transform: translate3d(-180px, 0, 0);
+      -moz-transform: translate3d(-180px, 0, 0);
+      transform: translate3d(-180px, 0, 0);
+    }
+    &.animation-right {
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}
+
 .table {
   .cell-blue {
     background: $brand_blue;

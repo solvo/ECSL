@@ -8,6 +8,7 @@ admin.site.register(DateState)
 admin.site.register(Room)
 admin.site.register(Hotel)
 admin.site.register(QuestionCategory)
+admin.site.register(SpeechResource)
 
 
 @admin.register(Speech)
