@@ -2,8 +2,6 @@
 from registration.forms import *
 from system.models import *
 
-#formulario de creacion de usuarios  quitar al final
-
 
 class ProfileForm(RegistrationForm):
     name = forms.CharField(label='Name', required=True, )
