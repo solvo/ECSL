@@ -20,7 +20,6 @@ jQuery(document).ready(function ($) {
         addToCartBtn.on('click', function (event) {
             event.preventDefault();
             datacart['amount'] = $('#id_amount').val();
-
             datacart['talla'] = $('#id_size').val();
 
             $.ajax({
