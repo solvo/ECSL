@@ -10,14 +10,14 @@
   border-color: $brand_purple;
 }
 
-body{
-  font: normal normal normal 18px/1.4em ECSL,sans-serif;
+body {
+  font: normal normal normal 18px/1.4em ECSL, sans-serif;
 }
 
 .dropdown {
   &.open {
     .dropdown-menu {
-      background-color: rgba(253,103,79,0.82);
+      background-color: rgba(253, 103, 79, 0.82);
       border-color: transparent !important;
     }
   }
@@ -27,27 +27,62 @@ body{
   .open {
     a {
       &.dropdown-toggle {
-         background-color: $brand_purple;
+        background-color: $brand_purple;
       }
     }
-    >a:visited {
+    > a:visited {
       &.dropdown-toggle {
-         background-color: $brand_purple;
+        background-color: $brand_purple;
       }
     }
-    >a:active {
+    > a:active {
       &.dropdown-toggle {
-         background-color: $brand_purple;
+        background-color: $brand_purple;
       }
     }
-    >a:focus {
+    > a:focus {
       &.dropdown-toggle {
-         background-color: $brand_purple;
+        background-color: $brand_purple;
       }
     }
-    >a:active {
+    > a:active {
       &.dropdown-toggle {
-         background-color: $brand_purple;
+        background-color: $brand_purple;
+      }
+    }
+  }
+}
+
+.nav-tabs {
+  background: $brand_red;
+  border-bottom: none;
+  li {
+    margin-bottom: 0;
+    a {
+      color: #fff !important;
+      border-radius: 0;
+      transition: .5s;
+      border: none !important;
+      &:hover, &:focus {
+        background: $brand_purple !important;
+      }
+    }
+    &.active{
+      a {
+        background: $brand_purple;
+      }
+      &:before {
+        content: '';
+        width: 0;
+        height: 0;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #fff;
+        margin: 0 auto;
+        position: absolute;
+        z-index: 100;
+        left: calc(50% - 7px);
+        bottom: 0;
       }
     }
   }
