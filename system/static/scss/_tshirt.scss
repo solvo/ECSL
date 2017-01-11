@@ -670,18 +670,22 @@ body.MakeFloatingCart div.cart-icon-bottom {
   transition: all 200ms ease-out;
 }
 
-.view_gallery:hover {
-  background: #fff;
-  color: $brand_blue;
-  cursor: pointer;
+.view_gallery,.add_to_cart{
+  &:hover {
+    background: #fff;
+    color: $brand_blue;
+    cursor: pointer;
+  }
 }
 
-.make3D.animate .view_gallery {
-  opacity: 1;
-  -webkit-transition: all 200ms ease-out;
-  -moz-transition: all 200ms ease-out;
-  -o-transition: all 200ms ease-out;
-  transition: all 200ms ease-out;
+.make3D.animate {
+  .view_gallery,.add_to_cart {
+    opacity: 1;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+  }
 }
 
 div.colors div {
@@ -725,3 +729,22 @@ div.c-white span {
 }
 
 
+.add_to_cart {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    width: 152px;
+    font-size: 15px;
+    margin-left: -78px;
+    border: 2px solid #fff;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 10px 0;
+    opacity: 0;
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+}
