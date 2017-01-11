@@ -52,11 +52,11 @@
         <br>
         <a href="{% url 'subir_recurso' speech_details.pk %}" class="btn btn-success">Subir recurso</a>
    {% elif speech_details in user.profile.matriculatedspeechs.all %}
-   <a class="matricula-link" data-pk="{{ speech_details.pk}}">
+        <a class="matricula-link-detail" data-pk="{{ speech_details.pk}}">
             <span>Desmatricularme</span>
         </a>
    {% else %}
-        <a class="matricula-link" data-pk="{{ speech_details.pk}}">
+        <a class="matricula-link-detail" data-pk="{{ speech_details.pk}}">
             <span>Matricularme</span>
         </a>
     {% endif %}
@@ -66,7 +66,7 @@
 {% block script %}
 
     <script type="text/javascript">
-        $('.matricula-link').click(function () {
+        $('.matricula-link-detail').click(function () {
             var id_speech = $(this).attr('data-pk');
             var element = $(this).find('span');
             matricular(element[0],id_speech);

@@ -18,7 +18,7 @@
                 </a>
                 <p>{{ foo.description|truncatewords:"30" }}</p>
                 <p class="date-activity"><span class="fa fa-user"></span>{{ foo.user.username }}</p>
-                <p><div class="likes"><span>{{ foo.cantidad_de_likes }}</span></div> Likes</p>
+                <p><div class="likes activity-{{ foo.pk }}"><span>{{ foo.cantidad_de_likes }}</span></div> Likes</p>
 
                 {% if foo.user == user %}
                 {% elif foo in user.profile.likes.all %}
@@ -68,8 +68,8 @@
                         console.log(response.messages);
                         likes = response.messages;
                         if(likes != 0) {
-                            $('.like-button').find('p').remove();
-                            $('.like-button').append('<p>'+ likes +'</p>');
+                            $('.activity-'+id_speech).find('span').remove();
+                            $('.activity-'+id_speech).append('<span>'+ likes +'</span>');
                         }
                         setTimeout(function () {
                             $(element[0]).removeClass('fa-thumbs-o-up');
