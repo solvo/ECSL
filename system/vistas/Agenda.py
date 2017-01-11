@@ -24,14 +24,14 @@ def agenda(request):
         var21 = ''
 
         if ii < dia20.count():
-            var20 = dia20[ii].title
+            var20 = dia20[ii]
 
         if ii < dia21.count():
-            var21 = dia21[ii].title
+            var21 = dia21[ii]
 
         dicc = {'dia20': var20, 'dia21': var21}
         lista.append(dicc)
 
     print(lista)
 
-    return render(request, 'agenda/agenda.html', lista)
+    return render(request, 'agenda/agenda.html', {'lista': lista})
