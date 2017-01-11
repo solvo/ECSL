@@ -105,7 +105,7 @@
             {% endblock %}
             <div class="cd-cart-container empty">
                 <a href="#0" class="cd-cart-trigger">
-                    Cart
+                    Compra
                     <ul class="count"> <!-- cart items count -->
                         <li>0</li>
                         <li>0</li>
@@ -115,8 +115,8 @@
                 <div class="cd-cart">
                     <div class="wrapper">
                         <header>
-                            <h2>Cart</h2>
-                            <span class="undo">Item removed. <a href="#0">Undo</a></span>
+                            <h2>Compra</h2>
+                            <span class="undo">Camisetas eliminadas. <a href="">deshacer</a></span>
                         </header>
 
                         <div class="body">
@@ -126,7 +126,7 @@
                         </div>
 
                         <footer>
-                            <a href="#0" class="checkout btn"><em>Checkout - $<span>0</span></em></a>
+                            <a href="{% url 'pagar_todo' %}" class="checkout btn"><em>Comprar - $<span>0</span></em></a>
                         </footer>
                     </div>
                 </div> <!-- .cd-cart -->
