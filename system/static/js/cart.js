@@ -65,7 +65,25 @@
 
         //update item quantity
         cartList.on('keyup', 'input', function (event) {
+
+
             quickUpdateCart();
+        });
+
+        cartList.on('blur', 'input', function (event) {
+            idpedido = $(this).parent().parent().parent().find('.delete-item');
+            idpedido = $(idpedido[0]).attr('data-idcamiseta');
+            amount = $(this).val();
+            $.ajax({
+                url: '/ajax/editar_pedido/',
+                type: "POST",
+                data: {'id_pedido': idpedido, 'amount': amount},
+                success: function (response) {
+                    console.log('ef');
+                    quickUpdateCart();
+                }
+            });
+
         });
 
         //reinsert item deleted from the cart

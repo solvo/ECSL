@@ -51,12 +51,13 @@ def pagarPedido(request, pedido_id):
     return redirect('carrito')
 
 
-class editarPedido(LoginRequiredMixin, UpdateView):
-    template_name = 'Tshirt/editar_camiseta.html'
-    model = Tshirt
-    fields = ['size', 'amount']
-    success_url = '/carrito'
-
+@login_required()
+def editarPedido(request):
+    id_pedido = request.POST['id_pedido']
+    elemento = Tshirt.objects.get(pk=id_pedido)
+    elemento.amount = request.POST['amount']
+    elemento.save()
+    return JsonResponse({'mensaje': "Pedido eliminado"})
 
 # pagar todos los pedidos del usuario autenticado
 @login_required()
