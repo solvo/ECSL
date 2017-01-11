@@ -15,25 +15,24 @@ jQuery(document).ready(function ($) {
         var undoTimeoutId;
         var idshirt = 0;
         var price = 0;
-        var datacart={'idshirt':0,'price':0,'name':'','amount':0};
+        var datacart = {'idshirt': 0, 'price': 0, 'name': '', 'amount': 0};
         //add product to cart
         addToCartBtn.on('click', function (event) {
             event.preventDefault();
-            datacart['amount']= $('#id_amount').val();
-            datacart['talla']= $('#id_size').val();
+            datacart['amount'] = $('#id_amount').val();
+            datacart['talla'] = $('#id_size').val();
 
             $.ajax({
-                    url: '/ajax/agregar_pedido/',
-                    type: "POST",
-                    data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
-                    success: function (response) {
-                        response['id_camiseta']
-                        addToCart(datacart);
-                        }});
-
-
-
-
+                url: '/ajax/agregar_pedido/',
+                type: "POST",
+                data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
+                success: function (response) {
+                    $('#id_amount').val('');
+            $('#id_size').val('');
+            $('#modalCart').modal('hide');
+                    addToCart(datacart,response['id_camiseta']);
+                }
+            });
         });
         $('.add_to_cart').on('click', function () {
             datacart['idshirt'] = $(this).attr('data-idcart');
@@ -43,9 +42,6 @@ jQuery(document).ready(function ($) {
         //open/close cart
         cartTrigger.on('click', function (event) {
             event.preventDefault();
-
-
-
             toggleCart();
         });
 
@@ -57,14 +53,15 @@ jQuery(document).ready(function ($) {
         //delete an item from the cart
         cartList.on('click', '.delete-item', function (event) {
             event.preventDefault();
+            var idpedido=$(event.target).attr('data-idcamiseta');
             $.ajax({
-                    url: '/ajax/delete_pedido/',
-                    type: "POST",
-                    data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_pedido': datacart['idshirt']},
-                    success: function (response) {
-                        removeProduct($(event.target).parents('.product'));
-                        }});
-
+                url: '/ajax/delete_pedido/',
+                type: "POST",
+                data: {'id_pedido': idpedido},
+                success: function (response) {
+                    removeProduct($(event.target).parents('.product'));
+                }
+            });
         });
 
         //update item quantity
@@ -104,10 +101,10 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    function addToCart(datacart) {
+    function addToCart(datacart,idcamiseta) {
         var cartIsEmpty = cartWrapper.hasClass('empty');
         //update cart product list
-        addProduct(datacart);
+        addProduct(datacart,idcamiseta);
         //update number of items
         updateCartCount(cartIsEmpty);
         //update total price
@@ -116,17 +113,17 @@ jQuery(document).ready(function ($) {
         cartWrapper.removeClass('empty');
     }
 
-    function addProduct(datacart) {
+    function addProduct(datacart,idcamiseta) {
         //this is just a product placeholder
         //you should insert an item with the selected product info
         //replace productId, productName, price and url with your real product info
         productId = productId + 1;
-        var productAdded = $('<li class="product"><div class="product-details"><h3><a href="#0">'+datacart['name']+'</a></h3><span class="price">$'+datacart['price']+'</span><div class="actions"><a href="#0" class="delete-item">Delete</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity"></span></div></div></div></li>');
+        var productAdded = $('<li class="product"><div class="product-details"><h3><a href="#0">' + datacart['name'] + '</a></h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="'+idcamiseta+'">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number"></span></div></div></div></li>');
         cartList.prepend(productAdded);
-        setTimeout(function(){
-             $('#cd-product-' + productId).val(datacart['amount']);
-        quickUpdateCart();
-        },100);
+        setTimeout(function () {
+            $('#cd-product-' + productId).val(datacart['amount']);
+            quickUpdateCart();
+        }, 100);
 
     }
 
@@ -135,7 +132,7 @@ jQuery(document).ready(function ($) {
         cartList.find('.deleted').remove();
 
         var topPosition = product.offset().top - cartBody.children('ul').offset().top,
-            productQuantity = Number(product.find('.quantity').find('select').val()),
+            productQuantity = Number(product.find('.quantity').find('input').val()),
             productTotPrice = Number(product.find('.price').text().replace('$', '')) * productQuantity;
 
         product.css('top', topPosition + 'px').addClass('deleted');
@@ -143,13 +140,6 @@ jQuery(document).ready(function ($) {
         //update items count + total price
         updateCartTotal(productTotPrice, false);
         updateCartCount(true, -productQuantity);
-        undo.addClass('visible');
-
-        //wait 8sec before completely remove the item
-        undoTimeoutId = setTimeout(function () {
-            undo.removeClass('visible');
-            cartList.find('.deleted').remove();
-        }, 8000);
     }
 
     function quickUpdateCart() {
@@ -168,35 +158,7 @@ jQuery(document).ready(function ($) {
     }
 
     function updateCartCount(emptyCart, quantity) {
-        if (typeof quantity === 'undefined') {
-            var actual = Number(cartCount.find('li').eq(0).text()) + 1;
-            var next = actual + 1;
-
-            if (emptyCart) {
-                cartCount.find('li').eq(0).text(actual);
-                cartCount.find('li').eq(1).text(next);
-            } else {
-                cartCount.addClass('update-count');
-
-                setTimeout(function () {
-                    cartCount.find('li').eq(0).text(actual);
-                }, 150);
-
-                setTimeout(function () {
-                    cartCount.removeClass('update-count');
-                }, 200);
-
-                setTimeout(function () {
-                    cartCount.find('li').eq(1).text(next);
-                }, 230);
-            }
-        } else {
-            var actual = Number(cartCount.find('li').eq(0).text()) + quantity;
-            var next = actual + 1;
-
-            cartCount.find('li').eq(0).text(actual);
-            cartCount.find('li').eq(1).text(next);
-        }
+        quickUpdateCart();
     }
 
     function updateCartTotal(price, bool) {
