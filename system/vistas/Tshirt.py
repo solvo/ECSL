@@ -7,7 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponseBadRequest
 from system.forms import TshirtForm
-
+from django.utils.timezone import now
 
 @method_decorator(login_required, name='dispatch')
 class tshirt_list(ListView):
@@ -69,16 +69,31 @@ def pagarTodo(request):
     messages.add_message(request, messages.SUCCESS, 'Gracias por comprar las camisetas del evento')
     return redirect('tshirt')
 
+
 @login_required()
 def deletePedido(request):
     user = request.user
     id_pedido = request.POST['id_pedido']
+    print id_pedido
     camiseta = get_object_or_404(Tshirt, pk=id_pedido)
     if user != camiseta.user:
         return HttpResponseBadRequest()
     else:
         camiseta.delete()
     return JsonResponse({'mensaje': "Pedido eliminado"})
+
+
+@login_required()
+def agregar_pedido(request):
+    user = request.user
+    amount = request.POST['amount']
+    talla = request.POST['talla']
+
+    id_sty = request.POST['id_style']
+    print id_sty
+    obj = TshirtStyle.objects.get(pk=id_sty)
+    Tshirt.objects.create(user=user, style=obj, amount=amount, last_update=now(), size=talla)
+    return JsonResponse({'id_camiseta': Tshirt.objects.get(user=user).pk})
 
 
 # para poder saber las camisetas sin pagar mediante ajax pa los fronten cuando eliminen un pedido

@@ -20,7 +20,20 @@ jQuery(document).ready(function ($) {
         addToCartBtn.on('click', function (event) {
             event.preventDefault();
             datacart['amount']= $('#id_amount').val();
-            addToCart(datacart);
+            datacart['talla']= $('#id_size').val();
+
+            $.ajax({
+                    url: '/ajax/agregar_pedido/',
+                    type: "POST",
+                    data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
+                    success: function (response) {
+                        response['id_camiseta']
+                        addToCart(datacart);
+                        }});
+
+
+
+
         });
         $('.add_to_cart').on('click', function () {
             datacart['idshirt'] = $(this).attr('data-idcart');
@@ -30,6 +43,9 @@ jQuery(document).ready(function ($) {
         //open/close cart
         cartTrigger.on('click', function (event) {
             event.preventDefault();
+
+
+
             toggleCart();
         });
 
@@ -41,7 +57,14 @@ jQuery(document).ready(function ($) {
         //delete an item from the cart
         cartList.on('click', '.delete-item', function (event) {
             event.preventDefault();
-            removeProduct($(event.target).parents('.product'));
+            $.ajax({
+                    url: '/ajax/delete_pedido/',
+                    type: "POST",
+                    data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_pedido': datacart['idshirt']},
+                    success: function (response) {
+                        removeProduct($(event.target).parents('.product'));
+                        }});
+
         });
 
         //update item quantity
