@@ -75,7 +75,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'system.contex_processor.url',
                 'system.contex_processor.patrocinadores',
-                # 'system.contex_processor.camisetas',
+                'system.contex_processor.camisetas',
 
             ],
         },
