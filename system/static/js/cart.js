@@ -141,13 +141,6 @@ jQuery(document).ready(function ($) {
         //update items count + total price
         updateCartTotal(productTotPrice, false);
         updateCartCount(true, -productQuantity);
-        undo.addClass('visible');
-
-        //wait 8sec before completely remove the item
-        undoTimeoutId = setTimeout(function () {
-            undo.removeClass('visible');
-            cartList.find('.deleted').remove();
-        }, 8000);
     }
 
     function quickUpdateCart() {
