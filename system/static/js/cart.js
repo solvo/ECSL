@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
         });
 
         //update item quantity
-        cartList.on('change', 'select', function (event) {
+        cartList.on('keyup', 'input', function (event) {
             quickUpdateCart();
         });
 
