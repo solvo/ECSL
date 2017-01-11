@@ -15,7 +15,6 @@ def patrocinadores(request):
 
 
 def camisetas(request):
-
     user = request.user
     if not user.is_anonymous:
         value = {'pedidos': Tshirt.objects.filter(user=user)}
