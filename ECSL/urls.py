@@ -58,7 +58,8 @@ ajax_patterns = [
     url(r'^ajax/delete_enroll/', deleteMatricularse, name='ajax_delete_matricula'),
     url(r'^ajax/add_like/$', profileAddLike, name='add_like'),
     url(r'^ajax/camisetas_pendientes/$', camisetas_pendientes, name='camisetas_pendientes'),
-    url(r'^ajax/delete_pedido/', deletePedido, name='ajax_delete_pedido'),
+    url(r'^ajax/delete_pedido/$', deletePedido, name='ajax_delete_pedido'),
+    url(r'^ajax/agregar_pedido/$', agregar_pedido, name='ajax_agregar_pedido'),
     url(r'^ajax/delete_recurso/', deleteRecurso, name='ajax_delete_recurso'),
 
 ]

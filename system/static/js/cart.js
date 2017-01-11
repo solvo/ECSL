@@ -20,10 +20,20 @@ jQuery(document).ready(function ($) {
         addToCartBtn.on('click', function (event) {
             event.preventDefault();
             datacart['amount'] = $('#id_amount').val();
-            addToCart(datacart);
-            $('#id_amount').val('');
+
+            datacart['talla'] = $('#id_size').val();
+
+            $.ajax({
+                url: '/ajax/agregar_pedido/',
+                type: "POST",
+                data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
+                success: function (response) {
+                    $('#id_amount').val('');
             $('#id_size').val('');
             $('#modalCart').modal('hide');
+                    addToCart(datacart,response['id_camiseta']);
+                }
+            });
         });
         $('.add_to_cart').on('click', function () {
             datacart['idshirt'] = $(this).attr('data-idcart');
@@ -44,7 +54,15 @@ jQuery(document).ready(function ($) {
         //delete an item from the cart
         cartList.on('click', '.delete-item', function (event) {
             event.preventDefault();
-            removeProduct($(event.target).parents('.product'));
+            var idpedido=$(event.target).attr('data-idcamiseta');
+            $.ajax({
+                url: '/ajax/delete_pedido/',
+                type: "POST",
+                data: {'id_pedido': idpedido},
+                success: function (response) {
+                    removeProduct($(event.target).parents('.product'));
+                }
+            });
         });
 
         //update item quantity
@@ -84,10 +102,10 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    function addToCart(datacart) {
+    function addToCart(datacart,idcamiseta) {
         var cartIsEmpty = cartWrapper.hasClass('empty');
         //update cart product list
-        addProduct(datacart);
+        addProduct(datacart,idcamiseta);
         //update number of items
         updateCartCount(cartIsEmpty);
         //update total price
@@ -96,12 +114,12 @@ jQuery(document).ready(function ($) {
         cartWrapper.removeClass('empty');
     }
 
-    function addProduct(datacart) {
+    function addProduct(datacart,idcamiseta) {
         //this is just a product placeholder
         //you should insert an item with the selected product info
         //replace productId, productName, price and url with your real product info
         productId = productId + 1;
-        var productAdded = $('<li class="product"><div class="product-details"><h3><a href="#0">' + datacart['name'] + '</a></h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number"></span></div></div></div></li>');
+        var productAdded = $('<li class="product"><div class="product-details"><h3><a href="#0">' + datacart['name'] + '</a></h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="'+idcamiseta+'">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number"></span></div></div></div></li>');
         cartList.prepend(productAdded);
         setTimeout(function () {
             $('#cd-product-' + productId).val(datacart['amount']);
