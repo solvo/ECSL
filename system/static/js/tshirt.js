@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-    $('.product').each(function(i, el) {
+    $('.product-item').each(function(i, el) {
 
         // Lift card and show stats on Mouseover
         $(el).find('.make3D').hover(function() {
