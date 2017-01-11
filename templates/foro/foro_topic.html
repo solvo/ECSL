@@ -72,20 +72,6 @@
                         }, 500);
                     }
                 });
-            } else {
-                $(element[0]).addClass('animation-left');
-                $.ajax({
-                    url: '/ajax/add_like/',
-                    type: "POST",
-                    data: {'id_speech': id_speech},
-                    success: function (response) {
-                        setTimeout(function () {
-                            $(element[0]).removeClass('fa-thumbs-up');
-                            $(element[0]).addClass('fa-thumbs-o-up');
-                            $(element[0]).addClass('animation-right');
-                        }, 500);
-                    }
-                });
             }
         });
 
