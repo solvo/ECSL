@@ -3,12 +3,6 @@
 {% load static %}
 {% block content %}
 
-     {% for foo in object_list %}
-        {{ foo.title }}
-        {{ foo.date_start }}
-        {% empty %}
-        <h1>No hay actividades</h1>
-    {% endfor %}
     <h1 class="page-header">Agenda</h1>
     <table class="table table-bordered">
         <thead>

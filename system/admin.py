@@ -12,8 +12,8 @@ admin.site.register(QuestionCategory)
 
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'user', 'published', 'days', 'places')
-    list_editable = ('published','days', 'places')
+    list_display = ('topic', 'user', 'published', 'pepe', 'places')
+    list_editable = ('published','pepe', 'places')
 
 
 @admin.register(Topic)
@@ -30,15 +30,15 @@ class SpeechTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Tshirt)
 class TshirtAdmin(admin.ModelAdmin):
-    list_display = ('style','user', 'amount', 'size')
+    list_display = ('style','user', 'amount', 'size', 'pagada')
     list_display_links = ('style',)
-    list_editable = ('amount', 'size')
+    list_editable = ('amount', 'size', 'pagada')
 
 
 @admin.register(TshirtStyle)
 class TshirtStyleAdmin(admin.ModelAdmin):
-     list_display = ('name','description', 'img1', 'img2', 'img3',)
-     list_editable = ('description', 'img1', 'img2', 'img3',)
+     list_display = ('name', 'img1', 'img2', 'img3',)
+     list_editable = ('img1', 'img2', 'img3',)
      list_display_links = ('name',)
 
 

@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <h1 class="page-header">{% trans "My Profile" %}</h1>
+    <h1 class="page-header">{% trans "Mi Perfil" %}</h1>
     <div class="row">
         <div class="col-sm-4">
             <div>
@@ -87,42 +87,75 @@
             </div>
         </div>
     </div>
+    <br>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#propuestas" role="tab" data-toggle="tab">Actividades propuestas</a></li>
+        <li><a href="#gustan" role="tab" data-toggle="tab">Actividades que le gustan</a></li>
+        <li><a href="#registrado" role="tab" data-toggle="tab">Actividades en las que esta registrado</a></li>
+    </ul>
 
-    <h3>Actividades propuestas</h3>
-    {% for speech in user.speechs.all %}
-      <h4>Título: {{ speech.title }}</h4>
-        <h5>Estado:
-        {% if speech.published %}
-            Aprovada</h5>
-        {% else %}
-             Pendiente a revisión</h5>
-        {% endif %}
-        {% empty %}
-        <p>Ninguna</p>
-    {% endfor %}
-
-
-    <h3>Actividades que le gustan</h3>
-
-    {% for speech in user.profile.likes.all %}
-      {{ speech.title }}
-        <br>
-        {% empty %}
-        <p>Ninguna</p>
-    {% endfor %}
-
-    <h3>Actividades en las que esta registrado</h3>
-
-    {% for speech in user.profile.matriculatedspeechs.all %}
-      {{ speech.title }}
-        <br>
-        {% empty %}
-        <p>Ninguna</p>
-    {% endfor %}
-
-<BR>
-<BR>
-<BR>
-<BR>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane active" id="propuestas">
+            <div class="row">
+                {% for speech in user.speechs.all %}
+                    <div class="col-sm-4">
+                        <div class="card-activity">
+                            <h4>Título: <a
+                                    href="{% url 'Forum_Detail' speech.topic.slug speech.slug %}">{{ speech.title }}</a>
+                            </h4>
+                            <h5>Estado:
+                                {% if speech.published %}
+                                    Aprovada</h5>
+                                {% else %}
+                                    Pendiente a revisión</h5>
+                                {% endif %}
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-sm-12">
+                        <h3 class="text-warning">Ninguna</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane" id="gustan">
+            <div class="row">
+                {% for speech in user.profile.likes.all %}
+                    <div class="col-sm-4">
+                        <div class="card-activity">
+                            <h4>Título: <a
+                                    href="{% url 'Forum_Detail' speech.topic.slug speech.slug %}">{{ speech.title }}</a>
+                            </h4>
+                            <p class="date-activity"><span class="fa fa-user"></span>{{ speech.user.username }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-sm-12">
+                        <h3 class="text-warning">Ninguna</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane" id="registrado">
+            <div class="row">
+                {% for speech in user.profile.matriculatedspeechs.all %}
+                    <div class="col-sm-4">
+                        <div class="card-activity">
+                            <h4>Título: <a
+                                    href="{% url 'Forum_Detail' speech.topic.slug speech.slug %}">{{ speech.title }}</a>
+                            </h4>
+                            <p class="date-activity"><span class="fa fa-user"></span>{{ speech.user.username }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div class="col-sm-12">
+                        <h3 class="text-warning">Ninguna</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
