@@ -15,7 +15,7 @@ def patrocinadores(request):
 
 
 def camisetas(request):
-    user = request.user
-    value = {'pedidos': Tshirt.objects.filter(user=user)}
-    return value
+     user = request.user
+    # # value = {'pedidos': Tshirt.objects.filter(user=user)}
+    # return value
 
