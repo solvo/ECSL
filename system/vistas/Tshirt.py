@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponseBadRequest
+from system.forms import TshirtForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -13,6 +14,12 @@ class tshirt_list(ListView):
     template_name = 'Tshirt/Tshirt.html'
     model = TshirtStyle
     context_object_name = 'camisetas'
+
+    def get_context_data(self, **kwargs):
+        context = super(tshirt_list, self).get_context_data(**kwargs)
+        context['form'] = TshirtForm
+        return context
+
 
 class createCamiseta(CreateView, LoginRequiredMixin):
     template_name = 'Tshirt/crear_camiseta.html'
