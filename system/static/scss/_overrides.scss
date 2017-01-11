@@ -52,3 +52,13 @@ body{
     }
   }
 }
+
+.input-group-addon {
+  background-color: #ffffff;
+}
+
+.btn-primary:focus {
+    color: #fff;
+    background-color: $brand_purple;
+    border-color: $brand_purple
+}
