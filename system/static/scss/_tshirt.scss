@@ -674,6 +674,7 @@ body.MakeFloatingCart div.cart-icon-bottom {
   &:hover {
     background: #fff;
     color: $brand_blue;
+    text-decoration: none;
     cursor: pointer;
   }
 }
