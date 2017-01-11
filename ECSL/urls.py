@@ -67,7 +67,7 @@ ajax_patterns = [
 tshirt_patterns = [
         # Esto es lo de las camisetas
     url(r'^carrito/pagar_pedido/(?P<pedido_id>[0-9]+)/$', pagarPedido, name='pagar_pedido'),
-    url(r'^carrito/editar_pedido/(?P<pk>[0-9]+)/$', editarPedido.as_view(), name='editar_pedido'),
+    url(r'^ajax/editar_pedido/$', editarPedido, name='editar_pedido'),
     url(r'^carrito/pagar_todos/$', pagarTodo, name='pagar_todo'),
     url(r'^carrito/$', Carrito.as_view(), name='carrito'),
     url(r'^tshirt/(?P<style_id>[0-9]+)/encargar/$', createCamiseta.as_view(), name='encargar_camiseta'),
