@@ -10,6 +10,7 @@ from system.forms import *
 from django.http import Http404
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db import IntegrityError
 
 
 @method_decorator(login_required, name='dispatch')
@@ -81,4 +82,8 @@ class insert_speech(SuccessMessageMixin, CreateView):
         self.topic_slug = get_object_or_404(Topic, slug= self.kwargs['slug'])
         form.instance.topic = self.topic_slug
         form.instance.slug = slugify(form.instance.user.username + ' ' + form.instance.title)
-        return super(insert_speech, self).form_valid(form)
+        try:
+            return super(insert_speech, self).form_valid(form)
+        except IntegrityError:
+            messages.add_message(self.request, messages.WARNING, 'Ya usted creo una actividad con el mismo título')
+            return redirect('Insert_Speech', slug=self.kwargs['slug'])

@@ -13,6 +13,7 @@ from xhtml2pdf import pisa  # import python module
 from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
 from django.contrib import messages
+from django.contrib.auth.views import logout
 
 
 @method_decorator(login_required, name='dispatch')
@@ -102,3 +103,7 @@ def completarRegistro(request, next):
     else:
         messages.add_message(request, messages.WARNING, 'Por favor complete su registro')
         return redirect('edit_profile', perfil.pk)
+
+
+def salir(request):
+    return logout(request, next_page='index')

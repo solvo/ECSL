@@ -67,7 +67,7 @@
                                     <li><a href="{% url 'edit_profile' user.profile.pk %}">{% trans "Editar" %}</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{% url 'auth_logout' %}" title="Log Out">{% trans "Salir " %}</a></li>
+                            <li><a href="{% url 'salir' %}" title="Log Out">{% trans "Salir " %}</a></li>
                         {% else %}
                             <li {% ifequal url "/accounts/login/" %}class="active"{% endifequal %}><a
                                     href="{% url 'auth_login' %}">{% trans "Entrar " %}</a></li>

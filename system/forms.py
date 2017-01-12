@@ -24,7 +24,7 @@ class InsertSpeech(forms.ModelForm):
     class Meta:
         model = Speech
         fields = ['title', 'description', 'notes', 'speaker_information','audience', 'skill_level',
-                  'speech_type', 'topic']
+                  'speech_type',]
 
 
 class TshirtForm(forms.ModelForm):
