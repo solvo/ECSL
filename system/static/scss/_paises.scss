@@ -20,6 +20,9 @@
       @media screen and (max-width: 480px) {
         height: 49%;
       }
+      @media screen and (max-width: 320px) {
+        height: 39%;
+      }
       width: 90px;
       max-width: 18%;
       -webkit-transform-origin: 50% 0;

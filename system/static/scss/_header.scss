@@ -32,9 +32,16 @@
     width: 100%;
     position: absolute;
     top: 0;
+    @media screen and (max-width: 480px) {
+       height: 500px;
+    }
   }
   .image-background {
-    background: url('../img/parque.jpg') center;
+    background: url('../img/parque.jpg') center no-repeat;
+     @media screen and (max-width: 480px) {
+      background-image: none;
+       height: 500px;
+    }
     background-size: 100%;
     background-position: 0 -15px;
     height: 635px;
@@ -44,6 +51,9 @@
     top: 7em;
     width: 300px;
     left: calc(50% - 150px);
+    @media screen and (max-width: 480px) {
+      top: 4em;
+    }
     .promo {
       text-decoration: none;
       color: #fff;

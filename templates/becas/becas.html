@@ -2,7 +2,13 @@
 {% load i18n %}
 
 {% block content %}
-    {{ estado }}
+
+    <div class="alert {% ifequal estado "Analizando" %}alert-info{% endifequal %}
+{% ifequal estado "Ha sido Aprobado" %}alert-success{% endifequal %}
+{% ifequal estado "Denegado" %}alert-danger{% endifequal %}
+">
+    <i class="fa fa-info-circle"></i> {{ estado }}
+    </div>
     {% if form %}
         {% load bootstrap3 %}
         <form method="post">

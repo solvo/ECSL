@@ -7,28 +7,33 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th class="cell-blue text-center agenda-day">20</th>
-            <th class="cell-blue text-center agenda-day">21</th>
+            <th class="cell-blue text-center agenda-day" width="50%">20</th>
+            <th class="cell-blue text-center agenda-day" width="50%">21</th>
         </tr>
         </thead>
         <tbody>
         {% for foo in lista %}
             <tr>
                 <td>
-                    <p class="agenda-hour">{{ foo.dia20.pepe }}</p>
-                    {{ foo.dia20.title }}
-                    <p class="date-activity">
-                        <span class="fa fa-user"></span>{{ foo.dia20.user.first_name }}
-                        <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
-                    </p>
+                    {% if foo.dia20 %}
+                        <p class="agenda-hour">{{ foo.dia20.pepe }}</p>
+                        {{ foo.dia20.title }}
+                        <p class="date-activity">
+                            <span class="fa fa-user"></span>{{ foo.dia20.user.first_name }}
+                            <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
+                        </p>
+                    {% endif %}
                 </td>
                 <td>
-                    <p class="agenda-hour">{{ foo.dia21.pepe }}</p>
-                    {{ foo.dia21.title }}
-                    <p class="date-activity">
-                        <span class="fa fa-user"></span>{{ foo.dia21.user.first_name }}
-                        <span class="type-speech">{{ foo.dia21.speech_type.name }}</span>
-                    </p>
+                    {% if foo.dia21 %}
+                        <p class="agenda-hour">{{ foo.dia21.pepe }}</p>
+                        {{ foo.dia21.title }}
+                        <p class="date-activity">
+                            <span class="fa fa-user"></span>{{ foo.dia21.user.first_name }}
+                            <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
+                        </p>
+                    {% endif %}
+
                 </td>
             </tr>
         {% endfor %}

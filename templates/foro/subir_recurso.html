@@ -2,13 +2,15 @@
 {% load i18n %}
 {% load bootstrap3 %}
 {% block content %}
-    <h1>{% trans "Nuevo recurso" %}</h1>
+    <h1 class="page-header">{% trans "Nuevo recurso" %}</h1>
 
     <div class="container">
-        <form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <form method="post" class="col-sm-12" enctype="multipart/form-data">
             {% csrf_token %}
         {% bootstrap_form form %}
-            <button class="btn btn-primary" type="submit">{% trans "Crear" %}</button>
+            <button class="btn btn-primary" type="submit">{% trans "Subir" %}</button>
         </form>
+    </div>
     </div>
 {% endblock %}
