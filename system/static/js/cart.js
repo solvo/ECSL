@@ -1,179 +1,204 @@
-    var cartWrapper = $('.cd-cart-container');
-    //product id - you don't need a counter in your real project but you can use your real product id
-    var productId = 0;
+var cartWrapper = $('.cd-cart-container');
+//product id - you don't need a counter in your real project but you can use your real product id
+var productId = 0;
 
-    if (cartWrapper.length > 0) {
-        //store jQuery objects
-        var cartBody = cartWrapper.find('.body')
-        var cartList = cartBody.find('ul').eq(0);
-        var cartTotal = cartWrapper.find('.checkout').find('span');
-        var cartTrigger = cartWrapper.children('.cd-cart-trigger');
-        var cartCount = cartTrigger.children('.count')
-        var addToCartBtn = $('.cd-add-to-cart');
-        var undo = cartWrapper.find('.undo');
-        var undoTimeoutId;
-        var idshirt = 0;
-        var price = 0;
-        var datacart = {'idshirt': 0, 'price': 0, 'name': '', 'amount': 0};
-        //add product to cart
-        addToCartBtn.on('click', function (event) {
-            event.preventDefault();
+if (cartWrapper.length > 0) {
+    //store jQuery objects
+    var cartBody = cartWrapper.find('.body')
+    var cartList = cartBody.find('ul').eq(0);
+    var cartTotal = cartWrapper.find('.checkout').find('span');
+    var cartTrigger = cartWrapper.children('.cd-cart-trigger');
+    var cartCount = cartTrigger.children('.count')
+    var addToCartBtn = $('.cd-add-to-cart');
+    var undo = cartWrapper.find('.undo');
+    var undoTimeoutId;
+    var idshirt = 0;
+    var price = 0;
+    var datacart = {'idshirt': 0, 'price': 0, 'name': '', 'amount': 0};
+    //add product to cart
+    addToCartBtn.on('click', function (event) {
+        event.preventDefault();
+        var amount = $('#id_amount').val();
+        var ok = true;
+        if ($.isNumeric(amount) && amount > 0) {
+            $('#id_amount').parent().find('.alert').remove();
+        } else {
+            ok = false;
+            if ($('#id_amount').parent().find('.alert').length == 0) {
+                $('#id_amount').parent().append('<div class="alert alert-danger alert-input">El valor debe ser un número mayor que 0.' +
+                    '  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>' +
+                    '<span class="sr-only">Close</span></button></div>');
+            }
+        }
+        if ($('#id_size').val() != '') {
+            $('#id_size').parent().find('.alert').remove();
+        } else {
+            ok = false;
+            if ($('#id_size').parent().find('.alert').length == 0) {
+                $('#id_size').parent().append('<div class="alert alert-danger alert-input">El valor es requerido.' +
+                    '  <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span>' +
+                    '<span class="sr-only">Close</span></button></div>');
+            }
+        }
+        if (ok) {
             datacart['amount'] = $('#id_amount').val();
             datacart['talla'] = $('#id_size').val();
-
             $.ajax({
                 url: '/ajax/agregar_pedido/',
                 type: "POST",
                 data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
                 success: function (response) {
                     $('#id_amount').val('');
-            $('#id_size').val('');
-            $('#modalCart').modal('hide');
-                    addToCart(datacart,response['id_camiseta']);
+                    $('#id_size').val('');
+                    $('#modalCart').modal('hide');
+                    addToCart(datacart, response['id_camiseta']);
                 }
             });
-        });
-        $('.add_to_cart').on('click', function () {
-            datacart['idshirt'] = $(this).attr('data-idcart');
-            datacart['price'] = $(this).attr('data-price');
-            datacart['name'] = $(this).attr('data-shirtname');
-        });
-        //open/close cart
-        cartTrigger.on('click', function (event) {
-            event.preventDefault();
-            toggleCart();
-        });
+        }
+    });
+    $('.add_to_cart').on('click', function () {
+        datacart['idshirt'] = $(this).attr('data-idcart');
+        datacart['price'] = $(this).attr('data-price');
+        datacart['name'] = $(this).attr('data-shirtname');
+    });
+    //open/close cart
+    cartTrigger.on('click', function (event) {
+        event.preventDefault();
+        toggleCart();
+    });
 
-        //close cart when clicking on the .cd-cart-container::before (bg layer)
-        cartWrapper.on('click', function (event) {
-            if ($(event.target).is($(this))) toggleCart(true);
-        });
+    //close cart when clicking on the .cd-cart-container::before (bg layer)
+    cartWrapper.on('click', function (event) {
+        if ($(event.target).is($(this))) toggleCart(true);
+    });
 
-        //delete an item from the cart
-        cartList.on('click', '.delete-item', function (event) {
-            event.preventDefault();
-            var idpedido=$(event.target).attr('data-idcamiseta');
-            $.ajax({
-                url: '/ajax/delete_pedido/',
-                type: "POST",
-                data: {'id_pedido': idpedido},
-                success: function (response) {
-                    removeProduct($(event.target).parents('.product'));
-                }
-            });
+    //delete an item from the cart
+    cartList.on('click', '.delete-item', function (event) {
+        event.preventDefault();
+        var idpedido = $(event.target).attr('data-idcamiseta');
+        $.ajax({
+            url: '/ajax/delete_pedido/',
+            type: "POST",
+            data: {'id_pedido': idpedido},
+            success: function (response) {
+                removeProduct($(event.target).parents('.product'));
+            }
         });
+    });
 
-        //update item quantity
-        cartList.on('change', 'input', function (event) {
-            quickUpdateCart();
-        });
-
-        cartList.on('blur', 'input', function (event) {
-            idpedido = $(this).parent().parent().parent().find('.delete-item');
-            idpedido = $(idpedido[0]).attr('data-idcamiseta');
-            amount = $(this).val();
+    //update item quantity
+    cartList.on('change', 'input', function (event) {
+        quickUpdateCart();
+    });
+    cartList.on('keyup', 'input', function (event) {
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+    });
+    cartList.on('blur', 'input', function (event) {
+        idpedido = $(this).parent().parent().parent().find('.delete-item');
+        idpedido = $(idpedido[0]).attr('data-idcamiseta');
+        amount = $(this).val();
+        if ($.isNumeric(amount) && amount > 0) {
             $.ajax({
                 url: '/ajax/editar_pedido/',
                 type: "POST",
                 data: {'id_pedido': idpedido, 'amount': amount},
                 success: function (response) {
-                    console.log('ef');
                     quickUpdateCart();
                 }
             });
-
-        });
-
-        //reinsert item deleted from the cart
-        undo.on('click', 'a', function (event) {
-            clearInterval(undoTimeoutId);
-            event.preventDefault();
-            cartList.find('.deleted').addClass('undo-deleted').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
-                $(this).off('webkitAnimationEnd oanimationend msAnimationEnd animationend').removeClass('deleted undo-deleted').removeAttr('style');
-                quickUpdateCart();
-            });
-            undo.removeClass('visible');
-        });
-    }
-
-    function toggleCart(bool) {
-        var cartIsOpen = ( typeof bool === 'undefined' ) ? cartWrapper.hasClass('cart-open') : bool;
-
-        if (cartIsOpen) {
-            cartWrapper.removeClass('cart-open');
-            //reset undo
-            clearInterval(undoTimeoutId);
-            undo.removeClass('visible');
-            cartList.find('.deleted').remove();
-
-            setTimeout(function () {
-                cartBody.scrollTop(0);
-                //check if cart empty to hide it
-                if (Number(cartCount.find('li').eq(0).text()) == 0) cartWrapper.addClass('empty');
-            }, 500);
-        } else {
-            cartWrapper.addClass('cart-open');
         }
-    }
+    });
 
-    function addToCart(datacart,idcamiseta) {
-        var cartIsEmpty = cartWrapper.hasClass('empty');
-        //update cart product list
-        addProduct(datacart,idcamiseta);
-        //update number of items
-        updateCartCount(cartIsEmpty);
-        //update total price
-        updateCartTotal(datacart['price'], true);
-        //show cart
-        cartWrapper.removeClass('empty');
-    }
-
-    function addProduct(datacart,idcamiseta) {
-        //this is just a product placeholder
-        //you should insert an item with the selected product info
-        //replace productId, productName, price and url with your real product info
-        productId = productId + 1;
-        var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="'+idcamiseta+'">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number"></span></div></div></div></li>');
-        cartList.prepend(productAdded);
-            $('#cd-product-' + productId).val(datacart['amount']);
-            quickUpdateCart();
-
-    }
-
-    function removeProduct(product) {
+    //reinsert item deleted from the cart
+    undo.on('click', 'a', function (event) {
         clearInterval(undoTimeoutId);
+        event.preventDefault();
+        cartList.find('.deleted').addClass('undo-deleted').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function () {
+            $(this).off('webkitAnimationEnd oanimationend msAnimationEnd animationend').removeClass('deleted undo-deleted').removeAttr('style');
+            quickUpdateCart();
+        });
+        undo.removeClass('visible');
+    });
+}
+
+function toggleCart(bool) {
+    var cartIsOpen = ( typeof bool === 'undefined' ) ? cartWrapper.hasClass('cart-open') : bool;
+
+    if (cartIsOpen) {
+        cartWrapper.removeClass('cart-open');
+        //reset undo
+        clearInterval(undoTimeoutId);
+        undo.removeClass('visible');
         cartList.find('.deleted').remove();
 
-        var topPosition = product.offset().top - cartBody.children('ul').offset().top,
-            productQuantity = Number(product.find('.quantity').find('input').val()),
-            productTotPrice = Number(product.find('.price').text().replace('$', '')) * productQuantity;
-
-        product.css('top', topPosition + 'px').addClass('deleted');
-
-        //update items count + total price
-        updateCartTotal(productTotPrice, false);
-        updateCartCount(true, -productQuantity);
+        setTimeout(function () {
+            cartBody.scrollTop(0);
+            //check if cart empty to hide it
+            if (Number(cartCount.find('li').eq(0).text()) == 0) cartWrapper.addClass('empty');
+        }, 500);
+    } else {
+        cartWrapper.addClass('cart-open');
     }
+}
 
-    function quickUpdateCart() {
-        var quantity = 0;
-        var price = 0;
+function addToCart(datacart, idcamiseta) {
+    var cartIsEmpty = cartWrapper.hasClass('empty');
+    //update cart product list
+    addProduct(datacart, idcamiseta);
+    //update number of items
+    updateCartCount(cartIsEmpty);
+    //update total price
+    updateCartTotal(datacart['price'], true);
+    //show cart
+    cartWrapper.removeClass('empty');
+}
 
-        cartList.children('li:not(.deleted)').each(function () {
-            var singleQuantity = Number($(this).find('input').val());
-            quantity = quantity + singleQuantity;
-            price = price + singleQuantity * Number($(this).find('.price').text().replace('$', ''));
-        });
+function addProduct(datacart, idcamiseta) {
+    //this is just a product placeholder
+    //you should insert an item with the selected product info
+    //replace productId, productName, price and url with your real product info
+    productId = productId + 1;
+    var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="' + idcamiseta + '">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number" ></span></div></div></div></li>');
+    cartList.prepend(productAdded);
+    $('#cd-product-' + productId).val(datacart['amount']);
+    quickUpdateCart();
 
-        cartTotal.text(price.toFixed(2));
-        cartCount.find('li').eq(0).text(quantity);
-        cartCount.find('li').eq(1).text(quantity + 1);
-    }
+}
 
-    function updateCartCount(emptyCart, quantity) {
-        quickUpdateCart();
-    }
+function removeProduct(product) {
+    clearInterval(undoTimeoutId);
+    cartList.find('.deleted').remove();
 
-    function updateCartTotal(price, bool) {
-        bool ? cartTotal.text((Number(cartTotal.text()) + Number(price)).toFixed(2)) : cartTotal.text((Number(cartTotal.text()) - Number(price)).toFixed(2));
-    }
+    var topPosition = product.offset().top - cartBody.children('ul').offset().top,
+        productQuantity = Number(product.find('.quantity').find('input').val()),
+        productTotPrice = Number(product.find('.price').text().replace('$', '')) * productQuantity;
+
+    product.css('top', topPosition + 'px').addClass('deleted');
+
+    //update items count + total price
+    updateCartTotal(productTotPrice, false);
+    updateCartCount(true, -productQuantity);
+}
+
+function quickUpdateCart() {
+    var quantity = 0;
+    var price = 0;
+
+    cartList.children('li:not(.deleted)').each(function () {
+        var singleQuantity = Number($(this).find('input').val());
+        quantity = quantity + singleQuantity;
+        price = price + singleQuantity * Number($(this).find('.price').text().replace('$', ''));
+    });
+
+    cartTotal.text(price.toFixed(2));
+    cartCount.find('li').eq(0).text(quantity);
+    cartCount.find('li').eq(1).text(quantity + 1);
+}
+
+function updateCartCount(emptyCart, quantity) {
+    quickUpdateCart();
+}
+
+function updateCartTotal(price, bool) {
+    bool ? cartTotal.text((Number(cartTotal.text()) + Number(price)).toFixed(2)) : cartTotal.text((Number(cartTotal.text()) - Number(price)).toFixed(2));
+}

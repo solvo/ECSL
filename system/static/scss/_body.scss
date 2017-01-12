@@ -352,3 +352,14 @@
     margin-bottom: 8px;
   }
 }
+
+#modalCart {
+  #id_amount,#id_size{
+    position: relative;
+  }
+  .alert-input {
+    padding: 15px 3px 3px;
+    border-radius: 0;
+    margin-top: -14px;
+  }
+}
