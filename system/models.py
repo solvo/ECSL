@@ -28,16 +28,11 @@ class Inscription(Model):
 
 
 class TshirtStyle(Model):
-    gender_choice = (
-        ('M', 'Masculino'),
-        ('F', 'Femenino')
-    )
+
     description = TextField(verbose_name=_('Descripción'))
-    gender = CharField(max_length=1, choices=gender_choice, verbose_name=_('Género'))
     img1 = ImageField(verbose_name=_('Imagen 1'), upload_to='Tshirt/')
     img2 = ImageField(verbose_name=_('Imagen 2'), upload_to='Tshirt/')
     img3 = ImageField(verbose_name=_('Imagen 3'), upload_to='Tshirt/')
-
     name = CharField(max_length=45, verbose_name=_('Nombre'))
     price = DecimalField(verbose_name=_('Precio'), decimal_places=2, max_digits=6)
 
@@ -46,6 +41,11 @@ class TshirtStyle(Model):
 
 
 class Tshirt(Model):
+    gender_choice = (
+        ('Masculino', 'Masculino'),
+        ('Femenino', 'Femenino')
+    )
+    gender = CharField(max_length=9, choices=gender_choice, verbose_name=_('Género'), default='Masculino')
     style = ForeignKey(TshirtStyle, on_delete=CASCADE, verbose_name=_('Estilo'))
     user = ForeignKey(User, on_delete=CASCADE, verbose_name=_('Usuario'))
     amount = PositiveIntegerField(verbose_name=_('Cantidad'))

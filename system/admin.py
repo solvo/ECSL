@@ -31,9 +31,9 @@ class SpeechTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Tshirt)
 class TshirtAdmin(admin.ModelAdmin):
-    list_display = ('style','user', 'amount', 'size', 'pagada')
+    list_display = ('style','user', 'amount', 'size', 'pagada', 'gender')
     list_display_links = ('style',)
-    list_editable = ('amount', 'size', 'pagada')
+    list_editable = ('amount', 'size', 'pagada', 'gender')
 
 
 @admin.register(TshirtStyle)

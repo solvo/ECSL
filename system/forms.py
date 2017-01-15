@@ -30,7 +30,7 @@ class InsertSpeech(forms.ModelForm):
 class TshirtForm(forms.ModelForm):
     class Meta:
         model = Tshirt
-        fields = ['size', 'amount']
+        fields = ['size', 'amount', 'gender']
 
 
 class EditProfileForm(forms.ModelForm):

@@ -43,10 +43,11 @@ if (cartWrapper.length > 0) {
         if (ok) {
             datacart['amount'] = $('#id_amount').val();
             datacart['talla'] = $('#id_size').val();
+            datacart['gender'] = $('#id_gender').val();
             $.ajax({
                 url: '/ajax/agregar_pedido/',
                 type: "POST",
-                data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt']},
+                data: {'amount': datacart['amount'], 'talla': datacart['talla'], 'id_style': datacart['idshirt'], 'id_gender': datacart['gender']},
                 success: function (response) {
                     $('#id_amount').val('');
                     $('#id_size').val('');
@@ -158,7 +159,7 @@ function addProduct(datacart, idcamiseta) {
     //you should insert an item with the selected product info
     //replace productId, productName, price and url with your real product info
     productId = productId + 1;
-    var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="' + idcamiseta + '">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number" ></span></div></div></div></li>');
+    var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="' + idcamiseta + '">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number" ></span><select class="form-control" id="select_gender" required><option value="Masculino" selected="selected"> '+ datacart['gender'] +'</option><option value="Femenino">Femenino</option></select> </div></div></div></li>');
     cartList.prepend(productAdded);
     $('#cd-product-' + productId).val(datacart['amount']);
     quickUpdateCart();

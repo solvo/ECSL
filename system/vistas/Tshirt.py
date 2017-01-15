@@ -21,19 +21,6 @@ class tshirt_list(ListView):
         return context
 
 
-class createCamiseta(CreateView, LoginRequiredMixin):
-    template_name = 'Tshirt/crear_camiseta.html'
-    model = Tshirt
-    fields = ['size', 'amount', ]
-    success_url = '/tshirt'
-
-    def form_valid(self, form):
-        form.instance.style_id = self.kwargs['style_id']
-        form.instance.user = self.request.user
-        form.instance.last_update = now()
-        return super(createCamiseta, self).form_valid(form)
-
-
 class Carrito(ListView, LoginRequiredMixin):
     template_name = 'Tshirt/carrito.html'
     queryset = Tshirt.objects.filter(pagada=False)
@@ -89,11 +76,11 @@ def agregar_pedido(request):
     user = request.user
     amount = request.POST['amount']
     talla = request.POST['talla']
-
+    gender = request.POST['id_gender']
     id_sty = request.POST['id_style']
 
     obj = TshirtStyle.objects.get(pk=id_sty)
-    Tshirt.objects.create(user=user, style=obj, amount=amount, last_update=now(), size=talla)
+    Tshirt.objects.create(user=user, style=obj, amount=amount, last_update=now(), size=talla, gender=gender)
     return JsonResponse({'id_camiseta': Tshirt.objects.last().pk})
 
 

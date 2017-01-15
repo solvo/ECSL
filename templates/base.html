@@ -190,7 +190,8 @@ jQuery(document).ready(function ($) {
             'talla': '{{item.size}}',
             'idshirt':{{item.pk}},
             'price':{{item.style.price}},
-            'name': '{{item.style.name}}'
+            'name': '{{item.style.name}}',
+            'gender': '{{item.gender}}'
         };
         addToCart(datacart, {{ item.pk }});
     {% endfor %}
