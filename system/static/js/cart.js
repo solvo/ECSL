@@ -98,6 +98,8 @@ if (cartWrapper.length > 0) {
         idpedido = $(this).parent().parent().parent().find('.delete-item');
         idpedido = $(idpedido[0]).attr('data-idcamiseta');
         amount = $(this).val();
+        datacart['gender'] = $('#peca').val();
+
         if ($.isNumeric(amount) && amount > 0) {
             $.ajax({
                 url: '/ajax/editar_pedido/',
@@ -109,6 +111,22 @@ if (cartWrapper.length > 0) {
             });
         }
     });
+    cartList.on('blur', 'select', function (event) {
+        idpedido = $(this).parent().parent().parent().find('.delete-item');
+        idpedido = $(idpedido[0]).attr('data-idcamiseta');
+        amount = $(this).val();
+        gender = datacart['gender'] = $('#select_gender').val();
+        alert(gender);
+
+            $.ajax({
+                url: '/ajax/editar_pedido/',
+                type: "POST",
+                data: {'id_pedido': idpedido, 'gender_id': gender, 'amount': amount},
+                success: function (response) {
+                    quickUpdateCart();
+                }
+            });
+            });
 
     //reinsert item deleted from the cart
     undo.on('click', 'a', function (event) {
@@ -159,7 +177,13 @@ function addProduct(datacart, idcamiseta) {
     //you should insert an item with the selected product info
     //replace productId, productName, price and url with your real product info
     productId = productId + 1;
-    var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="' + idcamiseta + '">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number" ></span><select class="form-control" id="select_gender" required><option value="Masculino" selected="selected"> '+ datacart['gender'] +'</option><option value="Femenino">Femenino</option></select> </div></div></div></li>');
+    if (datacart['gender'] == 'Masculino') {
+        var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="' + idcamiseta + '">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number" ></span><select class="form-control" id="select_gender" required><option value="Masculino" selected="selected">Masculino</option><option value="Femenino">Femenino</option></select> </div></div></div></li>');
+
+    }else{
+        var productAdded = $('<li class="product"><div class="product-details"><h3>' + datacart['name'] + '</h3><span class="price">$' + datacart['price'] + '</span><div class="actions"><a href="#0" class="delete-item text-danger" data-idcamiseta="' + idcamiseta + '">Eliminar</a><div class="quantity"><label for="cd-product-' + productId + '">cantidad</label><span class="select"><input id="cd-product-' + productId + '" name="quantity" type="number" ></span><select class="form-control" id="select_gender" required><option value="Femenino" selected="selected">Femenino</option><option value="Masculino">Masculino</option></select> </div></div></div></li>');
+    }
+
     cartList.prepend(productAdded);
     $('#cd-product-' + productId).val(datacart['amount']);
     quickUpdateCart();

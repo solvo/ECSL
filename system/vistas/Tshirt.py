@@ -1,3 +1,4 @@
+from PIL.ImageChops import add_modulo
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import *
@@ -40,11 +41,20 @@ def pagarPedido(request, pedido_id):
 
 @login_required()
 def editarPedido(request):
+    print 'dsfsdf'
     id_pedido = request.POST['id_pedido']
     elemento = Tshirt.objects.get(pk=id_pedido)
-    elemento.amount = request.POST['amount']
+    amount = request.POST['amount']
+    gender_data = request.POST['gender_id']
+    print amount
+    if amount == elemento.amount:
+        print('Son iguales')
+    else:
+        print('Vacio')
+    elemento.amount = amount
     elemento.save()
     return JsonResponse({'mensaje': "Pedido eliminado"})
+
 
 # pagar todos los pedidos del usuario autenticado
 @login_required()
