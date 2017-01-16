@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from system.forms import *
-from django.shortcuts import render
 from django.views.generic import *
-from django.shortcuts import render, reverse, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 
 
 def index(request):

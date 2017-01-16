@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
-from system.models import *
 from system.forms import *
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from registration.backends.hmac.views import RegistrationView
 from registration import signals
 from django.views.generic import *
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from xhtml2pdf import pisa  # import python module

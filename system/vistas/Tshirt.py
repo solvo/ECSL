@@ -1,5 +1,4 @@
-from PIL.ImageChops import add_modulo
-from django.shortcuts import render, reverse, redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.generic import *
 from system.models import *
@@ -24,7 +23,7 @@ class tshirt_list(ListView):
 
 class Carrito(ListView, LoginRequiredMixin):
     template_name = 'Tshirt/carrito.html'
-    queryset = Tshirt.objects.filter(pagada=False)
+    queryset = Tshirt.objects.filter(payed=False)
     context_object_name = 'camisetas'
 
 
@@ -33,7 +32,7 @@ class Carrito(ListView, LoginRequiredMixin):
 def pagarPedido(request, pedido_id):
     tshirt = Tshirt.objects.get(pk=pedido_id)
     # Aqui debe ir la funcion qu permite pagar por PayPal
-    tshirt.pagada = True
+    tshirt.payed = True
     tshirt.save()
     messages.add_message(request, messages.SUCCESS, 'Gracias por comprar las camisetas del evento')
     return redirect('carrito')
@@ -58,7 +57,7 @@ def pagarTodo(request):
     camisetas = Tshirt.objects.filter(user=request.user)
     # Aqui debe ir la funcion qu permite pagar por PayPal
     for tshirt in camisetas:
-        tshirt.pagada = True
+        tshirt.payed = True
         tshirt.save()
     messages.add_message(request, messages.SUCCESS, 'Gracias por comprar las camisetas del evento')
     return redirect('tshirt')

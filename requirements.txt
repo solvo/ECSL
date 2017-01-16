@@ -1,4 +1,4 @@
 django==1.10
-PIL
-django-bootstrap3
-Pillow
+django-bootstrap3==7.1.0
+Pillow==3.4.2
+xhtml2pdf==0.2b1

@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 from __future__ import absolute_import
 import os
-from django.utils.timezone import timedelta
-# import djcelery
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -43,9 +41,6 @@ INSTALLED_APPS = [
     'system',
     'bootstrap3',
     'xhtml2pdf',
-    # 'djcelery',
-    # 'djkombu',
-
 
 ]
 
@@ -64,7 +59,7 @@ ROOT_URLCONF = 'ECSL.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'system/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -123,17 +118,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# djcelery.setup_loader()
-# BROKER_URL = 'django://'
-#
-# CELERYBEAT_SCHEDULE = {
-#     'envios_correo': {
-#         'task': 'ECSL.celery.envios_correo',
-#         'schedule': timedelta(seconds=30),
-#         # 'args': (15, 35)
-#     },
-# }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
@@ -154,11 +138,11 @@ LOGIN_REDIRECT_URL = '/accounts/completar_registro/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # Run the email's server in windows's MS-DOS
-# python -m smtpd -c DebuggingServer -n
+# python -m smtpd -c DebuggingServer -n localhost:1025
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static', 'static-only')
 EMAIL_HOST = "localhost"
-EMAIL_PORT = "8025"
+EMAIL_PORT = "1025"

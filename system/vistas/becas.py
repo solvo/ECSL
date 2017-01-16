@@ -1,13 +1,9 @@
-from django.shortcuts import render, reverse, redirect, get_object_or_404
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.generic import *
-from django.views.generic.detail import SingleObjectMixin
 from system.models import *
 from django.utils.decorators import method_decorator
-from django.utils.text import slugify
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import Http404
-from django.contrib import messages
 
 
 @method_decorator(login_required, name='dispatch')
@@ -40,12 +36,3 @@ class becas(CreateView, SuccessMessageMixin):
             return render(self.request, 'becas/becas.html', {'estado': 'Denegado'})
         elif estado.subvention_request and estado.not_registered == False and estado.registered == False:
             return render(self.request, 'becas/becas.html', {'estado': 'Analizando'})
-
-
-@method_decorator(login_required, name='dispatch')
-class hotel(ListView):
-    template_name = 'hotel/hotel.html'
-    model = Hotel
-    context_object_name = 'hotel'
-
-

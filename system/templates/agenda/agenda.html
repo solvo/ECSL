@@ -16,7 +16,7 @@
             <tr>
                 <td>
                     {% if foo.dia20 %}
-                        <p class="agenda-hour">{{ foo.dia20.pepe }}</p>
+                        <p class="agenda-hour">{{ foo.dia20.activity_start }}</p>
                         {{ foo.dia20.title }}
                         <p class="date-activity">
                             <span class="fa fa-user"></span>{{ foo.dia20.user.first_name }}
@@ -26,7 +26,7 @@
                 </td>
                 <td>
                     {% if foo.dia21 %}
-                        <p class="agenda-hour">{{ foo.dia21.pepe }}</p>
+                        <p class="agenda-hour">{{ foo.dia21.activity_start }}</p>
                         {{ foo.dia21.title }}
                         <p class="date-activity">
                             <span class="fa fa-user"></span>{{ foo.dia21.user.first_name }}

@@ -13,8 +13,8 @@ admin.site.register(SpeechResource)
 
 @admin.register(Speech)
 class SpeechAdmin(admin.ModelAdmin):
-    list_display = ('topic', 'user', 'published', 'pepe', 'places')
-    list_editable = ('published','pepe', 'places')
+    list_display = ('topic', 'user', 'published', 'activity_start', 'places')
+    list_editable = ('published','activity_start', 'places')
 
 
 @admin.register(Topic)
@@ -31,9 +31,9 @@ class SpeechTypeAdmin(admin.ModelAdmin):
 
 @admin.register(Tshirt)
 class TshirtAdmin(admin.ModelAdmin):
-    list_display = ('style','user', 'amount', 'size', 'pagada', 'gender')
+    list_display = ('style','user', 'amount', 'size', 'payed', 'gender')
     list_display_links = ('style',)
-    list_editable = ('amount', 'size', 'pagada', 'gender')
+    list_editable = ('amount', 'size', 'payed', 'gender')
 
 
 @admin.register(TshirtStyle)
