@@ -81,9 +81,6 @@ urlpatterns = user_patterns + extra_patterns + forum_patterns + tshirt_patterns 
 
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
-    url(r'^testing$', testing, name='Testing'), #esto es pa probar quitar al final
-
-    url(r'^media/$', testing, name='Media'), #esto es pa probar quitar al final
     url(r'^calender/$', agenda, name='Agenda'),
 
     url(r'^faq/$', faq.as_view(), name='faq'),

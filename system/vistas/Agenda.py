@@ -24,7 +24,4 @@ def agenda(request):
 
         dicc = {'dia20': var20, 'dia21': var21}
         lista.append(dicc)
-
-    print(lista)
-
     return render(request, 'agenda/agenda.html', {'lista': lista})

@@ -226,8 +226,8 @@ if ($.fn.DataTable.TableTools) {
                 "disabled": "disabled"
             }
         },
-        "print": {
-            "info": "DTTT_print_info modal"
+        "activity_start": {
+            "info": "DTTT_activity_start_info modal"
         },
         "select": {
             "row": "active"

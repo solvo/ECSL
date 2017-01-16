@@ -67,7 +67,6 @@ def pagarTodo(request):
 def deletePedido(request):
     user = request.user
     id_pedido = request.POST['id_pedido']
-    print id_pedido
     camiseta = get_object_or_404(Tshirt, pk=id_pedido)
     if user != camiseta.user:
         return HttpResponseBadRequest()
