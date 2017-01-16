@@ -94,34 +94,34 @@ if (cartWrapper.length > 0) {
     cartList.on('keyup', 'input', function (event) {
         this.value = (this.value + '').replace(/[^0-9]/g, '');
     });
-    cartList.on('blur', 'input', function (event) {
+
+    cartList.on('change', 'input', function (event) {
         idpedido = $(this).parent().parent().parent().find('.delete-item');
         idpedido = $(idpedido[0]).attr('data-idcamiseta');
-        amount = $(this).val();
-        datacart['gender'] = $('#peca').val();
-
-        if ($.isNumeric(amount) && amount > 0) {
+        amount_campos = $(this).val();
+        id_gender = $('#select_gender').val();
+        if ($.isNumeric(amount_campos) && amount_campos > 0) {
             $.ajax({
                 url: '/ajax/editar_pedido/',
                 type: "POST",
-                data: {'id_pedido': idpedido, 'amount': amount},
+                data: {'id_pedido': idpedido, 'amount': amount_campos, 'id_gender': id_gender},
                 success: function (response) {
                     quickUpdateCart();
                 }
             });
         }
     });
+
     cartList.on('blur', 'select', function (event) {
         idpedido = $(this).parent().parent().parent().find('.delete-item');
         idpedido = $(idpedido[0]).attr('data-idcamiseta');
-        amount = $(this).val();
-        gender = datacart['gender'] = $('#select_gender').val();
-        alert(gender);
-
+        amount_id = $("#cd-product-1").val();
+        alert(amount_id);
+        datacart['id_gender'] = $(this).val();
             $.ajax({
                 url: '/ajax/editar_pedido/',
                 type: "POST",
-                data: {'id_pedido': idpedido, 'gender_id': gender, 'amount': amount},
+                data: {'id_pedido': idpedido, 'id_gender': datacart['id_gender'], 'amount': amount_id},
                 success: function (response) {
                     quickUpdateCart();
                 }

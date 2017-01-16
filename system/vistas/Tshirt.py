@@ -41,17 +41,13 @@ def pagarPedido(request, pedido_id):
 
 @login_required()
 def editarPedido(request):
-    print 'dsfsdf'
+
     id_pedido = request.POST['id_pedido']
     elemento = Tshirt.objects.get(pk=id_pedido)
     amount = request.POST['amount']
-    gender_data = request.POST['gender_id']
-    print amount
-    if amount == elemento.amount:
-        print('Son iguales')
-    else:
-        print('Vacio')
+    gender_data = request.POST['id_gender']
     elemento.amount = amount
+    elemento.gender = gender_data
     elemento.save()
     return JsonResponse({'mensaje': "Pedido eliminado"})
 
