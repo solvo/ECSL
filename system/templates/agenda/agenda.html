@@ -7,34 +7,36 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th class="cell-blue text-center agenda-day" width="50%">20</th>
-            <th class="cell-blue text-center agenda-day" width="50%">21</th>
+            <th class="cell-blue text-center agenda-day">20</th>
+            <th class="cell-blue text-center agenda-day">21</th>
         </tr>
         </thead>
         <tbody>
         {% for foo in lista %}
             <tr>
                 <td>
-                    {% if foo.dia20 %}
-                        <p class="agenda-hour">{{ foo.dia20.activity_start }}</p>
-                        {{ foo.dia20.title }}
-
-                        <p class="date-activity">
-                            <span class="fa fa-user"></span>{{ foo.dia20.user.first_name }}
-                            <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
-                        </p>
-                    {% endif %}
+                    <p class="agenda-hour">{{ foo.dia20.activity_start }}</p>
+                    {{ foo.dia20.title }}
+                    <p class="date-activity">
+                        <span class="fa fa-user"></span>{{ foo.dia20.user }}
+                        <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
+                        <br>
+                        <span class="fa fa-home"> {{  foo.dia20.places }}</span>
+                        <br>
+                        <span class="fa fa-users"> {{  foo.dia20.audience }}</span>
+                    </p>
                 </td>
                 <td>
-                    {% if foo.dia21 %}
-                        <p class="agenda-hour">{{ foo.dia21.activity_start }}</p>
-                        {{ foo.dia21.title }}
-                        <p class="date-activity">
-                            <span class="fa fa-user"></span>{{ foo.dia21.user.first_name }}
-                            <span class="type-speech">{{ foo.dia20.speech_type.name }}</span>
-                        </p>
-                    {% endif %}
-
+                    <p class="agenda-hour">{{ foo.dia21.activity_start }}</p>
+                    {{ foo.dia21.title }}
+                    <p class="date-activity">
+                        <span class="fa fa-user"></span>{{ foo.dia21.user }}
+                        <span class="type-speech">{{ foo.dia21.speech_type.name }}</span>
+                        <br>
+                        <span class="fa fa-home"> {{  foo.dia21.places }}</span>
+                        <br>
+                        <span class="fa fa-users"> {{  foo.dia21.audience }}</span>
+                    </p>
                 </td>
             </tr>
         {% endfor %}
