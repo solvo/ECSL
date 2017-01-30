@@ -100,10 +100,11 @@ class ProfileAdmin(admin.ModelAdmin):
     def send_email_invitation(self, request, queryset):
 
         for date in queryset:
-            correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com',
+            correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', settings.DEFAULT_FROM_EMAIL,
                                   [date.user.email, ])
 
-            correo.attach_file(settings.MEDIA_ROOT + '/pdf/invitacion.pdf')
+            correo.attach(settings.MEDIA_ROOT + '/pdf/invitacion.pdf', 'application/pdf')
+            correo.content_subtype = 'html'
             correo.send()
 
         rows_updated = queryset.update(invitation_file=True)
@@ -119,10 +120,11 @@ class ProfileAdmin(admin.ModelAdmin):
     def send_email_diploma(self, request, queryset):
 
         for date in queryset:
-            correo = EmailMessage('Gracias por asistir', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com',
+            correo = EmailMessage('Gracias por asistir', 'Este es el cuerpo del mensaje', settings.DEFAULT_FROM_EMAIL,
                                   [date.user.email, ])
 
-            correo.attach_file(settings.MEDIA_ROOT + '/pdf/diploma.pdf')
+            correo.attach(settings.MEDIA_ROOT + '/pdf/diploma.pdf', 'application/pdf')
+            correo.content_subtype = 'html'
             correo.send()
 
         rows_updated = queryset.update(diploma=True)

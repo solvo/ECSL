@@ -12,7 +12,7 @@ from django.utils.decorators import method_decorator
 from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth.views import logout
-
+from django.conf import settings
 
 @method_decorator(login_required, name='dispatch')
 class view_profile(DetailView):
@@ -37,10 +37,10 @@ class createProfile(RegistrationView):
                                   nationality=form.cleaned_data["nationality"],
                                   institution=form.cleaned_data["institution"],)
         email_user = [form.cleaned_data['email'], ]
-        outputFilename = createPDF()
-        correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', 'chicmotz.sr@gmail.com', [email_user, ])
-
-        correo.attach_file(outputFilename)
+        outputFilename = createPDF(form.cleaned_data["username"])
+        correo = EmailMessage('Bienvenido', 'Este es el cuerpo del mensaje', settings.DEFAULT_FROM_EMAIL, [email_user, ])
+        correo.attach(outputFilename, 'application/pdf')
+        correo.content_subtype = 'html'
         correo.send()
 
         profile.save()
@@ -56,10 +56,20 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
 
 
-# esto es lo de dar like
+def createPDF(usuario):
 
-def createPDF():
-    sourceHtml = "<html><body><p>To PDF or not to PDF</p></body></html>"
+    sourceHtml = "<html><body><p>Hola " + usuario + " Diploma de particiacion</p></body></html>"
+
+    outputFilename = settings.MEDIA_ROOT + '/pdf/diploma.pdf'
+    resultFile = open(outputFilename, "w+b")
+
+    pisaStatus = pisa.CreatePDF(
+        sourceHtml,  # the HTML to convert
+        dest=resultFile)  # file handle to recieve result
+
+    resultFile.close()
+
+    sourceHtml = "<html><body><p>" + usuario + "To PDF or not to PDF</p></body></html>"
 
     outputFilename = settings.MEDIA_ROOT + '/pdf/invitacion.pdf'
     resultFile = open(outputFilename, "w+b")
@@ -70,16 +80,6 @@ def createPDF():
 
     resultFile.close()
 
-    sourceHtml = "<html><body><p>Diploma de particiacion</p></body></html>"
-
-    outputFilename = settings.MEDIA_ROOT + '/pdf/diploma.pdf'
-    resultFile = open(outputFilename, "w+b")
-
-    pisaStatus = pisa.CreatePDF(
-        sourceHtml,  # the HTML to convert
-        dest=resultFile)  # file handle to recieve result
-
-    resultFile.close()
     return outputFilename
 
 

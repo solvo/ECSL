@@ -25,10 +25,20 @@ from system.vistas.becas import *
 from system.ajax import *
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework import routers
+from rest_framework.authtoken import views
+
+
+router = routers.DefaultRouter()
+router.register(r'agenda', AgendaViewSet)
+
+
 
 extra_patterns = [
 
     url(r'^accounts/', include('registration.backends.hmac.urls')),
+    url(r'^api/token/', views.obtain_auth_token, name='api-token'),
+    url(r'^api/', include(router.urls)),
 
     ]
 

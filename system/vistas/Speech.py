@@ -11,6 +11,9 @@ from django.http import Http404
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db import IntegrityError
+from rest_framework import viewsets
+from system.serializers import *
+from django.views.generic.detail import SingleObjectMixin
 
 
 @method_decorator(login_required, name='dispatch')
@@ -87,3 +90,19 @@ class insert_speech(SuccessMessageMixin, CreateView):
         except IntegrityError:
             messages.add_message(self.request, messages.WARNING, 'Ya usted creo una actividad con el mismo título')
             return redirect('Insert_Speech', slug=self.kwargs['slug'])
+
+
+class ActivityViewSet(viewsets.ModelViewSet):
+    queryset = Speech.objects.all()
+    serializer_class = ActivitySerializer
+
+
+class AgendaViewSet(viewsets.ModelViewSet):
+    queryset = Speech.objects.filter(published=True).filter(activity_start__day=20)
+    serializer_class = ActivitySerializer
+
+    # def get_queryset(self, *args, **kwargs):
+    #
+    #     dia21 = Speech.objects.filter(published=True).filter(activity_start__day=21)
+    #
+    #     return dia21

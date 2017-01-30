@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'system',
     'bootstrap3',
     'xhtml2pdf',
+    'rest_framework',
 
 ]
 
@@ -135,6 +136,8 @@ USE_TZ = False
 ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_REDIRECT_URL = '/accounts/completar_registro/'
 
+
+DEFAULT_FROM_EMAIL = 'chicomtz.sr@gmail.com'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # Run the email's server in windows's MS-DOS
